@@ -1,0 +1,834 @@
+openapi: "3.0.0"
+info:
+  title: Tech App backend
+  description: Documentation for the backend api
+  version: 1.1.0
+  contact:
+    email: unknown39825@gmail.cmo
+    url: "https://github.com/technobyte-nitkkr"
+
+servers:
+  - url : "http://localhost:5000/techspardha-87928/us-central1/api"
+    description: localhost
+  - url: "https://us-central1-techspardha-87928.cloudfunctions.net/api"
+    description: server
+
+    
+components:
+  securitySchemes:
+    Authdetails:
+      type: apiKey
+      in: header
+      name: Authorization
+
+paths:
+  /loginApp:
+    post:
+      tags:
+        - App
+      summary: login using the secure token of google  O Auth for app
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - idToken
+
+              properties:
+                idToken:
+                  type: string
+                  description: id token
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  onBoard:
+                    type: boolean
+                  information:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      name:
+                        type: string
+                      picture:
+                        type: string
+                      onBoard:
+                        type: boolean
+                      college:
+                        type: string
+                      year:
+                        type: string
+                      admin:
+                        type: boolean
+
+        401:
+          description: error in auth
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+  /login:
+    post:
+      tags:
+        - User
+      summary: login using the secure token of google  for web
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - idToken
+
+              properties:
+                idToken:
+                  type: string
+                  description: id token
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  onBoard:
+                    type: boolean
+                  information:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      name:
+                        type: string
+                      picture:
+                        type: string
+                      onBoard:
+                        type: boolean
+                      college:
+                        type: string
+                      year:
+                        type: string
+                      admin:
+                        type: boolean
+
+        401:
+          description: error in auth
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+  /user:
+    put:
+      tags:
+        - User
+      summary: update the user profile for web
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - year
+                - phone
+                - college
+              properties:
+                email:
+                  type: string
+                year:
+                  type: string
+                phone:
+                  type: string
+                college:
+                  type: string
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  onBoard:
+                    type: boolean
+                  information:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      name:
+                        type: string
+                      picture:
+                        type: string
+                      onBoard:
+                        type: boolean
+                      college:
+                        type: string
+                      year:
+                        type: string
+                      admin:
+                        type: boolean
+        405:
+          description: already on boarded
+        400:
+          description: incomplete body parameters
+        404:
+          description: Bad request
+        500:
+          description: internal server error
+  /events/categories:
+    get:
+      tags:
+        - events
+      summary: get the categories name
+
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      categories:
+                        type: array
+                        items:
+                          type: string
+        500:
+          description: internal server error
+
+  /events:
+    get:
+      tags:
+        - events
+      summary: get the events names
+      parameters:
+        - in: query
+          name: eventCategory
+          schema:
+            type: string
+            enum:
+              [
+                Astronomy,
+                Design,
+                Informals,
+                Managerial,
+                Online-Events,
+                Papyrus-Vitae,
+                Programming,
+                Quizzes,
+                Robotics,
+              ]
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      events:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            eventName:
+                              type: string
+                            eventCategory:
+                              type: string
+        500:
+          description: internal server error
+    post:
+      security:
+        - Authdetails: []
+      tags:
+        - manager
+      summary: add event for manager user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - eventData
+              properties:
+                eventData:
+                  type: object
+                  properties:
+                    eventName:
+                      type: string
+                      required: true
+                    category:
+                      type: string
+                      required: true
+                    startTime:
+                      type: number
+                      required: true
+                    endTime:
+                      type: number
+                      required: true
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+        401:
+          description: Not authenticated
+        500:
+          description: internal server error
+
+  /events/description:
+    get:
+      tags:
+        - events
+      summary: get the events description by category
+      parameters:
+        - in: query
+          name: eventCategory
+          required: true
+          schema:
+            type: string
+            enum:
+              [
+                Astronomy,
+                Design,
+                Informals,
+                Managerial,
+                Online-Events,
+                Papyrus-Vitae,
+                Programming,
+                Quizzes,
+                Robotics,
+              ]
+        - in: query
+          name: eventName
+          schema:
+            type: string
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      events:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            eventName:
+                              type: string
+                            eventCategory:
+                              type: string
+                            venue:
+                              type: string
+                            description:
+                              type: string
+                            endTime:
+                              type: number
+                            startTime:
+                              type: number
+                            file:
+                              type: string
+                            cordinators:
+                              type: array
+                              items:
+                                type: object
+                            rules:
+                              type: array
+                              items:
+                                type: string
+
+        500:
+          description: internal server error
+
+  /events/timeline:
+    get:
+      tags:
+        - events
+      summary: get the timeline of events
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      events:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            eventName:
+                              type: string
+                            eventCategory:
+                              type: string
+                            endTime:
+                              type: number
+                            startTime:
+                              type: number
+        500:
+          description: internal server error
+
+  /user/event:
+    get:
+      tags:
+        - User
+      summary: get the events of loggedin user
+      security:
+        - Authdetails: []
+
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      events:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            eventName:
+                              type: string
+                            eventCategory:
+                              type: string
+                            venue:
+                              type: string
+                            description:
+                              type: string
+                            endTime:
+                              type: number
+                            startTime:
+                              type: number
+                            file:
+                              type: string
+                            cordinators:
+                              type: array
+                              items:
+                                type: object
+                            rules:
+                              type: array
+                              items:
+                                type: string
+        500:
+          description: internal server error
+    put:
+      tags:
+        - User
+      summary: get the events of loggedin user
+      security:
+        - Authdetails: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - eventName
+                - eventCategory
+              properties:
+                eventName:
+                  type: string
+                eventCategory:
+                  type: string
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+        500:
+          description: internal server error
+
+  /user/eventApp:
+    get:
+      tags:
+        - App
+      summary: get the events of loggedin user app
+      parameters:
+        - in: query
+          name: email
+          schema:
+            type: string
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      events:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            eventName:
+                              type: string
+                            eventCategory:
+                              type: string
+                            venue:
+                              type: string
+                            description:
+                              type: string
+                            endTime:
+                              type: number
+                            startTime:
+                              type: number
+                            file:
+                              type: string
+                            cordinators:
+                              type: array
+                              items:
+                                type: object
+                            rules:
+                              type: array
+                              items:
+                                type: string
+        500:
+          description: internal server error
+    put:
+      tags:
+        - App
+      summary: get the events of loggedin user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - eventName
+                - eventCategory
+                - email
+              properties:
+                eventName:
+                  type: string
+                eventCategory:
+                  type: string
+                email:
+                  type: string
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+        500:
+          description: internal server error
+
+  /contacts:
+    get:
+      tags:
+        - Information
+      summary: all technical socities details
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      contacts:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            section:
+                              type: string
+                            people:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  imageUrl:
+                                    type: string
+                                  name:
+                                    post: string
+        500:
+          description: internal server error
+  /lectures:
+    get:
+      tags:
+        - Information
+      summary: guest lectures api
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      lectures:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            date:
+                              type: string
+                            desc:
+                              type: string
+                            imageUrl:
+                              type: string
+                            time:
+                              type: string
+                            name:
+                              type: string
+        500:
+          description: internal server error
+  /sponsors:
+    get:
+      tags:
+        - Information
+      summary: get the sponsors info
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      paisa:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            sponsors:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  imageUrl:
+                                    type: string
+                                  targetUrl:
+                                    type: string
+                            sponsorSection:
+                              type: string
+        500:
+          description: internal server error
+
+  /about:
+    get:
+      tags:
+        - Information
+      summary: about the web developers
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      devs:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            imageUrl:
+                              type: string
+                            name:
+                              type: string
+                            year:
+                              type: string
+                            link:
+                              type: string
+        500:
+          description: internal server error
+
+  /aboutAppDevs:
+    get:
+      tags:
+        - Information
+      summary: about the app Developers
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      information:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            imageUrl:
+                              type: string
+                            name:
+                              type: string
+                            year:
+                              type: string
+                            link:
+                              type: string
+        500:
+          description: internal server error
+  /facts:
+    get:
+      tags:
+        - Information
+      summary: about random facts
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+        500:
+          description: internal server error
+  /videos:
+    get:
+      tags:
+        - Information
+      summary: about videos
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        url:
+                          type: string
+        500:
+          description: internal server error
