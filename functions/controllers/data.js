@@ -385,6 +385,82 @@ function getDeveloper(req, res) {
     });
 }
 
+function getNotifications(req,res){
+	let data=db.child('notifications').once('value').then(snapshot => {
+		//console.log(snapshot.val());
+		let notifs = snapshot.val();
+
+		let data = {};
+		data[notifications] = new Array();
+
+		for(not in notifs) {
+			let obj = {};
+
+			obj["notif"] =notifs[not]['notif'];
+			obj["time"] = notifs[not]['time'];
+
+			data[notifications].push(obj);
+		}
+
+		return res.json({
+			success:true,
+			data:data
+		});
+	}).catch(() => {
+		return res.status(500).json({
+			error: "error getting notifications",
+			success: false
+		})
+	})
+}
+
+// return event description with eventName only
+// for assistant
+function getEventInformation(req, res) {
+	let eventName = req.query.eventName;
+
+	if(eventName === undefined) {
+		return res.status(400).json({
+			success:false,
+			message: "Usage: [GET] eventName=name"
+		})
+	}
+
+	let x = eventName;
+	eventName = eventName.toLowerCase();
+
+	db.child(eventDescription).once('value')
+	.then((snapshot) => {
+		let allData = snapshot.val();
+
+		for(let category in allData) {
+			for(let event in allData[category]) {
+				let name = event.toLowerCase();
+				if(eventName === name) {
+					// caching = 12hr (server), 6hr (browser)
+					res.set('Cache-Control', 'public, max-age=21600 , s-maxage=43200');
+					return res.status(200).json({
+						success: true,
+						data: allData[category][event]
+					})
+				}
+			}
+		}
+
+		return res.status(404).json({
+			success: false,
+			message: `${x} event not found`
+		})
+	})
+	.catch((err) => {
+		return res.status(500).json({
+			success: false,
+			message: "could not fetch event description",
+			err: err
+		})
+	})
+}
+
 module.exports = {
   foodSponsors,
   getAppDevelopers,
@@ -397,4 +473,6 @@ module.exports = {
   getContacts,
   getNextEvents,
   sponsorStatic,
+  getNotifications,
+  getEventInformation
 };

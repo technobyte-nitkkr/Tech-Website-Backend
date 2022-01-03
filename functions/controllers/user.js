@@ -294,3 +294,32 @@ exports.googleLoginApp=(req, res)=> {
     }
   );
 }
+
+//
+// <-----Adding query to database------->
+// only add newly asked query to the database, if query will be null then it will return the empty query message else query will be added to database.
+exports.addQuery=(request,response)=>{
+	const query = request.body.text;
+	const email=request.body.email;
+
+	console.log(email);
+	console.log(query);
+	let date=Date.now();
+	const email_child='queries/'+email;
+	if(query !== undefined) {
+		database.ref().child(email_child).child(date).set({
+			text:query,
+			id:date,
+			status:true,
+		});
+		response.status(200).json({
+			success:true,
+			message : "query successfully added"
+		});
+	} else {
+		response.status(400).json({
+			success:false,
+			message: "empty query"
+		})
+	}
+}

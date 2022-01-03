@@ -11,6 +11,8 @@ const {
   getContacts,
   getNextEvents,
   sponsorStatic,
+  getNotifications,
+  getEventInformation,
 } = require("../controllers/data");
 const isAuthenticated = require("../middlewares/auth");
 const router = require("express").Router();
@@ -32,5 +34,6 @@ router.get("/foodSponsors", foodSponsors);
 // app.post('/about', addDeveloper);
 router.get("/about", getDeveloper);
 router.get("/aboutAppDevs", getAppDevelopers);
-
+router.get("/notification", getNotifications);
+router.get("/events/search", getEventInformation);
 module.exports = router;
