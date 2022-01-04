@@ -1,0 +1,11 @@
+{
+  "jwt": {
+    "key": "2zDqaPZr7vnWmGHH8Kt0"
+  },
+  "technoemail": {
+    "refreshtoken": "1//040cuEwksn61YCgYIARAAGAQSNwF-L9Ir2JTKWUK_2bGDtfCTKKqlOmxgK0I09betqpLsIb0ztcgOaLHn6Yt2lfpFc9Y2xeJ5p78",
+    "clientsecret": "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",
+    "password": "Techno@22",
+    "clientid": "1023712968791-bbb0rokb5hfutjgie1vmi3ffetepk9p2.apps.googleusercontent.com"
+  }
+}
