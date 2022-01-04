@@ -1,11 +1,15 @@
-const admin = require('firebase-admin');
+const functions = require("firebase-functions");
+const admin = require("firebase-admin");
 const request = require("request");
 const database = admin.database();
 const db = database.ref();
+
+const jwt = require("jsonwebtoken");
+
 const googleUrl = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=";
 
 // google login web
-exports.googleLogin=(req, response)=> {
+exports.googleLogin = (req, response) => {
   request(googleUrl + req.body.idToken, { json: true }, (err, res, body) => {
     let data;
     if (err) {
@@ -44,6 +48,7 @@ exports.googleLogin=(req, response)=> {
             college: snapshot.val().college,
             year: snapshot.val().year,
             admin: snapshot.val().admin,
+            role: snapshot.val().role,
           };
         } else {
           jwttoken = {
@@ -52,10 +57,11 @@ exports.googleLogin=(req, response)=> {
             picture: snapshot.val().picture,
             onBoard: snapshot.val().onBoard,
             admin: snapshot.val().admin,
+            role: snapshot.val().role,
           };
         }
 
-        const token = jwt.sign(jwttoken, config.key);
+        const token = jwt.sign(jwttoken, functions.config().jwt.key);
         data = { token: token };
         return response.status(200).json({
           onBoard: snapshot.val().onBoard,
@@ -69,6 +75,7 @@ exports.googleLogin=(req, response)=> {
           name: body.name,
           picture: body.picture,
           admin: false,
+          role: "user",
         });
 
         jwttoken = {
@@ -77,9 +84,10 @@ exports.googleLogin=(req, response)=> {
           picture: body.picture,
           onBoard: false,
           admin: false,
+          role: "user",
         };
 
-        const token = jwt.sign(jwttoken, config.key);
+        const token = jwt.sign(jwttoken, functions.config().jwt.key);
         data = { token: token };
 
         return response.status(200).json({
@@ -90,10 +98,10 @@ exports.googleLogin=(req, response)=> {
       }
     });
   });
-}
+};
 
 // signup for app
-exports.signUpApp=(req, res) =>{
+exports.signUpApp = (req, res) => {
   if (
     req.body.phone === undefined ||
     req.body.college === undefined ||
@@ -153,10 +161,10 @@ exports.signUpApp=(req, res) =>{
       });
     }
   });
-}
+};
 
 // signup for web
-exports.signUp = (req, response) =>  {
+exports.signUp = (req, response) => {
   if (
     req.body.phone === undefined ||
     req.body.college === undefined ||
@@ -193,8 +201,9 @@ exports.signUp = (req, response) =>  {
           college: req.body.college,
           year: req.body.year,
           admin: snapshot.val().admin,
+          role: snapshot.val().role,
         };
-        const token = jwt.sign(jwttoken, config.key);
+        const token = jwt.sign(jwttoken, functions.config().jwt.key);
         let data = { token: token };
         return response.status(200).json({
           success: true,
@@ -209,10 +218,10 @@ exports.signUp = (req, response) =>  {
       }
     });
   }
-}
+};
 
 // google login for app
-exports.googleLoginApp=(req, res)=> {
+exports.googleLoginApp = (req, res) => {
   request(
     googleUrl + req.body.idToken,
     { json: true },
@@ -293,33 +302,84 @@ exports.googleLoginApp=(req, res)=> {
       });
     }
   );
-}
+};
 
 //
 // <-----Adding query to database------->
 // only add newly asked query to the database, if query will be null then it will return the empty query message else query will be added to database.
-exports.addQuery=(request,response)=>{
-	const query = request.body.text;
-	const email=request.body.email;
+exports.addQuery = (request, response) => {
+  const query = request.body.text;
+  const email = request.body.email;
 
-	console.log(email);
-	console.log(query);
-	let date=Date.now();
-	const email_child='queries/'+email;
-	if(query !== undefined) {
-		database.ref().child(email_child).child(date).set({
-			text:query,
-			id:date,
-			status:true,
-		});
-		response.status(200).json({
-			success:true,
-			message : "query successfully added"
-		});
-	} else {
-		response.status(400).json({
-			success:false,
-			message: "empty query"
-		})
-	}
-}
+  if(query === undefined || email === undefined){
+    return response.status(400).json({
+      success: false,
+
+      err: "please pass valid/complete url parameters",
+    });
+  }
+  
+  console.log(email);
+  console.log(query);
+  let date = Date.now();
+  const email_child = "queries/" + email;
+  if (query !== undefined) {
+    database.ref().child(email_child).child(date).set({
+      text: query,
+      id: date,
+      status: true,
+    });
+    response.status(200).json({
+      success: true,
+      message: "query successfully added",
+    });
+  } else {
+    response.status(400).json({
+      success: false,
+      message: "empty query",
+    });
+  }
+};
+
+exports.generageJwt = (req, response) => {
+  console.log("generage jwt");
+    let email_child = req.body.email.replace(/\./g, ",");
+    let email = "users/" + email_child;
+    let ref = database.ref().child(email);
+    ref.once("value", (snapshot) => {
+      if (snapshot.val()) {
+        console.log(snapshot.val());
+        if (snapshot.val().onBoard === true) {
+          jwttoken = {
+            email: snapshot.val().email,
+            name: snapshot.val().name,
+            picture: snapshot.val().picture,
+            onBoard: snapshot.val().onBoard,
+            phone: snapshot.val().phone,
+            college: snapshot.val().college,
+            year: snapshot.val().year,
+            admin: snapshot.val().admin,
+            role: snapshot.val().role,
+          };
+        } else {
+         return response.status(405).json({
+            success: false,
+            err: "invalid email not registered",
+          });
+        }
+
+        const token = jwt.sign(jwttoken, functions.config().jwt.key);
+        data = { token: token };
+        return response.status(200).json({
+          onBoard: snapshot.val().onBoard,
+          success: true,
+          data: data,
+        });
+      }  else {
+        return response.status(405).json({
+          success: false,
+          err: "invalid email not registered",
+        });
+      }
+    });
+};

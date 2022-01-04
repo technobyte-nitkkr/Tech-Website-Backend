@@ -1,21 +1,22 @@
 const { getRegisteredEvents, eventRegister, appGetRegisteredEvents, appEventRegister } = require('../controllers/events');
 const { googleLogin, signUp, signUpApp, googleLoginApp, addQuery } = require('../controllers/user');
-const isAuthenticated = require('../middlewares/auth');
+
+const { isLoggedIn } = require('../middlewares/user');
 
 // import router
 const router = require('express').Router();
 
 // web login
 router.post('/login', googleLogin);
-router.put('/user', isAuthenticated, signUp);
+router.put('/user', isLoggedIn, signUp);
 // Android
 router.post('/loginApp', googleLoginApp);
 router.put('/signUpApp', signUpApp);
 
-router.post("/query", isAuthenticated, addQuery);
+router.post("/query", isLoggedIn, addQuery);
 
-router.get("/user/event", isAuthenticated, getRegisteredEvents);
-router.put("/user/event", isAuthenticated, eventRegister);
+router.get("/user/event", isLoggedIn, getRegisteredEvents);
+router.put("/user/event", isLoggedIn, eventRegister);
 // for app registartion
 router.get("/user/eventApp", appGetRegisteredEvents, getRegisteredEvents);
 router.put("/user/eventApp", appEventRegister, eventRegister);

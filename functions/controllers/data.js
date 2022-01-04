@@ -7,6 +7,7 @@ const events = "events";
 const sponsorNode = 'sponsors';
 const appDevelopers = 'aboutAppDevs';
 const food = 'food';
+const notifications = "notifications";
 
 function foodSponsors(req, res) {
   db.child(food)
@@ -386,10 +387,10 @@ function getDeveloper(req, res) {
 }
 
 function getNotifications(req,res){
+  console.log("notificatons");
 	let data=db.child('notifications').once('value').then(snapshot => {
 		//console.log(snapshot.val());
 		let notifs = snapshot.val();
-
 		let data = {};
 		data[notifications] = new Array();
 
@@ -402,11 +403,12 @@ function getNotifications(req,res){
 			data[notifications].push(obj);
 		}
 
-		return res.json({
+		return res.status(200).json({
 			success:true,
 			data:data
 		});
-	}).catch(() => {
+	}).catch((error) => {
+    console.log(error);
 		return res.status(500).json({
 			error: "error getting notifications",
 			success: false

@@ -1,15 +1,24 @@
 const { updateUsers, addNotification, getQuery, removeQuery, getEventUsers, addSponsor } = require("../controllers/admin");
-const isAuthenticated = require("../middlewares/auth");
+const { addEvent } = require("../controllers/events");
+const { generageJwt } = require("../controllers/user");
+
+const { isLoggedIn, isCustomRole } = require("../middlewares/user");
 const router = require("express").Router();
-router.put("/admin/query", isAuthenticated, removeQuery);
-router.get("/admin/event", isAuthenticated, getEventUsers);
-router.get("/admin/query", isAuthenticated, getQuery
-);
-router.post("/admin/notification", addNotification
-);
+
+// manager routes
+router.post("/events", isLoggedIn,isCustomRole("admin"), addEvent);
+
+// admin routes
+router.put("/admin/query", isLoggedIn, isCustomRole("admin"), removeQuery);
+router.get("/admin/event", isLoggedIn, isCustomRole("admin"), getEventUsers);
+router.get("/admin/query", isLoggedIn, isCustomRole("admin","user"), getQuery);
+router.post("/admin/notification",isLoggedIn,isCustomRole("admin"), addNotification);
+router.post("/sponsors", isLoggedIn, isCustomRole("admin"), addSponsor);
 
 // updated user info
 // router.get('/updateUsers', updateUsers);
-router.post("/sponsors", addSponsor);
+
+// temporary for testing
+router.post("/getjwt",generageJwt);
 
 module.exports = router;

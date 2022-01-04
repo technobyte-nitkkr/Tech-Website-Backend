@@ -1,5 +1,5 @@
 const jwt=require("jsonwebtoken");
-const config=require("../config");
+const functions = require("firebase-functions");
 
 // checked if is logged in
 exports.isLoggedIn = (req,res,next)=>{
@@ -7,22 +7,23 @@ exports.isLoggedIn = (req,res,next)=>{
     const token = req.headers.authorization;
     
     if (!token) {
-        res.status(401).json({
+        return  res.status(401).json({
           success: false,
           err: "unauthenticated request",
         });
     }
 
      try {
-       const decoded = jwt.verify(token, config.key);
-       console.log(decoded);
-        const { email , name , admin } = decoded;
+       const decoded = jwt.verify(token, functions.config().jwt.key);
+    //    console.log(decoded);
+        const { email , name , role } = decoded;
 
         req.user = {
             email,
             name,
-            admin
+            role
         };
+        req.body.email=  email.replace(/\./g, ',');
      } catch (error) {
        console.log(error.message);
          res.status(401).json({
@@ -34,16 +35,14 @@ exports.isLoggedIn = (req,res,next)=>{
     next();
 }
 
-// check if is admin
-
-exports.isAdmin = (req,res,next)=>{
-    const { admin } = req.user;
-    if(admin){
-        next();
-    }else{
-        res.status(401).json({
-            success:false,
-            err: "you are not an admin, please request admin rights"
+// check for custom role
+exports.isCustomRole = (...roles) => (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+        return res.status(403).json({
+            success: false,
+            err: "unauthorized request not manager or admin",
         });
     }
-}
+
+    next();
+};

@@ -189,6 +189,67 @@ paths:
           description: Bad request
         500:
           description: internal server error
+  /signUpApp:
+    put:
+      tags:
+        - App
+      summary: update the user profile for android
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - year
+                - phone
+                - college
+              properties:
+                email:
+                  type: string
+                year:
+                  type: string
+                phone:
+                  type: string
+                college:
+                  type: string
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  onBoard:
+                    type: boolean
+                  information:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      name:
+                        type: string
+                      picture:
+                        type: string
+                      onBoard:
+                        type: boolean
+                      college:
+                        type: string
+                      year:
+                        type: string
+                      admin:
+                        type: boolean
+        405:
+          description: already on boarded
+        400:
+          description: incomplete body parameters
+        404:
+          description: Bad request
+        500:
+          description: internal server error
   /events/categories:
     get:
       tags:
@@ -506,6 +567,8 @@ paths:
         500:
           description: internal server error
 
+
+
   /user/eventApp:
     get:
       tags:
@@ -563,7 +626,7 @@ paths:
     put:
       tags:
         - App
-      summary: get the events of loggedin user
+      summary: add the event to logged in user
       requestBody:
         content:
           application/json:
@@ -594,6 +657,39 @@ paths:
                     type: string
         500:
           description: internal server error
+  
+  /query:
+    post:
+      tags:
+        - User
+      summary: add query 
+      security:
+        - Authdetails: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - text
+              properties:
+                text:
+                  type: string
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+        500:
+          description: internal server error
+
 
   /contacts:
     get:
@@ -706,6 +802,39 @@ paths:
                                     type: string
                             sponsorSection:
                               type: string
+        500:
+          description: internal server error
+  /foodsponsors:
+    get:
+      tags:
+        - Information
+      summary: get the food sponsors info
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      foodSponsors:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            imageUrl:
+                              type: string
+                            link:
+                              type: string
+                            name: 
+                              type: string    
         500:
           description: internal server error
 
@@ -830,5 +959,254 @@ paths:
                           type: string
                         url:
                           type: string
+        500:
+          description: internal server error
+  /timestamp/events:
+    get:
+      tags:
+        - Information
+      summary: get upcoming events
+      parameters:
+        - in: query
+          name: timestamp
+          schema:
+            type: number
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      events:
+                        type: array
+                        items: 
+                          type: object
+        500:
+          description: internal server error
+  /notification:
+    get:
+      tags:
+        - Information
+      summary: get notificaions
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      notifications:
+                        type: array
+                        items: 
+                          type: object
+                          properties:
+                            notif:
+                              type: string
+                            time:
+                              type: string
+        500:
+          description: internal server error
+
+  /getjwt:
+    post:
+      tags:
+        - admin
+      summary: get jwt for testing purpose
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+              properties:
+                email:
+                  type: string
+      responses:
+        200:
+          description: All good success
+        401:
+          description: error in auth
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+ 
+ 
+  /admin/event:
+    get:
+      tags:
+        - admin
+      summary: get the of all users
+      security:
+        - Authdetails: []
+      parameters:
+        - in: query
+          name: eventCategory
+          required: true
+          schema:
+            type: string
+            enum:
+              [
+                Astronomy,
+                Design,
+                Informals,
+                Managerial,
+                Online-Events,
+                Papyrus-Vitae,
+                Programming,
+                Quizzes,
+                Robotics,
+              ]
+        - in: query
+          name: eventName
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      users:
+                        type: object
+        500:
+          description: internal server error
+  /admin/query:
+    get:
+      tags:
+        - admin
+      summary: get the queries
+      security:
+        - Authdetails: []
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    queries:
+                      users:
+                        type: object
+        500:
+          description: internal server error
+    put:
+      tags:
+        - admin
+      summary: delete the query
+      security:
+        - Authdetails: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - queryEmail
+              properties:
+                id:
+                  type: string
+                queryEmail:
+                  type: string
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+        500:
+          description: internal server error
+  /admin/notification:
+    post:
+      tags:
+        - admin
+      summary: add a notification
+      security:
+        - Authdetails: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - notif
+              properties:
+                notif:
+                  type: string
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+        500:
+          description: internal server error
+  /updateUsers:
+    get:
+      tags:
+        - admin
+      summary: update the user
+      security:
+        - Authdetails: []
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
         500:
           description: internal server error
