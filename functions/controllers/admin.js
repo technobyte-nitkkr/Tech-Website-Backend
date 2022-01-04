@@ -219,6 +219,54 @@ function updateUsers(req, res) {
     });
 }
 
+function updateRole(req, res) {
+	// update the role of the user
+	let email = req.body.userEmail;
+	let role = req.body.role;
+
+	if(email === undefined || role === undefined) {
+		return res.status(400).json({
+			success: false,
+			error: "Usage: email and role are required"
+		});
+	}
+
+	// check if role is valid
+	if(role !== 'admin' && role !== 'user' && role !== 'manager') {
+		return res.status(400).json({
+			success: false,
+			error: "role must be admin, user or manager"
+		});
+	}
+
+	email = email.replace(/\./g, ',');
+	
+	const email_child='users/'+email;
+
+	db.child(email_child).once('value').then(snapshot => {
+		if(snapshot.val() === null) {
+			return res.status(400).json({
+				success: false,
+				message: "user not found"
+			});
+		} else {
+			// update the role of the user
+			db.child(email_child).update({
+				role: role
+			});
+			return res.status(200).json({
+				success: true,
+				message: "role updated"
+			});
+		}}).catch(() => {
+			return res.status(500).json({
+				success: false,
+				message: "error updating user role"
+			});
+		}
+	);
+}
+
 function addSponsor(request, response) {
   const imageUrl = request.body.sponsor.imageUrl;
   const sponsorSection = request.body.sponsor.sponsorSection;
@@ -259,5 +307,6 @@ module.exports = {
     getQuery,
     removeQuery,
     getEventUsers,
-    addSponsor
+    addSponsor,
+	updateRole,
 };
