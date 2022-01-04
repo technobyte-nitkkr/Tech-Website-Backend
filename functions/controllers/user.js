@@ -5,6 +5,7 @@ const database = admin.database();
 const db = database.ref();
 
 const jwt = require("jsonwebtoken");
+const { options } = require("../routes/user");
 
 const googleUrl = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=";
 
@@ -147,12 +148,29 @@ exports.signUpApp = (req, res) => {
         college: req.body.college,
         year: req.body.year,
         admin: snapshot.val().admin,
+        role: snapshot.val().role,
       };
+      let jwttoken = {
+        email: snapshot.val().email,
+        name: snapshot.val().name,
+        picture: snapshot.val().picture,
+        onBoard: snapshot.val().onBoard,
+        phone: snapshot.val().phone,
+        college: snapshot.val().college,
+        year: snapshot.val().year,
+        admin: snapshot.val().admin,
+        role: snapshot.val().role,
+      };
+
+      const token = jwt.sign(jwttoken, functions.config().jwt.key, {
+        expiresIn: "3d",
+      });
 
       return res.status(200).json({
         success: true,
         message: "user onboarded",
         information: info,
+        token: token,
       });
     } else {
       return res.status(405).json({
@@ -249,6 +267,7 @@ exports.googleLoginApp = (req, res) => {
       let info;
 
       ref.once("value", (snapshot) => {
+        let jwttoken;
         if (snapshot.val()) {
           if (snapshot.val().onBoard === true) {
             info = {
@@ -260,6 +279,18 @@ exports.googleLoginApp = (req, res) => {
               college: snapshot.val().college,
               year: snapshot.val().year,
               admin: snapshot.val().admin,
+              role: snapshot.val().role,
+            };
+            jwttoken = {
+              email: snapshot.val().email,
+              name: snapshot.val().name,
+              picture: snapshot.val().picture,
+              onBoard: snapshot.val().onBoard,
+              phone: snapshot.val().phone,
+              college: snapshot.val().college,
+              year: snapshot.val().year,
+              admin: snapshot.val().admin,
+              role: snapshot.val().role,
             };
           } else {
             info = {
@@ -268,13 +299,27 @@ exports.googleLoginApp = (req, res) => {
               picture: snapshot.val().picture,
               onBoard: snapshot.val().onBoard,
               admin: snapshot.val().admin,
+              role: snapshot.val().role,
+            };
+            jwttoken = {
+              email: snapshot.val().email,
+              name: snapshot.val().name,
+              picture: snapshot.val().picture,
+              onBoard: snapshot.val().onBoard,
+              admin: snapshot.val().admin,
+              role: snapshot.val().role,
             };
           }
+
+          const token = jwt.sign(jwttoken, functions.config().jwt.key, {
+            expiresIn: "3d",
+          });
 
           return res.status(200).json({
             success: true,
             onBoard: snapshot.val().onBoard,
             information: info,
+            token: token,
           });
         } else {
           database.ref(email_child).set({
@@ -283,6 +328,7 @@ exports.googleLoginApp = (req, res) => {
             name: body.name,
             picture: body.picture,
             admin: false,
+            role: "user",
           });
 
           info = {
@@ -291,6 +337,7 @@ exports.googleLoginApp = (req, res) => {
             picture: body.picture,
             onBoard: false,
             admin: false,
+            role: "user",
           };
 
           return res.status(200).json({
@@ -311,14 +358,14 @@ exports.addQuery = (request, response) => {
   const query = request.body.text;
   const email = request.body.email;
 
-  if(query === undefined || email === undefined){
+  if (query === undefined || email === undefined) {
     return response.status(400).json({
       success: false,
 
       err: "please pass valid/complete url parameters",
     });
   }
-  
+
   console.log(email);
   console.log(query);
   let date = Date.now();
@@ -343,43 +390,43 @@ exports.addQuery = (request, response) => {
 
 exports.generageJwt = (req, response) => {
   console.log("generage jwt");
-    let email_child = req.body.email.replace(/\./g, ",");
-    let email = "users/" + email_child;
-    let ref = database.ref().child(email);
-    ref.once("value", (snapshot) => {
-      if (snapshot.val()) {
-        console.log(snapshot.val());
-        if (snapshot.val().onBoard === true) {
-          jwttoken = {
-            email: snapshot.val().email,
-            name: snapshot.val().name,
-            picture: snapshot.val().picture,
-            onBoard: snapshot.val().onBoard,
-            phone: snapshot.val().phone,
-            college: snapshot.val().college,
-            year: snapshot.val().year,
-            admin: snapshot.val().admin,
-            role: snapshot.val().role,
-          };
-        } else {
-         return response.status(405).json({
-            success: false,
-            err: "invalid email not registered",
-          });
-        }
-
-        const token = jwt.sign(jwttoken, functions.config().jwt.key);
-        data = { token: token };
-        return response.status(200).json({
+  let email_child = req.body.email.replace(/\./g, ",");
+  let email = "users/" + email_child;
+  let ref = database.ref().child(email);
+  ref.once("value", (snapshot) => {
+    if (snapshot.val()) {
+      console.log(snapshot.val());
+      if (snapshot.val().onBoard === true) {
+        jwttoken = {
+          email: snapshot.val().email,
+          name: snapshot.val().name,
+          picture: snapshot.val().picture,
           onBoard: snapshot.val().onBoard,
-          success: true,
-          data: data,
-        });
-      }  else {
+          phone: snapshot.val().phone,
+          college: snapshot.val().college,
+          year: snapshot.val().year,
+          admin: snapshot.val().admin,
+          role: snapshot.val().role,
+        };
+      } else {
         return response.status(405).json({
           success: false,
           err: "invalid email not registered",
         });
       }
-    });
+
+      const token = jwt.sign(jwttoken, functions.config().jwt.key);
+      data = { token: token };
+      return response.status(200).json({
+        onBoard: snapshot.val().onBoard,
+        success: true,
+        data: data,
+      });
+    } else {
+      return response.status(405).json({
+        success: false,
+        err: "invalid email not registered",
+      });
+    }
+  });
 };

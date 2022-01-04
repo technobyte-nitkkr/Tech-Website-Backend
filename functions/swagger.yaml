@@ -133,6 +133,8 @@ paths:
       tags:
         - User
       summary: update the user profile for web
+      security:
+        - Authdetails: []
       requestBody:
         content:
           application/json:
@@ -194,19 +196,18 @@ paths:
       tags:
         - App
       summary: update the user profile for android
+      security:
+        - Authdetails: []
       requestBody:
         content:
           application/json:
             schema:
               type: object
               required:
-                - email
                 - year
                 - phone
                 - college
               properties:
-                email:
-                  type: string
                 year:
                   type: string
                 phone:
@@ -607,11 +608,8 @@ paths:
       tags:
         - App
       summary: get the events of loggedin user app
-      parameters:
-        - in: query
-          name: email
-          schema:
-            type: string
+      security:
+        - Authdetails: []
       responses:
         200:
           description: All good success
@@ -660,6 +658,8 @@ paths:
       tags:
         - App
       summary: add the event to logged in user
+      security:
+        - Authdetails: []
       requestBody:
         content:
           application/json:
@@ -668,13 +668,10 @@ paths:
               required:
                 - eventName
                 - eventCategory
-                - email
               properties:
                 eventName:
                   type: string
                 eventCategory:
-                  type: string
-                email:
                   type: string
       responses:
         200:

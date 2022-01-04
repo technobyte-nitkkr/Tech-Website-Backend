@@ -6,6 +6,7 @@ const YAML = require("yamljs");
 const swaggerDocument = YAML.load("./swagger.yaml");
 const cors = require('cors');
 admin.initializeApp();
+const path = require('path');
 
 // import the rotues
 const userRoutes = require('./routes/user');
@@ -13,6 +14,7 @@ const eventsRoutes = require('./routes/events');
 const dataRoutes = require('./routes/data');
 const adminRoutes = require('./routes/admin');
 const mailHelper = require('./utils/emailHelper');
+const { basicmail } = require('./utils/basicmail');
 
 // express
 const app = express();
@@ -35,7 +37,13 @@ app.get('/swaggerjson',(req,res)=>{
 });
 
 // serve public
-app.use(express.static(__dirname + "/swagger"));
+app.get('/api-docs',(req,res)=>{
+	res.sendFile(path.join(__dirname,'swagger','index.html'));
+});
+
+// app.get('/email',(req,res)=>{
+// 	res.send(basicmail("helo","helo","helo","helo","helo"));
+// })
 
 // defalut route
 app.use('/', (req, res) => {

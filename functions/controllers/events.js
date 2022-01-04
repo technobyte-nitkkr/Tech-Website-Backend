@@ -1,4 +1,5 @@
 const admin = require("firebase-admin");
+const { basicmail } = require("../utils/basicmail");
 const mailHelper = require("../utils/emailHelper");
 
 const database = admin.database();
@@ -360,73 +361,100 @@ exports.eventRegister = (request, response) => {
     });
   }
 
-  // get previsouly registered events
-  db.child(users + "/" + email + "/" + registeredEvents)
+  // check if the event exists
+  db.child(`${events}/${eventCategory}/${eventName}`)
     .once("value")
     .then((snapshot) => {
-      let registeredEvent = snapshot.val();
-      if (registeredEvent === undefined || registeredEvent === null) {
-        registeredEvent = {};
+      const data = snapshot.val();
+      if (data === null) {
+        return response.status(400).json({
+          success: false,
+          message: `${eventName} in ${eventCategory} doesn't exist.`,
+        });
       }
 
-      // if not registred any events in that category
-      if (registeredEvent[eventCategory] === undefined) {
-        // create array fro category
-        registeredEvent[eventCategory] = new Array();
-        // push event into that category
-        registeredEvent[eventCategory].push(eventName);
-      } else {
-        // if category already exists
-        // push event to that category
+      db.child(users + "/" + email + "/" + registeredEvents)
+        .once("value")
+        .then((snapshot) => {
+          let registeredEvent = snapshot.val();
+          if (registeredEvent === undefined || registeredEvent === null) {
+            registeredEvent = {};
+          }
 
-        // if event already registered
-        if (registeredEvent[eventCategory].indexOf(eventName) === -1) {
-          registeredEvent[eventCategory].push(eventName);
-        } else {
-          return response.send({
-            success: false,
-            message: `already registered for ${eventName}`,
-          });
-        }
-      }
+          // if not registred any events in that category
+          if (registeredEvent[eventCategory] === undefined) {
+            // create array fro category
+            registeredEvent[eventCategory] = new Array();
+            // push event into that category
+            registeredEvent[eventCategory].push(eventName);
+          } else {
+            // if category already exists
+            // push event to that category
 
-      // update user registered events
-      db.child(users + "/" + email)
-        .update({
-          [registeredEvents]: registeredEvent,
+            // if event already registered
+            if (registeredEvent[eventCategory].indexOf(eventName) === -1) {
+              registeredEvent[eventCategory].push(eventName);
+            } else {
+              return response.send({
+                success: false,
+                message: `already registered for ${eventName}`,
+              });
+            }
+          }
+
+          // update user registered events
+          db.child(users + "/" + email)
+            .update({
+              [registeredEvents]: registeredEvent,
+            })
+            .then((data) => {
+              var html = basicmail(
+                "thankyou for your registeration",
+                `you have succesfully registerd for the event: ${eventName}`,
+                "checkout website",
+                "https://website-frontend20-2mkfatxre.vercel.app/",
+                "Thank you for registering for the event"
+              );
+              mailHelper({
+                email: finalEmail,
+                subject: "Event Registration",
+                text: `You have been registered for ${eventName}`,
+                html: html,
+              }).catch((err) => {
+                console.log(err);
+              });
+              return response.json({
+                success: true,
+                status: `Successfully registered for ${eventName}`,
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+              return response.json({
+                success: false,
+                message: "could not register!",
+                error: err,
+              });
+            });
+
+          return;
         })
-        .then((data) => {
-          mailHelper({
-            email: finalEmail,
-            subject: "Event Registration",
-            text: `You have been registered for ${eventName}`,
-            html: `<h1>You have been registered for ${eventName}</h1>`,
-          }).catch((err) => {
-            console.log(err);
-          });
-          return response.json({
-            success: true,
-            status: `Successfully registered for ${eventName}`,
-          });
-        })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           return response.json({
             success: false,
-            message: "could not register!",
+            message: "could not fetch user registered events",
             error: err,
           });
         });
-
-      return;
     })
     .catch(() => {
-      return response.json({
+      return response.status(400).json({
         success: false,
-        message: "could not fetch user registered events",
-        error: err,
+        message: `Error while fetching event details`,
       });
     });
+
+  // get previsouly registered events
 };
 
 exports.eventUnregister = (request, response) => {
@@ -441,93 +469,81 @@ exports.eventUnregister = (request, response) => {
     });
   }
 
-  // get previsouly registered events
-  db.child(users + "/" + email + "/" + registeredEvents)
+  // check if the event exists
+  db.child(`${events}/${eventCategory}/${eventName}`)
     .once("value")
     .then((snapshot) => {
-      let registeredEvent = snapshot.val();
-      if (registeredEvent === undefined || registeredEvent === null) {
-        return response.send({
+      const data = snapshot.val();
+      if (data === null) {
+        return response.status(400).json({
           success: false,
-          message: `not registered for ${eventName}`,
-        });
-      }
-      if (registeredEvent[eventCategory] === undefined) {
-        return response.send({
-          success: false,
-          message: `not registered for ${eventName}`,
+          message: `${eventName} in ${eventCategory} doesn't exist.`,
         });
       }
 
-      if (registeredEvent[eventCategory].indexOf(eventName) === -1) {
-        return response.send({
-          success: false,
-          message: `not registered for ${eventName}`,
-        });
-      } else {
-        registeredEvent[eventCategory].pop(eventName);
-      }
-      
+      // get previsouly registered events
+      db.child(users + "/" + email + "/" + registeredEvents)
+        .once("value")
+        .then((snapshot) => {
+          let registeredEvent = snapshot.val();
+          if (registeredEvent === undefined || registeredEvent === null) {
+            return response.send({
+              success: false,
+              message: `not registered for ${eventName}`,
+            });
+          }
 
-      // update user registered events
-      db.child(users + "/" + email)
-        .update({
-          [registeredEvents]: registeredEvent,
-        })
-        .then(() => {
-          return response.json({
-            success: true,
-            status: `Successfully unregistered for ${eventName}`,
-          });
+          if (registeredEvent[eventCategory] === undefined) {
+            return response.send({
+              success: false,
+              message: `not registered for ${eventName}`,
+            });
+          }
+
+          if (registeredEvent[eventCategory].indexOf(eventName) === -1) {
+            return response.send({
+              success: false,
+              message: `not registered for ${eventName}`,
+            });
+          } else {
+            registeredEvent[eventCategory].pop(eventName);
+          }
+
+          // update user registered events
+          db.child(users + "/" + email)
+            .update({
+              [registeredEvents]: registeredEvent,
+            })
+            .then(() => {
+              return response.json({
+                success: true,
+                status: `Successfully unregistered for ${eventName}`,
+              });
+            })
+            .catch((err) => {
+              return response.json({
+                success: false,
+                message: "could not unregister!",
+                error: err,
+              });
+            });
+
+          return;
         })
         .catch((err) => {
           return response.json({
             success: false,
-            message: "could not unregister!",
+            message: "could not fetch user registered events",
             error: err,
           });
         });
-
-      return;
     })
-    .catch((err) => {
-      return response.json({
+    .catch(() => {
+      return response.status(400).json({
         success: false,
-        message: "could not fetch user registered events",
-        error: err,
+        message: `Error while fetching event details`,
       });
     });
-};
-
-
-exports.appGetRegisteredEvents = (req, res, next) => {
-  let id = req.query.email;
-  if (id === undefined || id === null) {
-    return res.status(400).json({
-      success: false,
-      message: "send id",
-    });
-  }
-
-  id = id.replace(/\./g, ",");
-  req.body.email = id;
-  return next();
-};
-
-exports.appEventRegister = (req, res, next) => {
-  let em = req.body.email;
-
-  if (em === undefined || em === null) {
-    res.status(400).json({
-      success: false,
-      message: "unauth, send id",
-    });
-  }
-
-  em = em.replace(/\./g, ",");
-  req.body.email = em;
-
-  next();
 };
 
 function matchEventDescription(database, data) {
