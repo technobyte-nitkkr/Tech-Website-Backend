@@ -12,6 +12,7 @@ const userRoutes = require('./routes/user');
 const eventsRoutes = require('./routes/events');
 const dataRoutes = require('./routes/data');
 const adminRoutes = require('./routes/admin');
+const mailHelper = require('./utils/emailHelper');
 
 // express
 const app = express();

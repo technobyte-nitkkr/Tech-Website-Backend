@@ -1,0 +1,483 @@
+[debug] [2021-12-30T09:37:00.110Z] ----------------------------------------------------------------------
+[debug] [2021-12-30T09:37:00.115Z] Command:       C:\Program Files\nodejs\nodejs new folder\node.exe C:\Users\hp\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js functions:shell
+[debug] [2021-12-30T09:37:00.115Z] CLI Version:   10.0.1
+[debug] [2021-12-30T09:37:00.116Z] Platform:      win32
+[debug] [2021-12-30T09:37:00.116Z] Node Version:  v14.5.0
+[debug] [2021-12-30T09:37:00.118Z] Time:          Thu Dec 30 2021 15:07:00 GMT+0530 (India Standard Time)
+[debug] [2021-12-30T09:37:00.118Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-12-30T09:37:00.312Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-12-30T09:37:00.313Z] > authorizing via signed-in user (swatimeena640@gmail.com)
+[debug] [2021-12-30T09:37:00.313Z] [iam] checking project techspardha-87928 for permissions ["firebase.projects.get"]
+[debug] [2021-12-30T09:37:00.317Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2021-12-30T09:37:00.318Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-12-30T09:37:00.581Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Thu, 30 Dec 2021 09:36:59 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-30T09:37:00.668Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/techspardha-87928:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2021-12-30T09:37:02.259Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 30 Dec 2021 09:37:01 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1396","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] !  Your requested "node" version "8" doesn't match your global version "14" {"metadata":{"emulator":{"name":"functions"},"message":"Your requested \"node\" version \"8\" doesn't match your global version \"14\""}}
+[debug] [2021-12-30T09:37:04.354Z] defaultcredentials: writing to file C:\Users\hp\AppData\Roaming\firebase\swatimeena640_gmail_com_application_default_credentials.json
+[debug] [2021-12-30T09:37:04.357Z] DEBUG: Setting GAC to C:\Users\hp\AppData\Roaming\firebase\swatimeena640_gmail_com_application_default_credentials.json
+[debug] [2021-12-30T09:37:04.360Z] > refreshing access token with scopes: []
+[debug] [2021-12-30T09:37:04.360Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-12-30T09:37:04.556Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","date":"Thu, 30 Dec 2021 09:37:03 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-30T09:37:04.669Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/techspardha-87928/adminSdkConfig [none]
+[debug] [2021-12-30T09:37:05.140Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/techspardha-87928/adminSdkConfig 200
+[debug] [2021-12-30T09:37:05.141Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/techspardha-87928/adminSdkConfig {"projectId":"techspardha-87928","databaseURL":"https://techspardha-87928.firebaseio.com","storageBucket":"techspardha-87928.appspot.com","locationId":"us-central"}
+[debug] [2021-12-30T09:37:05.197Z] [functions] Watching "C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions" for Cloud Functions...
+[debug] [2021-12-30T09:37:05.250Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2021-12-30T09:37:05.259Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2021-12-30T09:37:05.260Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2021-12-30T09:37:05.261Z] DEBUG: [worker-~diagnostic~-b90e5523-ee60-484a-af02-24a3a1c37c0c]: Assigning socketPath: \\?\pipe\C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\22236
+[debug] [2021-12-30T09:37:05.262Z] DEBUG: [worker-~diagnostic~-b90e5523-ee60-484a-af02-24a3a1c37c0c]: BUSY
+[debug] [2021-12-30T09:37:05.959Z] DEBUG: [runtime-status] [22236] Functions runtime initialized. {"cwd":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions","node_version":"14.5.0"}
+[debug] [2021-12-30T09:37:05.962Z] DEBUG: [runtime-status] [22236] Disabled runtime features: undefined
+[debug] [2021-12-30T09:37:05.970Z] DEBUG: [runtime-status] [22236] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2021-12-30T09:37:05.975Z] DEBUG: [runtime-status] [22236] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[warn] !  The Cloud Functions emulator requires the module "firebase-functions" to be version >3.13.1 so your version is too old. You can probably fix this by running "npm install firebase-functions@latest" in your functions directory. {"metadata":{"emulator":{"name":"functions"},"message":"The Cloud Functions emulator requires the module \"firebase-functions\" to be version >3.13.1 so your version is too old. You can probably fix this by running \"npm install firebase-functions@latest\" in your functions directory."}}
+[debug] [2021-12-30T09:37:05.977Z] [functions] Your functions could not be parsed due to an issue with your node_modules (see above)
+[debug] [2021-12-30T09:37:06.021Z] DEBUG: [worker-~diagnostic~-b90e5523-ee60-484a-af02-24a3a1c37c0c]: exited
+[debug] [2021-12-30T09:37:06.021Z] DEBUG: [worker-~diagnostic~-b90e5523-ee60-484a-af02-24a3a1c37c0c]: FINISHED
+[debug] [2022-01-04T10:15:08.778Z] ----------------------------------------------------------------------
+[debug] [2022-01-04T10:15:08.782Z] Command:       C:\Program Files\nodejs\nodejs new folder\node.exe C:\Users\hp\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js functions:shell
+[debug] [2022-01-04T10:15:08.782Z] CLI Version:   10.0.1
+[debug] [2022-01-04T10:15:08.782Z] Platform:      win32
+[debug] [2022-01-04T10:15:08.783Z] Node Version:  v14.5.0
+[debug] [2022-01-04T10:15:08.784Z] Time:          Tue Jan 04 2022 15:45:08 GMT+0530 (India Standard Time)
+[debug] [2022-01-04T10:15:08.784Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-01-04T10:15:08.937Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-01-04T10:15:08.937Z] > authorizing via signed-in user (swatimeena640@gmail.com)
+[debug] [2022-01-04T10:15:08.937Z] [iam] checking project techspardha-87928 for permissions ["firebase.projects.get"]
+[debug] [2022-01-04T10:15:08.943Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2022-01-04T10:15:08.944Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-01-04T10:15:09.236Z] <<< HTTP RESPONSE 200 {"cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Tue, 04 Jan 2022 10:15:10 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-01-04T10:15:09.951Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/techspardha-87928:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2022-01-04T10:15:11.442Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 04 Jan 2022 10:15:12 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1368","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] !  Your requested "node" version "8" doesn't match your global version "14" {"metadata":{"emulator":{"name":"functions"},"message":"Your requested \"node\" version \"8\" doesn't match your global version \"14\""}}
+[debug] [2022-01-04T10:15:13.510Z] defaultcredentials: writing to file C:\Users\hp\AppData\Roaming\firebase\swatimeena640_gmail_com_application_default_credentials.json
+[debug] [2022-01-04T10:15:13.512Z] DEBUG: Setting GAC to C:\Users\hp\AppData\Roaming\firebase\swatimeena640_gmail_com_application_default_credentials.json
+[debug] [2022-01-04T10:15:13.515Z] > refreshing access token with scopes: []
+[debug] [2022-01-04T10:15:13.515Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-01-04T10:15:13.726Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","date":"Tue, 04 Jan 2022 10:15:14 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-01-04T10:15:15.541Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/techspardha-87928/adminSdkConfig [none]
+[debug] [2022-01-04T10:15:15.984Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/techspardha-87928/adminSdkConfig 200
+[debug] [2022-01-04T10:15:15.984Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/techspardha-87928/adminSdkConfig {"projectId":"techspardha-87928","databaseURL":"https://techspardha-87928.firebaseio.com","storageBucket":"techspardha-87928.appspot.com","locationId":"us-central"}
+[debug] [2022-01-04T10:15:17.329Z] [functions] Watching "C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions" for Cloud Functions...
+[debug] [2022-01-04T10:15:17.364Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2022-01-04T10:15:17.364Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2022-01-04T10:15:17.366Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2022-01-04T10:15:17.370Z] DEBUG: [worker-~diagnostic~-9d522d15-93e9-45da-884c-edb5ab5f4cee]: Assigning socketPath: \\?\pipe\C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\14620
+[debug] [2022-01-04T10:15:17.372Z] DEBUG: [worker-~diagnostic~-9d522d15-93e9-45da-884c-edb5ab5f4cee]: BUSY
+[debug] [2022-01-04T10:15:17.944Z] DEBUG: [runtime-status] [14620] Functions runtime initialized. {"cwd":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions","node_version":"14.5.0"}
+[debug] [2022-01-04T10:15:17.948Z] DEBUG: [runtime-status] [14620] Disabled runtime features: undefined
+[debug] [2022-01-04T10:15:17.955Z] DEBUG: [runtime-status] [14620] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:15:17.959Z] DEBUG: [runtime-status] [14620] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:15:17.962Z] DEBUG: [runtime-status] [14620] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2022-01-04T10:15:17.964Z] DEBUG: [runtime-status] [14620] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:15:18.113Z] DEBUG: [runtime-status] [14620] Checked functions.config() {"config":{}}
+[debug] [2022-01-04T10:15:18.114Z] DEBUG: [runtime-status] [14620] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}}
+[debug] [2022-01-04T10:15:18.117Z] DEBUG: [runtime-status] [14620] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:15:18.122Z] DEBUG: [runtime-status] [14620] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:15:18.125Z] DEBUG: [runtime-status] [14620] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:15:18.125Z] DEBUG: [runtime-status] [14620] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}}
+[warn] !  SyntaxError: C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\.runtimeconfig.json: Unexpected token � in JSON at position 0
+    at parse (<anonymous>)
+    at Object.Module._extensions..json (internal/modules/cjs/loader.js:1235:22)
+    at Module.load (internal/modules/cjs/loader.js:1050:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:938:14)
+    at Module.require (internal/modules/cjs/loader.js:1090:19)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at Object.<anonymous> (C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js:14:15)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
+    at Module.load (internal/modules/cjs/loader.js:1050:32) {"metadata":{"emulator":{"name":"functions"},"message":"SyntaxError: C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\.runtimeconfig.json: Unexpected token � in JSON at position 0\n    at parse (<anonymous>)\n    at Object.Module._extensions..json (internal/modules/cjs/loader.js:1235:22)\n    at Module.load (internal/modules/cjs/loader.js:1050:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:938:14)\n    at Module.require (internal/modules/cjs/loader.js:1090:19)\n    at require (internal/modules/cjs/helpers.js:75:18)\n    at Object.<anonymous> (C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\index.js:14:15)\n    at Module._compile (internal/modules/cjs/loader.js:1201:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)\n    at Module.load (internal/modules/cjs/loader.js:1050:32)"}}
+[warn] !  We were unable to load your functions code. (see above) {"metadata":{"emulator":{"name":"functions"}}}
+[debug] [2022-01-04T10:15:19.337Z] DEBUG: [worker-~diagnostic~-9d522d15-93e9-45da-884c-edb5ab5f4cee]: exited
+[debug] [2022-01-04T10:15:19.337Z] DEBUG: [worker-~diagnostic~-9d522d15-93e9-45da-884c-edb5ab5f4cee]: FINISHED
+[debug] [2022-01-04T10:16:21.518Z] [work-queue] {"queueLength":1,"workRunningCount":0}
+[debug] [2022-01-04T10:16:21.520Z] [work-queue] {"queueLength":0,"workRunningCount":1}
+[debug] [2022-01-04T10:16:21.530Z] [work-queue] {"queueLength":0,"workRunningCount":0}
+[debug] [2022-01-04T10:18:23.508Z] DEBUG: File C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js changed, reloading triggers
+[debug] [2022-01-04T10:18:24.514Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 1 --> 0
+[debug] [2022-01-04T10:18:24.524Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2022-01-04T10:18:24.524Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2022-01-04T10:18:24.524Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2022-01-04T10:18:24.524Z] DEBUG: [worker-~diagnostic~-7dd2aa06-cabe-45a8-99ec-7b7a0f1a9e22]: Assigning socketPath: \\?\pipe\C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\12584
+[debug] [2022-01-04T10:18:24.525Z] DEBUG: [worker-~diagnostic~-7dd2aa06-cabe-45a8-99ec-7b7a0f1a9e22]: BUSY
+[debug] [2022-01-04T10:18:25.862Z] DEBUG: [runtime-status] [12584] Functions runtime initialized. {"cwd":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions","node_version":"14.5.0"}
+[debug] [2022-01-04T10:18:25.868Z] DEBUG: [runtime-status] [12584] Disabled runtime features: undefined
+[debug] [2022-01-04T10:18:25.875Z] DEBUG: [runtime-status] [12584] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:18:25.879Z] DEBUG: [runtime-status] [12584] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:25.882Z] DEBUG: [runtime-status] [12584] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2022-01-04T10:18:25.884Z] DEBUG: [runtime-status] [12584] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:25.993Z] DEBUG: [runtime-status] [12584] Checked functions.config() {"config":{}}
+[debug] [2022-01-04T10:18:25.993Z] DEBUG: [runtime-status] [12584] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}}
+[debug] [2022-01-04T10:18:25.994Z] DEBUG: [runtime-status] [12584] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:25.999Z] DEBUG: [runtime-status] [12584] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:18:26.000Z] DEBUG: [runtime-status] [12584] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:26.001Z] DEBUG: [runtime-status] [12584] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}}
+[warn] !  SyntaxError: C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\.runtimeconfig.json: Unexpected token � in JSON at position 0
+    at parse (<anonymous>)
+    at Object.Module._extensions..json (internal/modules/cjs/loader.js:1235:22)
+    at Module.load (internal/modules/cjs/loader.js:1050:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:938:14)
+    at Module.require (internal/modules/cjs/loader.js:1090:19)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at Object.<anonymous> (C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js:15:15)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
+    at Module.load (internal/modules/cjs/loader.js:1050:32) {"metadata":{"emulator":{"name":"functions"},"message":"SyntaxError: C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\.runtimeconfig.json: Unexpected token � in JSON at position 0\n    at parse (<anonymous>)\n    at Object.Module._extensions..json (internal/modules/cjs/loader.js:1235:22)\n    at Module.load (internal/modules/cjs/loader.js:1050:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:938:14)\n    at Module.require (internal/modules/cjs/loader.js:1090:19)\n    at require (internal/modules/cjs/helpers.js:75:18)\n    at Object.<anonymous> (C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\index.js:15:15)\n    at Module._compile (internal/modules/cjs/loader.js:1201:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)\n    at Module.load (internal/modules/cjs/loader.js:1050:32)"}}
+[warn] !  We were unable to load your functions code. (see above) {"metadata":{"emulator":{"name":"functions"}}}
+[debug] [2022-01-04T10:18:27.091Z] DEBUG: [worker-~diagnostic~-7dd2aa06-cabe-45a8-99ec-7b7a0f1a9e22]: exited
+[debug] [2022-01-04T10:18:27.091Z] DEBUG: [worker-~diagnostic~-7dd2aa06-cabe-45a8-99ec-7b7a0f1a9e22]: FINISHED
+[debug] [2022-01-04T10:18:35.906Z] DEBUG: File C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js changed, reloading triggers
+[debug] [2022-01-04T10:18:36.922Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 1 --> 0
+[debug] [2022-01-04T10:18:36.936Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2022-01-04T10:18:36.936Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2022-01-04T10:18:36.937Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2022-01-04T10:18:36.937Z] DEBUG: [worker-~diagnostic~-de64a7fe-4be0-4cc0-82c8-0026e5b694c6]: Assigning socketPath: \\?\pipe\C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\12048
+[debug] [2022-01-04T10:18:36.938Z] DEBUG: [worker-~diagnostic~-de64a7fe-4be0-4cc0-82c8-0026e5b694c6]: BUSY
+[debug] [2022-01-04T10:18:38.109Z] DEBUG: [runtime-status] [12048] Functions runtime initialized. {"cwd":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions","node_version":"14.5.0"}
+[debug] [2022-01-04T10:18:38.138Z] DEBUG: [runtime-status] [12048] Disabled runtime features: undefined
+[debug] [2022-01-04T10:18:38.168Z] DEBUG: [runtime-status] [12048] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:18:38.173Z] DEBUG: [runtime-status] [12048] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:38.177Z] DEBUG: [runtime-status] [12048] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2022-01-04T10:18:38.180Z] DEBUG: [runtime-status] [12048] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:38.443Z] DEBUG: [runtime-status] [12048] Checked functions.config() {"config":{}}
+[debug] [2022-01-04T10:18:38.444Z] DEBUG: [runtime-status] [12048] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}}
+[debug] [2022-01-04T10:18:38.447Z] DEBUG: [runtime-status] [12048] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:38.454Z] DEBUG: [runtime-status] [12048] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:18:38.457Z] DEBUG: [runtime-status] [12048] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:38.458Z] DEBUG: [runtime-status] [12048] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}}
+[debug] [2022-01-04T10:18:39.021Z] DEBUG: File C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js changed, reloading triggers
+[warn] !  TypeError [ERR_INVALID_ARG_VALUE]: The argument 'id' must be a non-empty string. Received ''
+    at Module.require (internal/modules/cjs/loader.js:1085:11)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at Object.<anonymous> (C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js:15:15)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
+    at Module.load (internal/modules/cjs/loader.js:1050:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:938:14)
+    at Module.require (internal/modules/cjs/loader.js:1090:19)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at initializeRuntime (C:\Users\hp\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\functionsEmulatorRuntime.js:640:29) {"metadata":{"emulator":{"name":"functions"},"message":"TypeError [ERR_INVALID_ARG_VALUE]: The argument 'id' must be a non-empty string. Received ''\n    at Module.require (internal/modules/cjs/loader.js:1085:11)\n    at require (internal/modules/cjs/helpers.js:75:18)\n    at Object.<anonymous> (C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\index.js:15:15)\n    at Module._compile (internal/modules/cjs/loader.js:1201:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)\n    at Module.load (internal/modules/cjs/loader.js:1050:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:938:14)\n    at Module.require (internal/modules/cjs/loader.js:1090:19)\n    at require (internal/modules/cjs/helpers.js:75:18)\n    at initializeRuntime (C:\\Users\\hp\\AppData\\Roaming\\npm\\node_modules\\firebase-tools\\lib\\emulator\\functionsEmulatorRuntime.js:640:29)"}}
+[warn] !  We were unable to load your functions code. (see above) {"metadata":{"emulator":{"name":"functions"}}}
+[debug] [2022-01-04T10:18:39.680Z] DEBUG: [worker-~diagnostic~-de64a7fe-4be0-4cc0-82c8-0026e5b694c6]: exited
+[debug] [2022-01-04T10:18:39.680Z] DEBUG: [worker-~diagnostic~-de64a7fe-4be0-4cc0-82c8-0026e5b694c6]: FINISHED
+[debug] [2022-01-04T10:18:40.024Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 1 --> 0
+[debug] [2022-01-04T10:18:40.037Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2022-01-04T10:18:40.038Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2022-01-04T10:18:40.038Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2022-01-04T10:18:40.038Z] DEBUG: [worker-~diagnostic~-e49074a3-8ac2-48a4-97e1-bb1e12b05128]: Assigning socketPath: \\?\pipe\C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\1072
+[debug] [2022-01-04T10:18:40.038Z] DEBUG: [worker-~diagnostic~-e49074a3-8ac2-48a4-97e1-bb1e12b05128]: BUSY
+[debug] [2022-01-04T10:18:41.413Z] DEBUG: [runtime-status] [1072] Functions runtime initialized. {"cwd":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions","node_version":"14.5.0"}
+[debug] [2022-01-04T10:18:41.419Z] DEBUG: [runtime-status] [1072] Disabled runtime features: undefined
+[debug] [2022-01-04T10:18:41.426Z] DEBUG: [runtime-status] [1072] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:18:41.430Z] DEBUG: [runtime-status] [1072] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:41.433Z] DEBUG: [runtime-status] [1072] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2022-01-04T10:18:41.436Z] DEBUG: [runtime-status] [1072] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:41.540Z] DEBUG: [runtime-status] [1072] Checked functions.config() {"config":{}}
+[debug] [2022-01-04T10:18:41.541Z] DEBUG: [runtime-status] [1072] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}}
+[debug] [2022-01-04T10:18:41.542Z] DEBUG: [runtime-status] [1072] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:41.545Z] DEBUG: [runtime-status] [1072] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:18:41.547Z] DEBUG: [runtime-status] [1072] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:41.547Z] DEBUG: [runtime-status] [1072] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}}
+[warn] !  Error: Cannot find module 'C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\index.js'. Please verify that the package.json has a valid "main" entry
+    at tryPackage (internal/modules/cjs/loader.js:329:19)
+    at Function.Module._findPath (internal/modules/cjs/loader.js:690:18)
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:1017:27)
+    at Function.Module._load (internal/modules/cjs/loader.js:899:27)
+    at Module.require (internal/modules/cjs/loader.js:1090:19)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at Object.<anonymous> (C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js:15:15)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
+    at Module.load (internal/modules/cjs/loader.js:1050:32) {"metadata":{"emulator":{"name":"functions"},"message":"Error: Cannot find module 'C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\index.js'. Please verify that the package.json has a valid \"main\" entry\n    at tryPackage (internal/modules/cjs/loader.js:329:19)\n    at Function.Module._findPath (internal/modules/cjs/loader.js:690:18)\n    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:1017:27)\n    at Function.Module._load (internal/modules/cjs/loader.js:899:27)\n    at Module.require (internal/modules/cjs/loader.js:1090:19)\n    at require (internal/modules/cjs/helpers.js:75:18)\n    at Object.<anonymous> (C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\index.js:15:15)\n    at Module._compile (internal/modules/cjs/loader.js:1201:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)\n    at Module.load (internal/modules/cjs/loader.js:1050:32)"}}
+[warn] !  We were unable to load your functions code. (see above) {"metadata":{"emulator":{"name":"functions"}}}
+[debug] [2022-01-04T10:18:42.357Z] DEBUG: [worker-~diagnostic~-e49074a3-8ac2-48a4-97e1-bb1e12b05128]: exited
+[debug] [2022-01-04T10:18:42.357Z] DEBUG: [worker-~diagnostic~-e49074a3-8ac2-48a4-97e1-bb1e12b05128]: FINISHED
+[debug] [2022-01-04T10:18:47.566Z] DEBUG: File C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js changed, reloading triggers
+[debug] [2022-01-04T10:18:48.571Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 1 --> 0
+[debug] [2022-01-04T10:18:48.625Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2022-01-04T10:18:48.626Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2022-01-04T10:18:48.626Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2022-01-04T10:18:48.626Z] DEBUG: [worker-~diagnostic~-a571518c-8e06-47c3-9bd5-b2abcb570b39]: Assigning socketPath: \\?\pipe\C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\11584
+[debug] [2022-01-04T10:18:48.627Z] DEBUG: [worker-~diagnostic~-a571518c-8e06-47c3-9bd5-b2abcb570b39]: BUSY
+[debug] [2022-01-04T10:18:49.084Z] DEBUG: [runtime-status] [11584] Functions runtime initialized. {"cwd":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions","node_version":"14.5.0"}
+[debug] [2022-01-04T10:18:49.089Z] DEBUG: [runtime-status] [11584] Disabled runtime features: undefined
+[debug] [2022-01-04T10:18:49.097Z] DEBUG: [runtime-status] [11584] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:18:49.102Z] DEBUG: [runtime-status] [11584] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:49.106Z] DEBUG: [runtime-status] [11584] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2022-01-04T10:18:49.108Z] DEBUG: [runtime-status] [11584] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:49.275Z] DEBUG: [runtime-status] [11584] Checked functions.config() {"config":{}}
+[debug] [2022-01-04T10:18:49.276Z] DEBUG: [runtime-status] [11584] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}}
+[debug] [2022-01-04T10:18:49.278Z] DEBUG: [runtime-status] [11584] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:49.283Z] DEBUG: [runtime-status] [11584] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:18:49.285Z] DEBUG: [runtime-status] [11584] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:49.285Z] DEBUG: [runtime-status] [11584] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}}
+[debug] [2022-01-04T10:18:50.183Z] DEBUG: File C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js changed, reloading triggers
+[warn] !  Error: Cannot find module 'C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\index.js'. Please verify that the package.json has a valid "main" entry
+    at tryPackage (internal/modules/cjs/loader.js:329:19)
+    at Function.Module._findPath (internal/modules/cjs/loader.js:690:18)
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:1017:27)
+    at Function.Module._load (internal/modules/cjs/loader.js:899:27)
+    at Module.require (internal/modules/cjs/loader.js:1090:19)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at Object.<anonymous> (C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js:15:15)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
+    at Module.load (internal/modules/cjs/loader.js:1050:32) {"metadata":{"emulator":{"name":"functions"},"message":"Error: Cannot find module 'C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\index.js'. Please verify that the package.json has a valid \"main\" entry\n    at tryPackage (internal/modules/cjs/loader.js:329:19)\n    at Function.Module._findPath (internal/modules/cjs/loader.js:690:18)\n    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:1017:27)\n    at Function.Module._load (internal/modules/cjs/loader.js:899:27)\n    at Module.require (internal/modules/cjs/loader.js:1090:19)\n    at require (internal/modules/cjs/helpers.js:75:18)\n    at Object.<anonymous> (C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\index.js:15:15)\n    at Module._compile (internal/modules/cjs/loader.js:1201:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)\n    at Module.load (internal/modules/cjs/loader.js:1050:32)"}}
+[warn] !  We were unable to load your functions code. (see above) {"metadata":{"emulator":{"name":"functions"}}}
+[debug] [2022-01-04T10:18:50.716Z] DEBUG: [worker-~diagnostic~-a571518c-8e06-47c3-9bd5-b2abcb570b39]: exited
+[debug] [2022-01-04T10:18:50.717Z] DEBUG: [worker-~diagnostic~-a571518c-8e06-47c3-9bd5-b2abcb570b39]: FINISHED
+[debug] [2022-01-04T10:18:51.186Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 1 --> 0
+[debug] [2022-01-04T10:18:51.197Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2022-01-04T10:18:51.198Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2022-01-04T10:18:51.198Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2022-01-04T10:18:51.199Z] DEBUG: [worker-~diagnostic~-99fd9dc3-24b2-41b3-9617-6d7231bb48b0]: Assigning socketPath: \\?\pipe\C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\15396
+[debug] [2022-01-04T10:18:51.200Z] DEBUG: [worker-~diagnostic~-99fd9dc3-24b2-41b3-9617-6d7231bb48b0]: BUSY
+[debug] [2022-01-04T10:18:52.528Z] DEBUG: [runtime-status] [15396] Functions runtime initialized. {"cwd":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions","node_version":"14.5.0"}
+[debug] [2022-01-04T10:18:52.538Z] DEBUG: [runtime-status] [15396] Disabled runtime features: undefined
+[debug] [2022-01-04T10:18:52.558Z] DEBUG: [runtime-status] [15396] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:18:52.568Z] DEBUG: [runtime-status] [15396] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:52.579Z] DEBUG: [runtime-status] [15396] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2022-01-04T10:18:52.583Z] DEBUG: [runtime-status] [15396] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:52.787Z] DEBUG: [runtime-status] [15396] Checked functions.config() {"config":{}}
+[debug] [2022-01-04T10:18:52.788Z] DEBUG: [runtime-status] [15396] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}}
+[debug] [2022-01-04T10:18:52.789Z] DEBUG: [runtime-status] [15396] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:52.792Z] DEBUG: [runtime-status] [15396] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:18:52.793Z] DEBUG: [runtime-status] [15396] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:52.793Z] DEBUG: [runtime-status] [15396] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}}
+[warn] !  Error: Cannot find module '../.r'
+Require stack:
+- C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js
+- C:\Users\hp\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\functionsEmulatorRuntime.js
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:1030:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:899:27)
+    at Module.require (internal/modules/cjs/loader.js:1090:19)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at Object.<anonymous> (C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js:15:15)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
+    at Module.load (internal/modules/cjs/loader.js:1050:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:938:14)
+    at Module.require (internal/modules/cjs/loader.js:1090:19) {"metadata":{"emulator":{"name":"functions"},"message":"Error: Cannot find module '../.r'\nRequire stack:\n- C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\index.js\n- C:\\Users\\hp\\AppData\\Roaming\\npm\\node_modules\\firebase-tools\\lib\\emulator\\functionsEmulatorRuntime.js\n    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:1030:15)\n    at Function.Module._load (internal/modules/cjs/loader.js:899:27)\n    at Module.require (internal/modules/cjs/loader.js:1090:19)\n    at require (internal/modules/cjs/helpers.js:75:18)\n    at Object.<anonymous> (C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\index.js:15:15)\n    at Module._compile (internal/modules/cjs/loader.js:1201:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)\n    at Module.load (internal/modules/cjs/loader.js:1050:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:938:14)\n    at Module.require (internal/modules/cjs/loader.js:1090:19)"}}
+[warn] !  We were unable to load your functions code. (see above) {"metadata":{"emulator":{"name":"functions"}}}
+[debug] [2022-01-04T10:18:54.022Z] DEBUG: [worker-~diagnostic~-99fd9dc3-24b2-41b3-9617-6d7231bb48b0]: exited
+[debug] [2022-01-04T10:18:54.022Z] DEBUG: [worker-~diagnostic~-99fd9dc3-24b2-41b3-9617-6d7231bb48b0]: FINISHED
+[debug] [2022-01-04T10:18:54.304Z] DEBUG: File C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js changed, reloading triggers
+[debug] [2022-01-04T10:18:55.329Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 1 --> 0
+[debug] [2022-01-04T10:18:55.358Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2022-01-04T10:18:55.358Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2022-01-04T10:18:55.359Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2022-01-04T10:18:55.360Z] DEBUG: [worker-~diagnostic~-a9634cdf-2e41-4446-9e61-244bfffaeed6]: Assigning socketPath: \\?\pipe\C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\13416
+[debug] [2022-01-04T10:18:55.360Z] DEBUG: [worker-~diagnostic~-a9634cdf-2e41-4446-9e61-244bfffaeed6]: BUSY
+[debug] [2022-01-04T10:18:56.631Z] DEBUG: File C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js changed, reloading triggers
+[debug] [2022-01-04T10:18:56.866Z] DEBUG: [runtime-status] [13416] Functions runtime initialized. {"cwd":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions","node_version":"14.5.0"}
+[debug] [2022-01-04T10:18:56.877Z] DEBUG: [runtime-status] [13416] Disabled runtime features: undefined
+[debug] [2022-01-04T10:18:56.943Z] DEBUG: [runtime-status] [13416] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:18:56.954Z] DEBUG: [runtime-status] [13416] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:56.959Z] DEBUG: [runtime-status] [13416] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2022-01-04T10:18:56.963Z] DEBUG: [runtime-status] [13416] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:57.231Z] DEBUG: [runtime-status] [13416] Checked functions.config() {"config":{}}
+[debug] [2022-01-04T10:18:57.234Z] DEBUG: [runtime-status] [13416] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}}
+[debug] [2022-01-04T10:18:57.240Z] DEBUG: [runtime-status] [13416] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:57.247Z] DEBUG: [runtime-status] [13416] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:18:57.252Z] DEBUG: [runtime-status] [13416] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:57.253Z] DEBUG: [runtime-status] [13416] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}}
+[debug] [2022-01-04T10:18:57.643Z] DEBUG: [worker-pool] Marking BUSY worker to finish (~diagnostic~)
+[debug] [2022-01-04T10:18:57.644Z] DEBUG: [worker-~diagnostic~-a9634cdf-2e41-4446-9e61-244bfffaeed6]: FINISHING
+[debug] [2022-01-04T10:18:57.654Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2022-01-04T10:18:57.655Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2022-01-04T10:18:57.655Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2022-01-04T10:18:57.656Z] DEBUG: [worker-~diagnostic~-4dab63dc-8e73-44ab-962c-2bb2c97ee5a3]: Assigning socketPath: \\?\pipe\C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\11896
+[debug] [2022-01-04T10:18:57.656Z] DEBUG: [worker-~diagnostic~-4dab63dc-8e73-44ab-962c-2bb2c97ee5a3]: BUSY
+[debug] [2022-01-04T10:18:58.350Z] DEBUG: File C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js changed, reloading triggers
+[debug] [2022-01-04T10:18:58.708Z] DEBUG: [runtime-status] [11896] Functions runtime initialized. {"cwd":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions","node_version":"14.5.0"}
+[debug] [2022-01-04T10:18:58.718Z] DEBUG: [runtime-status] [11896] Disabled runtime features: undefined
+[debug] [2022-01-04T10:18:58.733Z] DEBUG: [runtime-status] [11896] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:18:58.738Z] DEBUG: [runtime-status] [11896] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:58.742Z] DEBUG: [runtime-status] [11896] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2022-01-04T10:18:58.745Z] DEBUG: [runtime-status] [11896] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[warn] !  Error: Cannot find module '../.runt'
+Require stack:
+- C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js
+- C:\Users\hp\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\functionsEmulatorRuntime.js
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:1030:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:899:27)
+    at Module.require (internal/modules/cjs/loader.js:1090:19)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at Object.<anonymous> (C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js:15:15)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
+    at Module.load (internal/modules/cjs/loader.js:1050:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:938:14)
+    at Module.require (internal/modules/cjs/loader.js:1090:19) {"metadata":{"emulator":{"name":"functions"},"message":"Error: Cannot find module '../.runt'\nRequire stack:\n- C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\index.js\n- C:\\Users\\hp\\AppData\\Roaming\\npm\\node_modules\\firebase-tools\\lib\\emulator\\functionsEmulatorRuntime.js\n    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:1030:15)\n    at Function.Module._load (internal/modules/cjs/loader.js:899:27)\n    at Module.require (internal/modules/cjs/loader.js:1090:19)\n    at require (internal/modules/cjs/helpers.js:75:18)\n    at Object.<anonymous> (C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\index.js:15:15)\n    at Module._compile (internal/modules/cjs/loader.js:1201:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)\n    at Module.load (internal/modules/cjs/loader.js:1050:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:938:14)\n    at Module.require (internal/modules/cjs/loader.js:1090:19)"}}
+[warn] !  We were unable to load your functions code. (see above) {"metadata":{"emulator":{"name":"functions"}}}
+[debug] [2022-01-04T10:18:58.977Z] DEBUG: [worker-~diagnostic~-a9634cdf-2e41-4446-9e61-244bfffaeed6]: exited
+[debug] [2022-01-04T10:18:58.978Z] DEBUG: [worker-~diagnostic~-a9634cdf-2e41-4446-9e61-244bfffaeed6]: FINISHED
+[debug] [2022-01-04T10:18:59.086Z] DEBUG: [runtime-status] [11896] Checked functions.config() {"config":{}}
+[debug] [2022-01-04T10:18:59.087Z] DEBUG: [runtime-status] [11896] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}}
+[debug] [2022-01-04T10:18:59.091Z] DEBUG: [runtime-status] [11896] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:59.100Z] DEBUG: [runtime-status] [11896] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:18:59.105Z] DEBUG: [runtime-status] [11896] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:18:59.107Z] DEBUG: [runtime-status] [11896] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}}
+[debug] [2022-01-04T10:18:59.372Z] DEBUG: [worker-pool] Marking BUSY worker to finish (~diagnostic~)
+[debug] [2022-01-04T10:18:59.372Z] DEBUG: [worker-~diagnostic~-4dab63dc-8e73-44ab-962c-2bb2c97ee5a3]: FINISHING
+[debug] [2022-01-04T10:18:59.372Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 2 --> 1
+[debug] [2022-01-04T10:18:59.383Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2022-01-04T10:18:59.383Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2022-01-04T10:18:59.383Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2022-01-04T10:18:59.384Z] DEBUG: [worker-~diagnostic~-4cb88c33-5228-4e17-b9e6-4ec941383546]: Assigning socketPath: \\?\pipe\C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\3416
+[debug] [2022-01-04T10:18:59.384Z] DEBUG: [worker-~diagnostic~-4cb88c33-5228-4e17-b9e6-4ec941383546]: BUSY
+[warn] !  Error: Cannot find module '../.runtime'
+Require stack:
+- C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js
+- C:\Users\hp\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\functionsEmulatorRuntime.js
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:1030:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:899:27)
+    at Module.require (internal/modules/cjs/loader.js:1090:19)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at Object.<anonymous> (C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js:15:15)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
+    at Module.load (internal/modules/cjs/loader.js:1050:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:938:14)
+    at Module.require (internal/modules/cjs/loader.js:1090:19) {"metadata":{"emulator":{"name":"functions"},"message":"Error: Cannot find module '../.runtime'\nRequire stack:\n- C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\index.js\n- C:\\Users\\hp\\AppData\\Roaming\\npm\\node_modules\\firebase-tools\\lib\\emulator\\functionsEmulatorRuntime.js\n    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:1030:15)\n    at Function.Module._load (internal/modules/cjs/loader.js:899:27)\n    at Module.require (internal/modules/cjs/loader.js:1090:19)\n    at require (internal/modules/cjs/helpers.js:75:18)\n    at Object.<anonymous> (C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\index.js:15:15)\n    at Module._compile (internal/modules/cjs/loader.js:1201:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)\n    at Module.load (internal/modules/cjs/loader.js:1050:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:938:14)\n    at Module.require (internal/modules/cjs/loader.js:1090:19)"}}
+[warn] !  We were unable to load your functions code. (see above) {"metadata":{"emulator":{"name":"functions"}}}
+[debug] [2022-01-04T10:19:00.607Z] DEBUG: [worker-~diagnostic~-4dab63dc-8e73-44ab-962c-2bb2c97ee5a3]: exited
+[debug] [2022-01-04T10:19:00.607Z] DEBUG: [worker-~diagnostic~-4dab63dc-8e73-44ab-962c-2bb2c97ee5a3]: FINISHED
+[debug] [2022-01-04T10:19:00.854Z] DEBUG: [runtime-status] [3416] Functions runtime initialized. {"cwd":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions","node_version":"14.5.0"}
+[debug] [2022-01-04T10:19:00.860Z] DEBUG: [runtime-status] [3416] Disabled runtime features: undefined
+[debug] [2022-01-04T10:19:00.870Z] DEBUG: [runtime-status] [3416] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:19:00.877Z] DEBUG: [runtime-status] [3416] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:19:00.881Z] DEBUG: [runtime-status] [3416] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2022-01-04T10:19:00.884Z] DEBUG: [runtime-status] [3416] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:19:01.033Z] DEBUG: [runtime-status] [3416] Checked functions.config() {"config":{}}
+[debug] [2022-01-04T10:19:01.034Z] DEBUG: [runtime-status] [3416] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}}
+[debug] [2022-01-04T10:19:01.037Z] DEBUG: [runtime-status] [3416] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:19:01.042Z] DEBUG: [runtime-status] [3416] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:19:01.045Z] DEBUG: [runtime-status] [3416] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:19:01.046Z] DEBUG: [runtime-status] [3416] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}}
+[warn] !  Error: Cannot find module '../.runtime'
+Require stack:
+- C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js
+- C:\Users\hp\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\functionsEmulatorRuntime.js
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:1030:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:899:27)
+    at Module.require (internal/modules/cjs/loader.js:1090:19)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at Object.<anonymous> (C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js:15:15)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
+    at Module.load (internal/modules/cjs/loader.js:1050:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:938:14)
+    at Module.require (internal/modules/cjs/loader.js:1090:19) {"metadata":{"emulator":{"name":"functions"},"message":"Error: Cannot find module '../.runtime'\nRequire stack:\n- C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\index.js\n- C:\\Users\\hp\\AppData\\Roaming\\npm\\node_modules\\firebase-tools\\lib\\emulator\\functionsEmulatorRuntime.js\n    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:1030:15)\n    at Function.Module._load (internal/modules/cjs/loader.js:899:27)\n    at Module.require (internal/modules/cjs/loader.js:1090:19)\n    at require (internal/modules/cjs/helpers.js:75:18)\n    at Object.<anonymous> (C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\index.js:15:15)\n    at Module._compile (internal/modules/cjs/loader.js:1201:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)\n    at Module.load (internal/modules/cjs/loader.js:1050:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:938:14)\n    at Module.require (internal/modules/cjs/loader.js:1090:19)"}}
+[warn] !  We were unable to load your functions code. (see above) {"metadata":{"emulator":{"name":"functions"}}}
+[debug] [2022-01-04T10:19:02.211Z] DEBUG: [worker-~diagnostic~-4cb88c33-5228-4e17-b9e6-4ec941383546]: exited
+[debug] [2022-01-04T10:19:02.211Z] DEBUG: [worker-~diagnostic~-4cb88c33-5228-4e17-b9e6-4ec941383546]: FINISHED
+[debug] [2022-01-04T10:19:02.515Z] DEBUG: File C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js changed, reloading triggers
+[debug] [2022-01-04T10:19:03.530Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 2 --> 0
+[debug] [2022-01-04T10:19:03.541Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2022-01-04T10:19:03.542Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2022-01-04T10:19:03.542Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2022-01-04T10:19:03.542Z] DEBUG: [worker-~diagnostic~-b55a4e23-81ee-479f-883a-604223d7e14a]: Assigning socketPath: \\?\pipe\C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\15036
+[debug] [2022-01-04T10:19:03.542Z] DEBUG: [worker-~diagnostic~-b55a4e23-81ee-479f-883a-604223d7e14a]: BUSY
+[debug] [2022-01-04T10:19:04.096Z] DEBUG: [runtime-status] [15036] Functions runtime initialized. {"cwd":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions","node_version":"14.5.0"}
+[debug] [2022-01-04T10:19:04.099Z] DEBUG: [runtime-status] [15036] Disabled runtime features: undefined
+[debug] [2022-01-04T10:19:04.108Z] DEBUG: [runtime-status] [15036] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:19:04.113Z] DEBUG: [runtime-status] [15036] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:19:04.116Z] DEBUG: [runtime-status] [15036] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2022-01-04T10:19:04.119Z] DEBUG: [runtime-status] [15036] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:19:04.490Z] DEBUG: [runtime-status] [15036] Checked functions.config() {"config":{}}
+[debug] [2022-01-04T10:19:04.491Z] DEBUG: [runtime-status] [15036] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}}
+[debug] [2022-01-04T10:19:04.512Z] DEBUG: [runtime-status] [15036] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:19:04.529Z] DEBUG: [runtime-status] [15036] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:19:04.540Z] DEBUG: [runtime-status] [15036] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:19:04.542Z] DEBUG: [runtime-status] [15036] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}}
+[warn] !  SyntaxError: C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\.runtimeconfig.json: Unexpected token � in JSON at position 0
+    at parse (<anonymous>)
+    at Object.Module._extensions..json (internal/modules/cjs/loader.js:1235:22)
+    at Module.load (internal/modules/cjs/loader.js:1050:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:938:14)
+    at Module.require (internal/modules/cjs/loader.js:1090:19)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at Object.<anonymous> (C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js:15:15)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
+    at Module.load (internal/modules/cjs/loader.js:1050:32) {"metadata":{"emulator":{"name":"functions"},"message":"SyntaxError: C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\.runtimeconfig.json: Unexpected token � in JSON at position 0\n    at parse (<anonymous>)\n    at Object.Module._extensions..json (internal/modules/cjs/loader.js:1235:22)\n    at Module.load (internal/modules/cjs/loader.js:1050:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:938:14)\n    at Module.require (internal/modules/cjs/loader.js:1090:19)\n    at require (internal/modules/cjs/helpers.js:75:18)\n    at Object.<anonymous> (C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\index.js:15:15)\n    at Module._compile (internal/modules/cjs/loader.js:1201:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)\n    at Module.load (internal/modules/cjs/loader.js:1050:32)"}}
+[warn] !  We were unable to load your functions code. (see above) {"metadata":{"emulator":{"name":"functions"}}}
+[debug] [2022-01-04T10:19:06.311Z] DEBUG: [worker-~diagnostic~-b55a4e23-81ee-479f-883a-604223d7e14a]: exited
+[debug] [2022-01-04T10:19:06.311Z] DEBUG: [worker-~diagnostic~-b55a4e23-81ee-479f-883a-604223d7e14a]: FINISHED
+[debug] [2022-01-04T10:19:07.550Z] DEBUG: File C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js changed, reloading triggers
+[debug] [2022-01-04T10:19:08.556Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 1 --> 0
+[debug] [2022-01-04T10:19:08.571Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2022-01-04T10:19:08.571Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2022-01-04T10:19:08.571Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2022-01-04T10:19:08.571Z] DEBUG: [worker-~diagnostic~-24f6253b-bfdc-406f-855e-c244a1930f56]: Assigning socketPath: \\?\pipe\C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\13876
+[debug] [2022-01-04T10:19:08.572Z] DEBUG: [worker-~diagnostic~-24f6253b-bfdc-406f-855e-c244a1930f56]: BUSY
+[debug] [2022-01-04T10:19:09.140Z] DEBUG: [runtime-status] [13876] Functions runtime initialized. {"cwd":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions","node_version":"14.5.0"}
+[debug] [2022-01-04T10:19:09.150Z] DEBUG: [runtime-status] [13876] Disabled runtime features: undefined
+[debug] [2022-01-04T10:19:09.178Z] DEBUG: [runtime-status] [13876] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:19:09.189Z] DEBUG: [runtime-status] [13876] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:19:09.196Z] DEBUG: [runtime-status] [13876] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2022-01-04T10:19:09.202Z] DEBUG: [runtime-status] [13876] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:19:09.408Z] DEBUG: [runtime-status] [13876] Checked functions.config() {"config":{}}
+[debug] [2022-01-04T10:19:09.409Z] DEBUG: [runtime-status] [13876] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}}
+[debug] [2022-01-04T10:19:09.411Z] DEBUG: [runtime-status] [13876] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:19:09.415Z] DEBUG: [runtime-status] [13876] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:19:09.417Z] DEBUG: [runtime-status] [13876] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:19:09.418Z] DEBUG: [runtime-status] [13876] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}}
+[warn] !  SyntaxError: C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\.runtimeconfig.json: Unexpected token � in JSON at position 0
+    at parse (<anonymous>)
+    at Object.Module._extensions..json (internal/modules/cjs/loader.js:1235:22)
+    at Module.load (internal/modules/cjs/loader.js:1050:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:938:14)
+    at Module.require (internal/modules/cjs/loader.js:1090:19)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at Object.<anonymous> (C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js:15:15)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
+    at Module.load (internal/modules/cjs/loader.js:1050:32) {"metadata":{"emulator":{"name":"functions"},"message":"SyntaxError: C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\.runtimeconfig.json: Unexpected token � in JSON at position 0\n    at parse (<anonymous>)\n    at Object.Module._extensions..json (internal/modules/cjs/loader.js:1235:22)\n    at Module.load (internal/modules/cjs/loader.js:1050:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:938:14)\n    at Module.require (internal/modules/cjs/loader.js:1090:19)\n    at require (internal/modules/cjs/helpers.js:75:18)\n    at Object.<anonymous> (C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\index.js:15:15)\n    at Module._compile (internal/modules/cjs/loader.js:1201:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)\n    at Module.load (internal/modules/cjs/loader.js:1050:32)"}}
+[warn] !  We were unable to load your functions code. (see above) {"metadata":{"emulator":{"name":"functions"}}}
+[debug] [2022-01-04T10:19:10.341Z] DEBUG: [worker-~diagnostic~-24f6253b-bfdc-406f-855e-c244a1930f56]: exited
+[debug] [2022-01-04T10:19:10.342Z] DEBUG: [worker-~diagnostic~-24f6253b-bfdc-406f-855e-c244a1930f56]: FINISHED
+[debug] [2022-01-04T10:19:17.904Z] DEBUG: File C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js changed, reloading triggers
+[debug] [2022-01-04T10:19:18.911Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 1 --> 0
+[debug] [2022-01-04T10:19:18.920Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2022-01-04T10:19:18.920Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2022-01-04T10:19:18.921Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2022-01-04T10:19:18.922Z] DEBUG: [worker-~diagnostic~-f8da461e-149e-4473-890a-be01bdd7ad10]: Assigning socketPath: \\?\pipe\C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\10364
+[debug] [2022-01-04T10:19:18.922Z] DEBUG: [worker-~diagnostic~-f8da461e-149e-4473-890a-be01bdd7ad10]: BUSY
+[debug] [2022-01-04T10:19:19.343Z] DEBUG: [runtime-status] [10364] Functions runtime initialized. {"cwd":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions","node_version":"14.5.0"}
+[debug] [2022-01-04T10:19:19.348Z] DEBUG: [runtime-status] [10364] Disabled runtime features: undefined
+[debug] [2022-01-04T10:19:19.356Z] DEBUG: [runtime-status] [10364] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:19:19.360Z] DEBUG: [runtime-status] [10364] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:19:19.364Z] DEBUG: [runtime-status] [10364] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2022-01-04T10:19:19.366Z] DEBUG: [runtime-status] [10364] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:19:19.478Z] DEBUG: [runtime-status] [10364] Checked functions.config() {"config":{}}
+[debug] [2022-01-04T10:19:19.479Z] DEBUG: [runtime-status] [10364] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}}
+[debug] [2022-01-04T10:19:19.482Z] DEBUG: [runtime-status] [10364] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:19:19.488Z] DEBUG: [runtime-status] [10364] Resolved module firebase-admin {"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2022-01-04T10:19:19.490Z] DEBUG: [runtime-status] [10364] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2022-01-04T10:19:19.492Z] DEBUG: [runtime-status] [10364] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"10.0.1","resolution":"C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\node_modules\\firebase-admin\\lib\\index.js"}}
+[warn] !  SyntaxError: C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\.runtimeconfig.json: Unexpected token � in JSON at position 0
+    at parse (<anonymous>)
+    at Object.Module._extensions..json (internal/modules/cjs/loader.js:1235:22)
+    at Module.load (internal/modules/cjs/loader.js:1050:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:938:14)
+    at Module.require (internal/modules/cjs/loader.js:1090:19)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at Object.<anonymous> (C:\Users\hp\Desktop\Clg\Techno\Tech-Website-Backend-2021\functions\index.js:15:15)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
+    at Module.load (internal/modules/cjs/loader.js:1050:32) {"metadata":{"emulator":{"name":"functions"},"message":"SyntaxError: C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\.runtimeconfig.json: Unexpected token � in JSON at position 0\n    at parse (<anonymous>)\n    at Object.Module._extensions..json (internal/modules/cjs/loader.js:1235:22)\n    at Module.load (internal/modules/cjs/loader.js:1050:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:938:14)\n    at Module.require (internal/modules/cjs/loader.js:1090:19)\n    at require (internal/modules/cjs/helpers.js:75:18)\n    at Object.<anonymous> (C:\\Users\\hp\\Desktop\\Clg\\Techno\\Tech-Website-Backend-2021\\functions\\index.js:15:15)\n    at Module._compile (internal/modules/cjs/loader.js:1201:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)\n    at Module.load (internal/modules/cjs/loader.js:1050:32)"}}
+[warn] !  We were unable to load your functions code. (see above) {"metadata":{"emulator":{"name":"functions"}}}
+[debug] [2022-01-04T10:19:20.701Z] DEBUG: [worker-~diagnostic~-f8da461e-149e-4473-890a-be01bdd7ad10]: exited
+[debug] [2022-01-04T10:19:20.702Z] DEBUG: [worker-~diagnostic~-f8da461e-149e-4473-890a-be01bdd7ad10]: FINISHED

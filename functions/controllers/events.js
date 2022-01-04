@@ -1,4 +1,5 @@
 const admin = require("firebase-admin");
+const mailHelper = require("../utils/emailHelper");
 
 const database = admin.database();
 const db = database.ref();
@@ -84,7 +85,8 @@ exports.getCategories = (req, res) => {
     .once("value")
     .then((snapshot) => {
       var data = { categories: [] };
-      for (var i in snapshot.val()) { // get each category
+      for (var i in snapshot.val()) {
+        // get each category
         let category = i;
         data.categories.push(category);
       }
@@ -345,6 +347,11 @@ exports.eventRegister = (request, response) => {
   let eventName = request.body.eventName;
   let eventCategory = request.body.eventCategory;
   let email = request.body.email;
+  var emailArray = request.body.email.split(",");
+  var finalEmail = emailArray[0];
+  for (let i = 1; i < emailArray.length; i++) {
+    finalEmail += "." + emailArray[i];
+  }
 
   if (eventName === undefined || eventCategory === undefined) {
     return response.status(400).json({
@@ -388,13 +395,22 @@ exports.eventRegister = (request, response) => {
         .update({
           [registeredEvents]: registeredEvent,
         })
-        .then(() => {
+        .then((data) => {
+          mailHelper({
+            email: finalEmail,
+            subject: "Event Registration",
+            text: `You have been registered for ${eventName}`,
+            html: `<h1>You have been registered for ${eventName}</h1>`,
+          }).catch((err) => {
+            console.log(err);
+          });
           return response.json({
             success: true,
             status: `Successfully registered for ${eventName}`,
           });
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log(err);
           return response.json({
             success: false,
             message: "could not register!",
