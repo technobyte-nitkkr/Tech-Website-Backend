@@ -536,7 +536,7 @@ paths:
     put:
       tags:
         - User
-      summary: get the events of loggedin user
+      summary: add event of loggedin user
       security:
         - Authdetails: []
       requestBody:
@@ -567,7 +567,40 @@ paths:
         500:
           description: internal server error
 
-
+  /user/event/unregister:
+    put:
+      tags:
+        - User
+      summary: delete event of loggedin user
+      security:
+        - Authdetails: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - eventName
+                - eventCategory
+              properties:
+                eventName:
+                  type: string
+                eventCategory:
+                  type: string
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+        500:
+          description: internal server error
 
   /user/eventApp:
     get:

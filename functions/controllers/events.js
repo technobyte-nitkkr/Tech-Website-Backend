@@ -413,6 +413,77 @@ exports.eventRegister = (request, response) => {
     });
 };
 
+exports.eventUnregister = (request, response) => {
+  let eventName = request.body.eventName;
+  let eventCategory = request.body.eventCategory;
+  let email = request.body.email;
+
+  if (eventName === undefined || eventCategory === undefined) {
+    return response.status(400).json({
+      success: false,
+      message: `Invalid Parameters.\n Usage: eventName=event&eventCategory=category`,
+    });
+  }
+
+  // get previsouly registered events
+  db.child(users + "/" + email + "/" + registeredEvents)
+    .once("value")
+    .then((snapshot) => {
+      let registeredEvent = snapshot.val();
+      if (registeredEvent === undefined || registeredEvent === null) {
+        return response.send({
+          success: false,
+          message: `not registered for ${eventName}`,
+        });
+      }
+      if (registeredEvent[eventCategory] === undefined) {
+        return response.send({
+          success: false,
+          message: `not registered for ${eventName}`,
+        });
+      }
+
+      if (registeredEvent[eventCategory].indexOf(eventName) === -1) {
+        return response.send({
+          success: false,
+          message: `not registered for ${eventName}`,
+        });
+      } else {
+        registeredEvent[eventCategory].pop(eventName);
+      }
+      
+
+      // update user registered events
+      db.child(users + "/" + email)
+        .update({
+          [registeredEvents]: registeredEvent,
+        })
+        .then(() => {
+          return response.json({
+            success: true,
+            status: `Successfully unregistered for ${eventName}`,
+          });
+        })
+        .catch((err) => {
+          return response.json({
+            success: false,
+            message: "could not unregister!",
+            error: err,
+          });
+        });
+
+      return;
+    })
+    .catch((err) => {
+      return response.json({
+        success: false,
+        message: "could not fetch user registered events",
+        error: err,
+      });
+    });
+};
+
+
 exports.appGetRegisteredEvents = (req, res, next) => {
   let id = req.query.email;
   if (id === undefined || id === null) {
