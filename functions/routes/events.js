@@ -1,5 +1,6 @@
-const { getEventNames, getCategories,getEventDescription, getEventTimeline, addEvent, 
+const { getEventNames, getCategories,getEventDescription, getEventTimeline, addEvent, addCategory, 
  } = require("../controllers/events");
+const { isLoggedIn, isCustomRole } = require("../middlewares/user");
 
 const router = require("express").Router();
 

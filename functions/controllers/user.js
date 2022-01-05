@@ -339,11 +339,15 @@ exports.googleLoginApp = (req, res) => {
             admin: false,
             role: "user",
           };
+          const token = jwt.sign(info, functions.config().jwt.key, {
+            expiresIn: "3d",
+          });
 
           return res.status(200).json({
             success: true,
             onBoard: false,
             information: info,
+            token: token,
           });
         }
       });

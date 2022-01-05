@@ -251,6 +251,13 @@ function updateRole(req, res) {
 			});
 		} else {
 			// update the role of the user
+			// check if its admin
+			if(snapshot.val()["role"] === 'admin') {
+				return res.status(400).json({
+					success: false,
+					message: "cannot change role of admin"
+				});
+			} else {
 			db.child(email_child).update({
 				role: role
 			});
@@ -258,6 +265,7 @@ function updateRole(req, res) {
 				success: true,
 				message: "role updated"
 			});
+			}
 		}}).catch(() => {
 			return res.status(500).json({
 				success: false,

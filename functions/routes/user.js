@@ -19,9 +19,5 @@ router.get("/user/event", isLoggedIn, getRegisteredEvents);
 router.put("/user/event", isLoggedIn, eventRegister);
 router.put("/user/event/unregister", isLoggedIn, eventUnregister);
 
-// for app registartion
-router.get("/user/eventApp", isLoggedIn, getRegisteredEvents);
-router.put("/user/eventApp", isLoggedIn, eventRegister);
-
 // export router
 module.exports = router;

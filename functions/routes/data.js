@@ -5,14 +5,11 @@ const {
   getSponsors,
   getLectures,
   getDeveloper,
-  getTimestamp,
   randomFact,
   video,
   getContacts,
   getNextEvents,
-  sponsorStatic,
   getNotifications,
-  getEventInformation,
 } = require("../controllers/data");
 
 const router = require("express").Router();
@@ -26,12 +23,9 @@ router.get("/contacts", getContacts);
 
 router.get("/lectures", getLectures);
 // Route to obtain section wise sponsors
-router.get("/sponsors", sponsorStatic);
+router.get("/sponsors", getSponsors);
 router.get("/foodSponsors", foodSponsors);
 
-// Route to add a sponsor to a section
-
-// app.post('/about', addDeveloper);
 router.get("/about", getDeveloper);
 router.get("/aboutAppDevs", getAppDevelopers);
 router.get("/notification", getNotifications);

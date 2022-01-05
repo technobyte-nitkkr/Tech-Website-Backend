@@ -12,20 +12,89 @@ servers:
     description: localhost
   - url: "https://us-central1-techspardha-87928.cloudfunctions.net/api"
     description: server
+tags:
+  - name: app
+    description: Apis for app only
+  - name: web
+    description: Apis for web only
+  - name: User
+    description: Apis for user data
+  - name: admin 
+    description: admin apis
+  - name: manager
+    description: api for manager
+  - name: Information
+    description: all basic get apis
 
-    
 components:
   securitySchemes:
     Authdetails:
       type: apiKey
       in: header
       name: Authorization
+  schemas:
+    simpleResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+    userInfo:
+      type: object
+      properties:
+        email:
+          type: string
+        name:
+          type: string
+        picture:
+          type: string
+        onBoard:
+          type: boolean
+        college:
+          type: string
+        year:
+          type: string
+        admin:
+          type: boolean
+        role:
+          type: string
+    eventInfo:
+      type: object
+      properties:
+        eventName:
+          type: string
+        eventCategory:
+          type: string
+        venue:
+          type: string
+        description:
+          type: string
+        endTime:
+          type: number
+        startTime:
+          type: number
+        file:
+          type: string
+        cordinators:
+          type: array
+          items:
+            type: object
+            properties: 
+              coordinator_name:
+                type: string
+              coordinator_number:
+                type: string
+        rules:
+          type: array
+          items:
+            type: string
 
 paths:
   /loginApp:
     post:
       tags:
-        - App
+        - app
       summary: login using the secure token of google  O Auth for app
       requestBody:
         content:
@@ -34,7 +103,6 @@ paths:
               type: object
               required:
                 - idToken
-
               properties:
                 idToken:
                   type: string
@@ -51,24 +119,10 @@ paths:
                     type: boolean
                   onBoard:
                     type: boolean
-                  information:
-                    type: object
-                    properties:
-                      email:
-                        type: string
-                      name:
-                        type: string
-                      picture:
-                        type: string
-                      onBoard:
-                        type: boolean
-                      college:
-                        type: string
-                      year:
-                        type: string
-                      admin:
-                        type: boolean
-
+                  information: 
+                    $ref: '#/components/schemas/userInfo'
+                  token:
+                    type: string
         401:
           description: error in auth
         400:
@@ -78,7 +132,7 @@ paths:
   /login:
     post:
       tags:
-        - User
+        - web
       summary: login using the secure token of google  for web
       requestBody:
         content:
@@ -87,7 +141,6 @@ paths:
               type: object
               required:
                 - idToken
-
               properties:
                 idToken:
                   type: string
@@ -104,24 +157,10 @@ paths:
                     type: boolean
                   onBoard:
                     type: boolean
-                  information:
-                    type: object
-                    properties:
-                      email:
-                        type: string
-                      name:
-                        type: string
-                      picture:
-                        type: string
-                      onBoard:
-                        type: boolean
-                      college:
-                        type: string
-                      year:
-                        type: string
-                      admin:
-                        type: boolean
-
+                  information: 
+                    $ref: '#/components/schemas/userInfo'
+                  token:
+                    type: string
         401:
           description: error in auth
         400:
@@ -131,7 +170,7 @@ paths:
   /user:
     put:
       tags:
-        - User
+        - web
       summary: update the user profile for web
       security:
         - Authdetails: []
@@ -141,13 +180,10 @@ paths:
             schema:
               type: object
               required:
-                - email
                 - year
                 - phone
                 - college
               properties:
-                email:
-                  type: string
                 year:
                   type: string
                 phone:
@@ -166,23 +202,10 @@ paths:
                     type: boolean
                   onBoard:
                     type: boolean
-                  information:
-                    type: object
-                    properties:
-                      email:
-                        type: string
-                      name:
-                        type: string
-                      picture:
-                        type: string
-                      onBoard:
-                        type: boolean
-                      college:
-                        type: string
-                      year:
-                        type: string
-                      admin:
-                        type: boolean
+                  information: 
+                    $ref: '#/components/schemas/userInfo'
+                  token:
+                    type: string
         405:
           description: already on boarded
         400:
@@ -194,7 +217,7 @@ paths:
   /signUpApp:
     put:
       tags:
-        - App
+        - app
       summary: update the user profile for android
       security:
         - Authdetails: []
@@ -226,23 +249,10 @@ paths:
                     type: boolean
                   onBoard:
                     type: boolean
-                  information:
-                    type: object
-                    properties:
-                      email:
-                        type: string
-                      name:
-                        type: string
-                      picture:
-                        type: string
-                      onBoard:
-                        type: boolean
-                      college:
-                        type: string
-                      year:
-                        type: string
-                      admin:
-                        type: boolean
+                  information: 
+                    $ref: '#/components/schemas/userInfo'
+                  token:
+                    type: string
         405:
           description: already on boarded
         400:
@@ -251,11 +261,78 @@ paths:
           description: Bad request
         500:
           description: internal server error
+ 
+ 
   /events/categories:
     get:
+        tags:
+          - Information
+        summary: get the categories name
+        responses:
+          200:
+            description: All good success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    success:
+                      type: boolean
+                    message:
+                      type: string
+                    data:
+                      type: object
+                      properties:
+                        categories:
+                          type: array
+                          items:
+                            type: string
+          500:
+            description: internal server error
+    post:
+        tags:
+          - admin
+        summary: add a category
+        security:
+        - Authdetails: []
+        requestBody:
+          content:
+            application/x-www-form-urlencoded:
+              schema:
+                type: object
+                required:
+                  - category
+                properties:
+                  category:
+                    type: string
+        responses:
+          200:
+            description: All good success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    success:
+                      type: boolean
+                    message:
+                      type: string
+                    data:
+                      type: object
+                      properties:
+                        categories:
+                          type: array
+                          items:
+                            type: string
+          500:
+            description: internal server error
+  /user/event:
+    get:
       tags:
-        - events
-      summary: get the categories name
+        - User
+      summary: get the events of loggedin user
+      security:
+        - Authdetails: []
 
       responses:
         200:
@@ -272,17 +349,103 @@ paths:
                   data:
                     type: object
                     properties:
-                      categories:
+                      events:
                         type: array
                         items:
-                          type: string
+                          $ref: '#/components/schemas/eventInfo'
+                          
         500:
           description: internal server error
+    put:
+      tags:
+        - User
+      summary: add event of loggedin user
+      security:
+        - Authdetails: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - eventName
+                - eventCategory
+              properties:
+                eventName:
+                  type: string
+                eventCategory:
+                  type: string
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/simpleResponse'
+        500:
+          description: internal server error
+
+  /user/event/unregister:
+    put:
+      tags:
+        - User
+      summary: delete event of loggedin user
+      security:
+        - Authdetails: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - eventName
+                - eventCategory
+              properties:
+                eventName:
+                  type: string
+                eventCategory:
+                  type: string
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/simpleResponse'
+        500:
+          description: internal server error
+  /query:
+    post:
+      tags:
+        - User
+      summary: add query 
+      security:
+        - Authdetails: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - text
+              properties:
+                text:
+                  type: string
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/simpleResponse'
+        500:
+          description: internal server error
+
 
   /events:
     get:
       tags:
-        - events
+        - Information
       summary: get the events names
       parameters:
         - in: query
@@ -342,20 +505,7 @@ paths:
                 - eventData
               properties:
                 eventData:
-                  type: object
-                  properties:
-                    eventName:
-                      type: string
-                      required: true
-                    category:
-                      type: string
-                      required: true
-                    startTime:
-                      type: number
-                      required: true
-                    endTime:
-                      type: number
-                      required: true
+                  $ref: '#/components/schemas/eventInfo'
       responses:
         200:
           description: All good success
@@ -376,7 +526,7 @@ paths:
   /events/description:
     get:
       tags:
-        - events
+        - Information
       summary: get the events description by category
       parameters:
         - in: query
@@ -418,30 +568,7 @@ paths:
                       events:
                         type: array
                         items:
-                          type: object
-                          properties:
-                            eventName:
-                              type: string
-                            eventCategory:
-                              type: string
-                            venue:
-                              type: string
-                            description:
-                              type: string
-                            endTime:
-                              type: number
-                            startTime:
-                              type: number
-                            file:
-                              type: string
-                            cordinators:
-                              type: array
-                              items:
-                                type: object
-                            rules:
-                              type: array
-                              items:
-                                type: string
+                          $ref: '#/components/schemas/eventInfo'
 
         500:
           description: internal server error
@@ -449,7 +576,7 @@ paths:
   /events/timeline:
     get:
       tags:
-        - events
+        - Information
       summary: get the timeline of events
       responses:
         200:
@@ -479,244 +606,6 @@ paths:
                               type: number
                             startTime:
                               type: number
-        500:
-          description: internal server error
-
-  /user/event:
-    get:
-      tags:
-        - User
-      summary: get the events of loggedin user
-      security:
-        - Authdetails: []
-
-      responses:
-        200:
-          description: All good success
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      events:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            eventName:
-                              type: string
-                            eventCategory:
-                              type: string
-                            venue:
-                              type: string
-                            description:
-                              type: string
-                            endTime:
-                              type: number
-                            startTime:
-                              type: number
-                            file:
-                              type: string
-                            cordinators:
-                              type: array
-                              items:
-                                type: object
-                            rules:
-                              type: array
-                              items:
-                                type: string
-        500:
-          description: internal server error
-    put:
-      tags:
-        - User
-      summary: add event of loggedin user
-      security:
-        - Authdetails: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - eventName
-                - eventCategory
-              properties:
-                eventName:
-                  type: string
-                eventCategory:
-                  type: string
-      responses:
-        200:
-          description: All good success
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  message:
-                    type: string
-        500:
-          description: internal server error
-
-  /user/event/unregister:
-    put:
-      tags:
-        - User
-      summary: delete event of loggedin user
-      security:
-        - Authdetails: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - eventName
-                - eventCategory
-              properties:
-                eventName:
-                  type: string
-                eventCategory:
-                  type: string
-      responses:
-        200:
-          description: All good success
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  message:
-                    type: string
-        500:
-          description: internal server error
-
-  /user/eventApp:
-    get:
-      tags:
-        - App
-      summary: get the events of loggedin user app
-      security:
-        - Authdetails: []
-      responses:
-        200:
-          description: All good success
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      events:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            eventName:
-                              type: string
-                            eventCategory:
-                              type: string
-                            venue:
-                              type: string
-                            description:
-                              type: string
-                            endTime:
-                              type: number
-                            startTime:
-                              type: number
-                            file:
-                              type: string
-                            cordinators:
-                              type: array
-                              items:
-                                type: object
-                            rules:
-                              type: array
-                              items:
-                                type: string
-        500:
-          description: internal server error
-    put:
-      tags:
-        - App
-      summary: add the event to logged in user
-      security:
-        - Authdetails: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - eventName
-                - eventCategory
-              properties:
-                eventName:
-                  type: string
-                eventCategory:
-                  type: string
-      responses:
-        200:
-          description: All good success
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  message:
-                    type: string
-        500:
-          description: internal server error
-  
-  /query:
-    post:
-      tags:
-        - User
-      summary: add query 
-      security:
-        - Authdetails: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - text
-              properties:
-                text:
-                  type: string
-      responses:
-        200:
-          description: All good success
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  message:
-                    type: string
         500:
           description: internal server error
 
@@ -801,6 +690,62 @@ paths:
       tags:
         - Information
       summary: get the sponsors info
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      paisa:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            sponsors:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  imageUrl:
+                                    type: string
+                                  targetUrl:
+                                    type: string
+                            sponsorSection:
+                              type: string
+        500:
+          description: internal server error
+    post:
+      tags:
+        - manager
+      summary: add sponsors
+      security:
+        - Authdetails: []
+      tags:
+        - manager
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sponsor:
+                  type: object
+                  properties:
+                    imageUrl:
+                      type: string
+                    targetUrl:
+                      type: string
+                    sponsorSection:
+                      type: string
       responses:
         200:
           description: All good success
@@ -1061,7 +1006,7 @@ paths:
       summary: get jwt for testing purpose
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               required:
@@ -1083,7 +1028,7 @@ paths:
   /admin/event:
     get:
       tags:
-        - admin
+        - manager
       summary: get the of all users
       security:
         - Authdetails: []
@@ -1126,13 +1071,15 @@ paths:
                     type: object
                     properties:
                       users:
-                        type: object
+                        type: array
+                        items: 
+                          $ref: '#/components/schemas/userInfo'
         500:
           description: internal server error
   /admin/query:
     get:
       tags:
-        - admin
+        - manager
       summary: get the queries
       security:
         - Authdetails: []
@@ -1163,7 +1110,7 @@ paths:
         - Authdetails: []
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               required:
@@ -1191,13 +1138,13 @@ paths:
   /admin/notification:
     post:
       tags:
-        - admin
+        - manager
       summary: add a notification
       security:
         - Authdetails: []
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               required:
@@ -1249,7 +1196,7 @@ paths:
       summary: If user is admin, he can update mentioned fields in user
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               required:
@@ -1267,14 +1214,15 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  message:
-                    type: string
-        400:
+                  $ref: '#/components/schemas/simpleResponse'
           description: Bad request
         500:
           description: internal server error
+
+
+
+
+
+
+
     

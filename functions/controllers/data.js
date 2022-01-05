@@ -21,6 +21,7 @@ function foodSponsors(req, res) {
         });
       }
 
+      res.set("Cache-Control", "public, max-age=3600 , s-maxage=7200");
       return res.status(200).json({
         success: true,
         data: {
@@ -42,7 +43,7 @@ function getAppDevelopers(req, res) {
     .once("value")
     .then((snapshot) => {
       let information = snapshot.val();
-
+      res.set("Cache-Control", "public, max-age=3600 , s-maxage=7200");
       return res.status(200).json({
         success: true,
         message: "info received",
@@ -274,55 +275,6 @@ function getSponsors(req, res) {
     });
 }
 
-function sponsorStatic(req, res) {
-  let data = {
-    data: {
-      paisa: [
-        {
-          sponsorSection: "Associate Sponsors",
-          sponsors: [
-            {
-              imageUrl: "https://i.ibb.co/rbytcLS/2-IIM-Original-Logo.png",
-              targetUrl: "https://www.2iim.com/",
-            },
-            {
-              imageUrl:
-                "https://www.stbaldricks.org/photo/event/6249/2019/large",
-              targetUrl: "https://ihsmarkit.com",
-            },
-            {
-              imageUrl: "https://pbs.twimg.com/media/CFWHUNrUMAAlDfz.jpg",
-              targetUrl: "https://www.swiggy.com/",
-            },
-          ],
-        },
-        {
-          sponsorSection: "Intern Partner",
-          sponsors: [
-            {
-              imageUrl: "https://i.ibb.co/kSmtpGr/HI-Logo-PNG.png",
-              targetUrl: "https://www.hellointern.com/",
-            },
-          ],
-        },
-        {
-          sponsorSection: "Media Partner",
-          sponsors: [
-            {
-              imageUrl:
-                "https://upload.wikimedia.org/wikipedia/commons/2/29/The_Pioneer_logo.jpg",
-              targetUrl: "https://www.dailypioneer.com/",
-            },
-          ],
-        },
-      ],
-    },
-    success: true,
-  };
-
-  res.status(200).json(data);
-}
-
 function getLectures(req, res) {
   db.child("/lectures")
     .once("value")
@@ -474,7 +426,6 @@ module.exports = {
   video,
   getContacts,
   getNextEvents,
-  sponsorStatic,
   getNotifications,
   getEventInformation
 };
