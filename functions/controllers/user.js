@@ -173,7 +173,7 @@ exports.signUpApp = (req, res) => {
       return res.status(200).json({
         success: true,
         message: "user onboarded",
-        information: info,
+        data: info,
         token: token,
       });
     } else {
@@ -356,7 +356,7 @@ exports.googleLoginApp = (req, res) => {
           return res.status(200).json({
             success: true,
             onBoard: false,
-            information: info,
+            data: info,
             token: token,
           });
         }
