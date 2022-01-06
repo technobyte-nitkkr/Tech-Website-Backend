@@ -24,6 +24,6 @@ router.post("/events/categories",isLoggedIn,isCustomRole("admin"), addCategory);
 // router.get('/updateUsers', updateUsers);
 
 // temporary for testing
-router.post("/getjwt",generageJwt);
+// router.post("/getjwt",generageJwt);
 
 module.exports = router;

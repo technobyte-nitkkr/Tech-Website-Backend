@@ -1002,33 +1002,6 @@ paths:
                               type: string
         500:
           description: internal server error
-
-  /getjwt:
-    post:
-      tags:
-        - admin
-      summary: get jwt for testing purpose
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              required:
-                - email
-              properties:
-                email:
-                  type: string
-      responses:
-        200:
-          description: All good success
-        401:
-          description: error in auth
-        400:
-          description: Bad request
-        500:
-          description: internal server error
- 
- 
   /admin/event:
     get:
       tags:
