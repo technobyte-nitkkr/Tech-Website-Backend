@@ -1,11 +1,19 @@
-const functions = require('firebase-functions');
+// const functions = require('firebase-functions');
+require("dotenv").config();
 const admin = require('firebase-admin');
 const express = require('express');
 const bodyParser = require('body-parser');
 const YAML = require("yamljs");
 const swaggerDocument = YAML.load("./swagger.yaml");
 const cors = require('cors');
-admin.initializeApp();
+var serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://techspardha-87928.firebaseio.com",
+});
+
+// admin.initializeApp();
 const path = require('path');
 
 // import the rotues
@@ -59,4 +67,8 @@ app.use('/', (req, res) => {
 	});
 })
 
-exports.api = functions.https.onRequest(app);
+// exports.api = functions.https.onRequest(app);
+
+app.listen(process.env.PORT || 3000, () => {
+	console.log(`Server is running on port ${process.env.PORT || 3000}`);
+});

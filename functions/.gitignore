@@ -1,0 +1,5 @@
+node_modules/
+*.logs
+.runtimeconfig.json
+servicekey.json
+.env
