@@ -173,8 +173,10 @@ exports.signUpApp = (req, res) => {
       return res.status(200).json({
         success: true,
         message: "user onboarded",
-        data: info,
-        token: token,
+        data: {
+          user: info,
+          token: token,
+        }
       });
     } else {
       return res.status(405).json({
@@ -325,8 +327,10 @@ exports.googleLoginApp = (req, res) => {
           return res.status(200).json({
             success: true,
             onBoard: snapshot.val().onBoard,
-            information: info,
-            token: token,
+            data: {
+              user: info,
+              token: token,
+            },
           });
         } else {
           database.ref(email_child).set({
@@ -356,8 +360,10 @@ exports.googleLoginApp = (req, res) => {
           return res.status(200).json({
             success: true,
             onBoard: false,
-            data: info,
-            token: token,
+            data: {
+              user: info,
+              token: token,
+            },
           });
         }
       });
