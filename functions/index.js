@@ -29,6 +29,7 @@ const app = express();
 
 // middlewares
 app.use(bodyParser.urlencoded({extended:false}));
+app.use(express.json());
 
 // routes
 app.use(cors({origin: true}));
