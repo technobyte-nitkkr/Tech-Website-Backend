@@ -1,4 +1,7 @@
 const admin = require("firebase-admin");
+const { promises } = require("stream");
+const { basicmail } = require("../utils/basicmail");
+const mailHelper = require("../utils/emailHelper");
 const database = admin.database();
 const db = database.ref();
 
@@ -77,6 +80,61 @@ function getEventUsers(req, res) {
 			message: "could not see events. internal error"
 		})
 	})
+}
+
+function getEventUsersEmails(req, res,next) {
+	let eventName = req.body.eventName;
+	let eventCategory = req.body.eventCategory;
+
+	if(eventName === undefined || eventCategory === undefined) {
+		return res.status(400).json({
+			success: false,
+			message: `Usage: eventName=name&eventCategory=category`
+		})
+	}
+
+	db.child(events + "/" + eventCategory + "/" + eventName).once('value')
+	.then((snapshot) => {
+		if(snapshot.val() === null) {
+			return res.status(400).json({
+				success: false,
+				message: `${eventName} in ${eventCategory} doesn't exist`
+			})
+		}
+
+		db.child(users).once('value')
+		.then((snapshot) => {
+			let allUsers = snapshot.val();
+
+			let data = {};
+			data["users"] = new Array();
+
+			for(user in allUsers) {
+				if(allUsers[user][registeredEvents] === undefined) {
+					continue;
+				}
+
+				if(allUsers[user][registeredEvents][eventCategory] === undefined) {
+					continue;
+				}
+
+				if(allUsers[user][registeredEvents][eventCategory].indexOf(eventName) !== -1) {
+					data["users"].push(allUsers[user]["email"]);
+				}
+			}
+
+			req.body.users = data["users"];
+			next();
+		}).catch
+		(() => {
+			throw new Error("error fetching users node");
+		})
+	}).catch((error)=>{
+		return res.status(500).json({
+			success: false,
+			message: error.message
+		})
+	});
 }
 
 // function to remove a addQuery
@@ -309,12 +367,55 @@ function addSponsor(request, response) {
   }
 }
 
+async function emailtoarray(req,res){
+	let users = req.body.users;
+	let heading = req.body.heading;
+	let buttontext = req.body.buttontext;
+	let buttonlink = req.body.buttonlink;
+	let thankyou = req.body.thankyou;
+	let subject = req.body.subject;
+	let detail = req.body.detail;
+
+	if(users === undefined || heading === undefined || buttontext === undefined || buttonlink === undefined || thankyou === undefined || subject === undefined || detail === undefined) {
+		return res.status(400).json({
+			success: false,
+
+			error: "Usage: users, heading, buttontext, buttonlink, thankyou, subject, detail are required"
+		});
+	}		
+
+	let html = basicmail(heading,detail,buttontext,buttonlink,thankyou);
+	try {
+	let data=	await mailHelper({
+		email: users,
+		subject: subject,
+		text: detail,
+		html: html,
+		});
+		return res.status(200).json({
+			success: true,
+			message: "mail sent",
+			data: {
+				messageId: data
+			}
+		});
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			success: false,
+			message: `Error sending email: ${error.message} `,
+		});
+	}
+}
+
 module.exports = {
-    addNotification,
-    updateUsers,
-    getQuery,
-    removeQuery,
-    getEventUsers,
-    addSponsor,
-	updateRole,
+  addNotification,
+  updateUsers,
+  getQuery,
+  removeQuery,
+  getEventUsers,
+  addSponsor,
+  updateRole,
+  emailtoarray,
+  getEventUsersEmails,
 };

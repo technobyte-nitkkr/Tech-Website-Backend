@@ -490,6 +490,8 @@ exports.eventRegister = (request, response) => {
                 subject: "Event Registration",
                 text: `You have been registered for ${eventName}`,
                 html: html,
+              }).then((info)=>{
+                console.log(info);
               }).catch((err) => {
                 console.log(err);
               });

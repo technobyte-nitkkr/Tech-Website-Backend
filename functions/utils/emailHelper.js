@@ -23,24 +23,28 @@ const mailHelper = async (options) => {
       refreshToken: emailRefreshToken,
     },
   });
+  
+    const message = {
+      from: "noreplytechnobyte@gmail.com", // sender address
+      to: options.email, // list of receivers
+      subject: options.subject, // Subject line
+      text: options.message, // plain text body
+      html: options.html, // html body
+    };
 
-  const message = {
-    from: "noreplytechnobyte@gmail.com", // sender address
-    to: options.email, // list of receivers
-    subject: options.subject, // Subject line
-    text: options.message, // plain text body
-    html: options.html, // html body
-  };
-  // send mail with defined transport object
-  await transporter.sendMail(message, function (err, data) {
-    if (err) {
-      console.log("Error in sending message:" + err);
-      throw err;
-    } else {
-      console.log("message sent");
-      console.log(data.messageId);
-    }
-  });
+    // send mail with defined transport object
+    return new Promise(async(resolve, reject) => {
+      try {
+        let info = await transporter.sendMail(message);
+        // console.log(info);
+        resolve(info.messageId);
+      } catch (error) {
+        console.log(error);
+        reject(error);
+      }
+    });
+
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 };
 
 module.exports = mailHelper;

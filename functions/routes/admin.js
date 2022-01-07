@@ -1,4 +1,4 @@
-const { updateUsers, addNotification, getQuery, removeQuery, getEventUsers, addSponsor, updateRole } = require("../controllers/admin");
+const { updateUsers, addNotification, getQuery, removeQuery, getEventUsers, addSponsor, updateRole, emailtoarray, getEventUsersEmails } = require("../controllers/admin");
 const { addEvent, addCategory } = require("../controllers/events");
 const { generageJwt } = require("../controllers/user");
 
@@ -11,6 +11,8 @@ router.get("/admin/event", isLoggedIn, isCustomRole("admin","manager"), getEvent
 router.get("/admin/query", isLoggedIn, isCustomRole("admin","manager"), getQuery);
 router.post("/admin/notification",isLoggedIn,isCustomRole("admin","manager"), addNotification);
 router.post("/sponsors", isLoggedIn, isCustomRole("admin","manager"), addSponsor);
+router.post("/admin/mail/list",isLoggedIn, isCustomRole("admin"),emailtoarray);
+router.post("/admin/mail/category",isLoggedIn, isCustomRole("admin","manager"),getEventUsersEmails,emailtoarray);
 // TODO: resolve query with email notificaton
 
 // admin routes

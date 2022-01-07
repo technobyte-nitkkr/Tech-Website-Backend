@@ -123,10 +123,13 @@ paths:
                     type: boolean
                   onBoard:
                     type: boolean
-                  data: 
-                    $ref: '#/components/schemas/userInfo'
-                  token:
-                    type: string
+                  data:
+                    type: object
+                    properties: 
+                      user:
+                        $ref: '#/components/schemas/userInfo'
+                      token:
+                        type: string
         401:
           description: error in auth
         400:
@@ -161,10 +164,13 @@ paths:
                     type: boolean
                   onBoard:
                     type: boolean
-                  data: 
-                    $ref: '#/components/schemas/userInfo'
-                  token:
-                    type: string
+                  data:
+                    type: object
+                    properties: 
+                      user:
+                        $ref: '#/components/schemas/userInfo'
+                      token:
+                        type: string
         401:
           description: error in auth
         400:
@@ -206,10 +212,13 @@ paths:
                     type: boolean
                   onBoard:
                     type: boolean
-                  data: 
-                    $ref: '#/components/schemas/userInfo'
-                  token:
-                    type: string
+                  data:
+                    type: object
+                    properties: 
+                      user:
+                        $ref: '#/components/schemas/userInfo'
+                      token:
+                        type: string
         405:
           description: already on boarded
         400:
@@ -253,10 +262,13 @@ paths:
                     type: boolean
                   onBoard:
                     type: boolean
-                  data: 
-                    $ref: '#/components/schemas/userInfo'
-                  token:
-                    type: string
+                  data:
+                    type: object
+                    properties: 
+                      user:
+                        $ref: '#/components/schemas/userInfo'
+                      token:
+                        type: string
         405:
           description: already on boarded
         400:
@@ -1128,6 +1140,109 @@ paths:
                 - notif
               properties:
                 notif:
+                  type: string
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+        500:
+          description: internal server error
+  /admin/mail/list:
+    post:
+      tags:
+        - admin
+      summary: send email to multiple users
+      security:
+        - Authdetails: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - users
+                - heading
+                - buttontext
+                - buttonlink
+                - subject
+                - thankyou
+                - detail
+              properties:
+                users:
+                  type: array
+                  items:
+                    type: string
+                heading:
+                  type: string
+                buttontext:
+                  type: string
+                buttonlink:
+                  type: string
+                subject:
+                  type: string
+                thankyou:
+                  type: string
+                detail:
+                  type: string
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+        500:
+          description: internal server error
+  /admin/mail/category:
+    post:
+      tags:
+        - manager
+      summary: send email to paritcular category
+      security:
+        - Authdetails: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - eventName
+                - eventCategory
+                - heading
+                - buttontext
+                - buttonlink
+                - subject
+                - thankyou
+                - detail
+              properties:
+                eventName:
+                  type: string
+                eventCategory:
+                  type: string
+                heading:
+                  type: string
+                buttontext:
+                  type: string
+                buttonlink:
+                  type: string
+                subject:
+                  type: string
+                thankyou:
+                  type: string
+                detail:
                   type: string
       responses:
         200:
