@@ -408,6 +408,47 @@ async function emailtoarray(req,res){
 	}
 }
 
+async function sendNotification (req,res){
+	let topic = req.body.topic;
+	let title = req.body.title;
+	let body = req.body.body;
+	let android_channel_id = "technobyte";
+	let image = req.body.image;
+	let link = req.body.link;
+
+	if(topic === undefined || title === undefined || body === undefined   || image === undefined  ) {
+		return res.status(400).json({
+			success: false,
+			error: "Usage: topic, title, body, image  are required"
+		});
+	};
+
+	const data ={
+		notification:{
+			title: title,
+			body: body,
+			android_channel_id: android_channel_id,
+			image: image,
+			link: link,
+		}
+	};
+	
+	admin.messaging().sendToTopic(topic,data).then(response => {
+		return res.status(200).json({
+			success: true,
+			message: "Notification sent",
+			data: {
+				response : response
+			}
+		});
+	}).catch(error => {
+		return res.status(500).json({
+			success: false,
+			message: `Error sending notification: ${error.message} `,
+		});
+	});
+}
+
 module.exports = {
   addNotification,
   updateUsers,
@@ -418,4 +459,5 @@ module.exports = {
   updateRole,
   emailtoarray,
   getEventUsersEmails,
+  sendNotification
 };

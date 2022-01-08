@@ -1,4 +1,4 @@
-const { updateUsers, addNotification, getQuery, removeQuery, getEventUsers, addSponsor, updateRole, emailtoarray, getEventUsersEmails } = require("../controllers/admin");
+const { updateUsers, addNotification, getQuery, removeQuery, getEventUsers, addSponsor, updateRole, emailtoarray, getEventUsersEmails, sendNotification } = require("../controllers/admin");
 const { addEvent, addCategory } = require("../controllers/events");
 const { generageJwt } = require("../controllers/user");
 
@@ -21,6 +21,7 @@ router.post("/admin/mail/category",isLoggedIn, isCustomRole("admin","manager"),g
 router.put("/admin/query", isLoggedIn, isCustomRole("admin"), removeQuery);
 router.put("/admin/user", isLoggedIn, isCustomRole("admin"), updateRole);
 router.post("/events/categories",isLoggedIn,isCustomRole("admin"), addCategory);
+router.post("/admin/mobilenoti",isLoggedIn, isCustomRole("admin"),sendNotification);
 
 // updated user info
 // router.get('/updateUsers', updateUsers);

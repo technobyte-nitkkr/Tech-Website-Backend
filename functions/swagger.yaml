@@ -1258,6 +1258,48 @@ paths:
                     type: string
         500:
           description: internal server error
+  /admin/mobilenoti:
+    post:
+      tags:
+        - admin
+      summary: send notification to topic
+      security:
+        - Authdetails: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - topic
+                - title
+                - body 
+                - image
+              properties:
+                topic:
+                  type: string
+                title:
+                  type: string
+                body:
+                  type: string 
+                image:
+                  type: string
+                link :
+                  type: string
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+        500:
+          description: internal server error
   /updateUsers:
     get:
       tags:
