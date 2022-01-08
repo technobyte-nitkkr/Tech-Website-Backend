@@ -13,6 +13,7 @@ admin.initializeApp({
   databaseURL: "https://techspardha-87928.firebaseio.com",
 });
 
+//
 // admin.initializeApp();
 const path = require('path');
 
