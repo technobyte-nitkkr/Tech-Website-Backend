@@ -302,6 +302,7 @@ function getLectures(req, res) {
     });
 }
 
+
 function getDeveloper(req, res) {
   db.child("about")
     .once("value")
@@ -336,6 +337,25 @@ function getDeveloper(req, res) {
         message: "error fetching developers",
       });
     });
+}
+
+function getFaq(req,res){
+  db.child("faq")
+    .once("value").then(snapshot => {
+      console.log(snapshot.val());
+      let data = snapshot.val();
+    
+      return res.status(200).json({
+        success:true,
+        data:data
+      });
+    }).catch((error) => {
+      console.log(error);
+      return res.status(500).json({
+        error: "error getting FAQ",
+        success: false
+      })
+    })
 }
 
 function getNotifications(req,res){
@@ -427,5 +447,6 @@ module.exports = {
   getContacts,
   getNextEvents,
   getNotifications,
-  getEventInformation
+  getEventInformation,
+  getFaq,
 };

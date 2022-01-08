@@ -11,7 +11,7 @@ servers:
   - url : "https://techspardhabackend.herokuapp.com"
     description: heroku
   - url : "http://localhost:3000"
-    description: localhost
+    description: 
   - url : "http://localhost:5000/techspardha-87928/us-central1/api"
     description: localhost-firebase
   - url: "https://us-central1-techspardha-87928.cloudfunctions.net/api"
