@@ -1,3 +1,4 @@
+
 const admin = require("firebase-admin");
 const database = admin.database();
 const db = database.ref();
@@ -302,7 +303,6 @@ function getLectures(req, res) {
     });
 }
 
-
 function getDeveloper(req, res) {
   db.child("about")
     .once("value")
@@ -344,7 +344,7 @@ function getFaq(req,res){
     .once("value").then(snapshot => {
       console.log(snapshot.val());
       let data = snapshot.val();
-    
+      res.set("Cache-Control", "public, max-age=3600 , s-maxage=7200");
       return res.status(200).json({
         success:true,
         data:data

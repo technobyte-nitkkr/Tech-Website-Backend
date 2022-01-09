@@ -952,6 +952,34 @@ paths:
                           type: string
         500:
           description: internal server error
+  /faq:
+    get:
+      tags:
+        - Information
+      summary: FAQ
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        ques:
+                          type: string
+                        ans:
+                          type: string
+        500:
+          description: internal server error
   /timestamp/events:
     get:
       tags:
