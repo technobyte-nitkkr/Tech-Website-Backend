@@ -1,6 +1,5 @@
 const { updateUsers, addNotification, getQuery, removeQuery, getEventUsers, addSponsor, updateRole, emailtoarray, getEventUsersEmails, sendNotification } = require("../controllers/admin");
 const { addEvent, addCategory } = require("../controllers/events");
-const { generageJwt } = require("../controllers/user");
 
 const { isLoggedIn, isCustomRole } = require("../middlewares/user");
 const router = require("express").Router();

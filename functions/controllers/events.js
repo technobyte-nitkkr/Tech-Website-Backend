@@ -479,11 +479,12 @@ exports.eventRegister = (request, response) => {
             })
             .then((data) => {
               var html = basicmail(
-                "thankyou for your registeration",
-                `you have succesfully registerd for the event: ${eventName}`,
-                "checkout website",
+                "Thankyou for your registration",
+                `You have succesfully registered for the event: ${eventName}`,
+                "Open Website",
+                "Open Website",
                 "https://website-frontend20-2mkfatxre.vercel.app/",
-                "Thank you for registering for the event"
+                "Thanks and regards,\n Team Altius"
               );
               mailHelper({
                 email: finalEmail,

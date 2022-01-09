@@ -78,7 +78,9 @@ components:
           type: number
         startTime:
           type: number
-        file:
+        document:
+          type: string
+        poster:
           type: string
         cordinators:
           type: array
@@ -476,7 +478,7 @@ paths:
                 Managerial,
                 Online-Events,
                 Papyrus-Vitae,
-                Programming,
+                programming,
                 Quizzes,
                 Robotics,
               ]
@@ -558,7 +560,7 @@ paths:
                 Managerial,
                 Online-Events,
                 Papyrus-Vitae,
-                Programming,
+                programming,
                 Quizzes,
                 Robotics,
               ]
@@ -860,7 +862,11 @@ paths:
                               type: string
                             year:
                               type: string
-                            link:
+                            github:
+                              type: string
+                            linkedin:
+                              type: string
+                            insta:
                               type: string
         500:
           description: internal server error
@@ -896,7 +902,11 @@ paths:
                               type: string
                             year:
                               type: string
-                            link:
+                            github:
+                              type: string
+                            linkedin:
+                              type: string
+                            insta:
                               type: string
         500:
           description: internal server error
@@ -1063,7 +1073,7 @@ paths:
                 Managerial,
                 Online-Events,
                 Papyrus-Vitae,
-                Programming,
+                programming,
                 Quizzes,
                 Robotics,
               ]
