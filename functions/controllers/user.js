@@ -62,8 +62,7 @@ exports.googleLogin = (req, response) => {
           };
         }
 
-        // const token = jwt.sign(jwttoken, functions.config().jwt.key);
-        const token = jwt.sign(jwttoken, process.env.jwt);
+        const token = jwt.sign(jwttoken, functions.config().jwt.key);
         data = { token: token };
         return response.status(200).json({
           onBoard: snapshot.val().onBoard,
@@ -89,9 +88,8 @@ exports.googleLogin = (req, response) => {
           role: "user",
         };
 
-        // const token = jwt.sign(jwttoken, functions.config().jwt.key);
-        const token = jwt.sign(jwttoken, process.env.jwt);
-        data = { token: token, user: jwttoken };
+        const token = jwt.sign(jwttoken, functions.config().jwt.key);
+        data = { token: token };
 
         return response.status(200).json({
           onBoard: false,
@@ -164,12 +162,10 @@ exports.signUpApp = (req, res) => {
         role: snapshot.val().role,
       };
 
-      // const token = jwt.sign(jwttoken, functions.config().jwt.key, {
-      //   expiresIn: "3d",
-      // });
-      const token = jwt.sign(jwttoken, process.env.jwt, {
+      const token = jwt.sign(jwttoken, functions.config().jwt.key, {
         expiresIn: "3d",
       });
+
       return res.status(200).json({
         success: true,
         message: "user onboarded",
@@ -227,9 +223,8 @@ exports.signUp = (req, response) => {
           admin: snapshot.val().admin,
           role: snapshot.val().role,
         };
-        // const token = jwt.sign(jwttoken, functions.config().jwt.key);
-        const token = jwt.sign(jwttoken, process.env.jwt);
-        let data = { token: token , user: jwttoken};
+        const token = jwt.sign(jwttoken, functions.config().jwt.key);
+        let data = { token: token };
         return response.status(200).json({
           success: true,
           message: "user onboarded",
@@ -318,12 +313,10 @@ exports.googleLoginApp = (req, res) => {
             };
           }
 
-          // const token = jwt.sign(jwttoken, functions.config().jwt.key, {
-          //   expiresIn: "3d",
-          // });
-          const token = jwt.sign(jwttoken, process.env.jwt, {
+          const token = jwt.sign(jwttoken, functions.config().jwt.key, {
             expiresIn: "3d",
           });
+
           return res.status(200).json({
             success: true,
             onBoard: snapshot.val().onBoard,
@@ -350,10 +343,7 @@ exports.googleLoginApp = (req, res) => {
             admin: false,
             role: "user",
           };
-          // const token = jwt.sign(info, functions.config().jwt.key, {
-          //   expiresIn: "3d",
-          // });
-          const token = jwt.sign(info, process.env.jwt, {
+          const token = jwt.sign(info, functions.config().jwt.key, {
             expiresIn: "3d",
           });
 
@@ -435,8 +425,7 @@ exports.generageJwt = (req, response) => {
         });
       }
 
-      // const token = jwt.sign(jwttoken, functions.config().jwt.key);
-      const token = jwt.sign(jwttoken, process.env.jwt);
+      const token = jwt.sign(jwttoken, functions.config().jwt.key);
       data = { token: token };
       return response.status(200).json({
         onBoard: snapshot.val().onBoard,

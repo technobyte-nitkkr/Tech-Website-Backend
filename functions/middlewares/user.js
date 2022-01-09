@@ -14,8 +14,7 @@ exports.isLoggedIn = (req,res,next)=>{
     }
 
      try {
-    //    const decoded = jwt.verify(token, functions.config().jwt.key);
-     const decoded = jwt.verify(token, process.env.jwt);
+       const decoded = jwt.verify(token, functions.config().jwt.key);
     //    console.log(decoded);
         const { email , name , role } = decoded;
 
