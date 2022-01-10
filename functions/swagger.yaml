@@ -523,7 +523,37 @@ paths:
                 - eventData
               properties:
                 eventData:
-                  $ref: '#/components/schemas/eventInfo'
+                  type: object
+                  properties:
+                    eventName:
+                      type: string
+                    category:
+                      type: string
+                    venue:
+                      type: string
+                    description:
+                      type: string
+                    endTime:
+                      type: number
+                    startTime:
+                      type: number
+                    document:
+                      type: string
+                    poster:
+                      type: string
+                    cordinators:
+                      type: array
+                      items:
+                        type: object
+                        properties: 
+                          coordinator_name:
+                            type: string
+                          coordinator_number:
+                            type: string
+                    rules:
+                      type: array
+                      items:
+                        type: string
       responses:
         200:
           description: All good success
