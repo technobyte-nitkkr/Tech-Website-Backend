@@ -699,6 +699,8 @@ paths:
                           properties:
                             section:
                               type: string
+                            logo:
+                              type: string
                             people:
                               type: array
                               items:
