@@ -26,9 +26,9 @@ exports.getEventNames = (req, res) => {
         data[events] = new Array();
 
         for (let category in database) {
-          for (let event in database[category]) {
+          for (let event in database[category]["events"]) {
             let eventData = new Object();
-            let eventName = database[category][event]["eventName"];
+            let eventName = database[category]["events"][event]["eventName"];
 
             eventData["eventName"] = eventName;
             eventData["eventCategory"] = category;
@@ -62,9 +62,9 @@ exports.getEventNames = (req, res) => {
         let data = {};
         data[events] = new Array();
 
-        for (let event in database) {
+        for (let event in database["events"]) {
           data[events].push({
-            eventName: database[event].eventName,
+            eventName: database["events"][event].eventName,
             eventCategory: category,
           });
         }
@@ -86,10 +86,17 @@ exports.getCategories = (req, res) => {
     .once("value")
     .then((snapshot) => {
       var data = { categories: [] };
-      for (var i in snapshot.val()) {
+      let snap = snapshot.val();
+      for (var i in snap) {
         // get each category
         let category = i;
-        data.categories.push(category);
+        let imgUrl = snap[i].imgUrl;
+        let icon = snap[i].icon;
+        data.categories.push({
+          categoryName : category,
+          imgUrl : imgUrl,
+          icon : icon
+        });
       }
 
       message = "Categories received";
@@ -107,37 +114,28 @@ exports.getCategories = (req, res) => {
 
 exports.addCategory = (req, res) => {
   let category = req.body.category;
-
-  if (category === undefined) {
-    return res.status(401).json({
+  let imgUrl = req.body.imgUrl;
+  let icon = req.body.icon;
+  // check category and url valid
+  if (category === undefined || imgUrl === undefined) {
+    return res.json({
       success: false,
-      message: "Category not defined",
+      message: "category and imgUrl are required",
     });
   }
 
   let node = events + "/" + category;
   // check if node existe
+
+  // create node
   return db
     .child(node)
-    .once("value")
-    .then((snapshot) => {
-      if (snapshot.val() !== null) {
-        return res.status(401).json({
-          success: false,
-          message: "Category already exists",
-        });
-      } else {
-        // create node
-        return db
-          .child(node)
-          .set({ dummy: "dummy" })
-          .then(() => {
-            return res.status(200).json({
-              success: true,
-              message: "Category added",
-            });
-          });
-      }
+    .update({ imgUrl: imgUrl , icon : icon})
+    .then(() => {
+      return res.status(200).json({
+        success: true,
+        message: "Category added",
+      });
     })
     .catch((err) => {
       return res.status(401).json({
@@ -164,8 +162,7 @@ exports.addEvent = (req, res) => {
     eventData["endTime"] === undefined ||
     eventData["description"] === undefined ||
     eventData["category"] === undefined
-  ) 
-  {
+  ) {
     return res.status(400).json({
       success: false,
       message:
@@ -189,31 +186,7 @@ exports.addEvent = (req, res) => {
         // name, startTime and endTime
         // delete dummy node
 
-        //  check if dummy node is there
-        let node = events + "/" + eventData.category;
-        db.child(node)
-          .once("value")
-          .then((snapshot) => {
-            let database = snapshot.val();
-            //  console.log(database);
-            if (database["dummy"]) {
-              // delete dummy node
-              console.log(database["dummy"]);
-              db.child(node)
-                .update({
-                  dummy: null,
-                })
-                .then(() => {
-                  console.log("dummy node deleted");
-                });
-              // remove the dummy node
-            }
-          })
-          .catch((err) => {
-            return console.log(err);
-          });
-
-        db.child(`${events}/${eventData.category}/${eventData.eventName}`)
+        db.child(`${events}/${eventData.category}/events/${eventData.eventName}`)
           .set({
             eventName: eventData.eventName,
             startTime: eventData.startTime,
@@ -347,8 +320,8 @@ exports.getEventTimeline = (req, res) => {
       data[events] = new Array();
 
       for (let category in database) {
-        for (let event in database[category]) {
-          let eventData = database[category][event];
+        for (let event in database[category]["events"]) {
+          let eventData = database[category]["events"][event];
           eventData["eventCategory"] = category;
 
           data[events].push(eventData);
@@ -434,7 +407,7 @@ exports.eventRegister = (request, response) => {
   }
 
   // check if the event exists
-  db.child(`${events}/${eventCategory}/${eventName}`)
+  db.child(`${events}/${eventCategory}/events/${eventName}`)
     .once("value")
     .then((snapshot) => {
       const data = snapshot.val();
@@ -482,8 +455,8 @@ exports.eventRegister = (request, response) => {
                 "Thankyou for your registration",
                 `You have succesfully registered for the event: ${eventName}`,
                 "Open Website",
-                "Open Website",
                 "https://website-frontend20-2mkfatxre.vercel.app/",
+                
                 "Thanks and regards,\n Team Altius"
               );
               mailHelper({
@@ -491,11 +464,13 @@ exports.eventRegister = (request, response) => {
                 subject: "Event Registration",
                 text: `You have been registered for ${eventName}`,
                 html: html,
-              }).then((info)=>{
-                console.log(info);
-              }).catch((err) => {
-                console.log(err);
-              });
+              })
+                .then((info) => {
+                  console.log(info);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
               return response.json({
                 success: true,
                 status: `Successfully registered for ${eventName}`,
@@ -543,7 +518,7 @@ exports.eventUnregister = (request, response) => {
   }
 
   // check if the event exists
-  db.child(`${events}/${eventCategory}/${eventName}`)
+  db.child(`${events}/${eventCategory}/events/${eventName}`)
     .once("value")
     .then((snapshot) => {
       const data = snapshot.val();

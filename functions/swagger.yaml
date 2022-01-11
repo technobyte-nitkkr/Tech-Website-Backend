@@ -304,7 +304,15 @@ paths:
                         categories:
                           type: array
                           items:
-                            type: string
+                            type: object
+                            properties:
+                              categoryName:
+                                type: string
+                              imgUrl:
+                                type: string
+                              icon:
+                                type: string
+
           500:
             description: internal server error
     post:
@@ -320,9 +328,15 @@ paths:
                 type: object
                 required:
                   - category
+                  - imgUrl
+                  - icon
                 properties:
                   category:
                     type: string
+                  imgUrl: 
+                    type: string
+                  icon:
+                    type : string
         responses:
           200:
             description: All good success
