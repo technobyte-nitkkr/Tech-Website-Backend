@@ -87,7 +87,13 @@ exports.getCategories = (req, res) => {
     .then((snapshot) => {
       var data = { categories: [] };
       let snap = snapshot.val();
-      for (var i in snap) {
+      // sort the categories on the basis of the tag in the object
+      var sorted = {};
+      Object.keys(snap)
+        .sort((a, b) => snap[a].index - snap[b].index)
+        .map((item) => (sorted[item] = snap[item]));
+      
+      for (var i in sorted) {
         // get each category
         let category = i;
         let imgUrl = snap[i].imgUrl;
