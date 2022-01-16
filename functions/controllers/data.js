@@ -133,10 +133,11 @@ function getContacts(req, res) {
       for (let category in database) {
         let type = {};
         type["section"] = category;
+        type["logo"] = database[category]["logo"];
         type["people"] = new Array();
 
-        for (let person in database[category]) {
-          type["people"].push(database[category][person]);
+        for (let person in database[category]["contacts"]) {
+          type["people"].push(database[category]["contacts"][person]);
         }
 
         data["contacts"].push(type);

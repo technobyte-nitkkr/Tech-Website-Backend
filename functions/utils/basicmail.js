@@ -13,7 +13,7 @@ exports.basicmail = (heading,detail,buttontext,buttonlink,thankyou) => {
                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                 <td class="" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: #38414a; margin: 0; padding: 20px;"
                                     align="center" bgcolor="#71b6f9" valign="top">
-                                    <a href="https://website-frontend20-bn85ryuih.vercel.app/" style="font-size:32px;color:#fff;">Technobyte</a> <br>
+                                    <a href="https://website-frontend20-bn85ryuih.vercel.app/" style="font-size:32px;color:#fff;">Altius 2022</a> <br>
                                     <span style="margin-top: 10px;display: block;"> ${heading} </span>
                                 </td>
                             </tr>

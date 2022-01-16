@@ -30,7 +30,7 @@ function getEventUsers(req, res) {
 		})
 	}
 
-	db.child(events + "/" + eventCategory + "/" + eventName).once('value')
+	db.child(events + "/" + eventCategory + "/events/" + eventName).once('value')
 	.then((snapshot) => {
 		if(snapshot.val() === null) {
 			return res.status(400).json({
