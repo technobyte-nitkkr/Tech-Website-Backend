@@ -8,14 +8,14 @@ info:
     url: "https://github.com/technobyte-nitkkr"
 
 servers:
-  - url : "https://techspardhabackend.herokuapp.com"
-    description: heroku
-  - url : "http://localhost:3000"
-    description: 
   - url : "http://localhost:5000/techspardha-87928/us-central1/api"
     description: localhost
   - url: "https://us-central1-techspardha-87928.cloudfunctions.net/api"
     description: server
+  - url : "https://techspardhabackend.herokuapp.com"
+    description: heroku
+  - url : "http://localhost:3000"
+    description: 
 tags:
   - name: app
     description: Apis for app only
@@ -746,6 +746,12 @@ paths:
                             time:
                               type: string
                             name:
+                              type: string
+                            insta:
+                              type: string
+                            linkedin:
+                              type: string
+                            facebook:
                               type: string
         500:
           description: internal server error
