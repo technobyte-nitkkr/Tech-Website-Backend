@@ -1,12 +1,13 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const express = require('express');
+var path = require("path");
 const bodyParser = require('body-parser');
 const YAML = require("yamljs");
-const swaggerDocument = YAML.load("./swagger.yaml");
+var swagger_path = path.resolve(__dirname, "swagger.yaml");
+const swaggerDocument = YAML.load(swagger_path);
 const cors = require('cors');
 admin.initializeApp();
-const path = require('path');
 
 // import the rotues
 const userRoutes = require('./routes/user');
@@ -60,4 +61,4 @@ app.use('/', (req, res) => {
 	});
 })
 
-exports.api = functions.https.onRequest(app);
+exports.api2 = functions.https.onRequest(app);

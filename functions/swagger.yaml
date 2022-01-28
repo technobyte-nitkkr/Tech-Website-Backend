@@ -8,10 +8,10 @@ info:
     url: "https://github.com/technobyte-nitkkr"
 
 servers:
-  - url : "http://localhost:5000/techspardha-87928/us-central1/api"
-    description: localhost
-  - url: "https://us-central1-techspardha-87928.cloudfunctions.net/api"
+  - url: "https://us-central1-techspardha-87928.cloudfunctions.net/api2"
     description: server
+  - url : "http://localhost:5000/techspardha-87928/us-central1/api2"
+    description: localhost
   - url : "https://techspardhabackend.herokuapp.com"
     description: heroku
   - url : "http://localhost:3000"
