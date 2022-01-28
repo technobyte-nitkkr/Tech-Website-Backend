@@ -63,7 +63,7 @@ exports.googleLogin = (req, response) => {
         }
 
         const token = jwt.sign(jwttoken, functions.config().jwt.key);
-        data = { token: token };
+        data = { token: token , user : jwttoken};
         return response.status(200).json({
           onBoard: snapshot.val().onBoard,
           success: true,
@@ -89,7 +89,7 @@ exports.googleLogin = (req, response) => {
         };
 
         const token = jwt.sign(jwttoken, functions.config().jwt.key);
-        data = { token: token };
+        data = { token: token, user: jwttoken };
 
         return response.status(200).json({
           onBoard: false,
@@ -224,7 +224,7 @@ exports.signUp = (req, response) => {
           role: snapshot.val().role,
         };
         const token = jwt.sign(jwttoken, functions.config().jwt.key);
-        let data = { token: token };
+        let data = { token: token ,user : jwttoken};
         return response.status(200).json({
           success: true,
           message: "user onboarded",
