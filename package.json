@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "firebase functions:config:get > functions/.runtimeconfig.json && firebase use default && firebase serve --only functions"
   },
   "engines": {
-    "node": "8"
+    "node": "10"
   },
   "author": "",
   "license": "ISC",

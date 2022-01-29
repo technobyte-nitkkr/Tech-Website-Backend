@@ -7,13 +7,14 @@ const bodyParser = require('body-parser');
 const isAuthenticated = require('./middlewares/auth');
 const isAuthenticatedAdmin = require('./middlewares/admin');
 const config = require('./config');
-
 const cors = require('cors');
-
-admin.initializeApp();
+var serviceAccount = require("./finaservicekey.json");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://techspardha-87928.firebaseio.com",
+});
 const database = admin.database();
 const db = database.ref();
-
 
 // Hard-Coded String
 const events = "events";
@@ -31,41 +32,39 @@ const food = 'food';
 const app = express();
 app.use(bodyParser.urlencoded({extended:false}));
 
-
-
 // routes
 app.use(cors({origin: true}));
 
 // Login and Onboard
 // Web
 app.post('/login', googleLogin);
-app.put('/user', isAuthenticated, signUp);
+// app.put('/user', isAuthenticated, signUp);
 // Android
 app.post('/loginApp', googleLoginApp);
-app.put('/signUpApp', signUpApp);
+// app.put('/signUpApp', signUpApp);
 
 app.get('/events', getEventNames);
 app.get('/events/categories', getCategories);
 app.get('/events/description', getEventDescription);
 app.get('/events/timeline', getEventTimeline);
-app.post('/events', isAuthenticated, addEvent);
+// app.post('/events', isAuthenticated, addEvent);
 app.get('/user/event', isAuthenticated, getRegisteredEvents);
-app.put('/user/event', isAuthenticated, eventRegister);
+// app.put('/user/event', isAuthenticated, eventRegister);
 // for app registartion
 app.get('/user/eventApp', appGetRegisteredEvents, getRegisteredEvents);
 app.put('/user/eventApp', appEventRegister, eventRegister);
 
 app.get('/facts', randomFact);
 app.get('/videos', video);
-app.post('/query', isAuthenticated, addQuery);
-app.put('/admin/query',isAuthenticated, removeQuery);
+// app.post('/query', isAuthenticated, addQuery);
+// app.put('/admin/query',isAuthenticated, removeQuery);
 app.get('/timestamp', getTimestamp);
 app.get('/timestamp/events', getNextEvents);
 
 app.get('/admin/event', isAuthenticated, getEventUsers);
 app.get('/admin/query', isAuthenticated, getQuery);
 
-app.post('/admin/notification',addNotification);
+// app.post('/admin/notification',addNotification);
 app.get('/notification',getNotifications);
 
 app.get('/contacts', getContacts);
@@ -80,8 +79,7 @@ app.get('/sponsors', sponsorStatic);
 app.get('/foodSponsors', foodSponsors);
 
 // Route to add a sponsor to a section
-app.post('/sponsors', addSponsor);
-
+// app.post('/sponsors', addSponsor);
 
 // app.post('/about', addDeveloper);
 app.get('/about', getDeveloper);
@@ -91,7 +89,6 @@ app.get('/aboutAppDevs', getAppDevelopers);
 // app.get('/updateUsers', updateUsers);
 
 app.use('/', (req, res) => {
-
 	let data = {};
 	let success = false;
 	let message = "connected to server";
@@ -105,13 +102,10 @@ app.use('/', (req, res) => {
 })
 
 function foodSponsors(req, res) {
-
 	db.child(food).once('value')
 	.then((snapshot) => {
-
 		let data = snapshot.val();
 		if(!data) {
-
 			return res.status(500).json({
 				success: false,
 				message: "No Food"
@@ -126,7 +120,6 @@ function foodSponsors(req, res) {
 		});
 	})
 	.catch((err) => {
-
 		return res.status(500).json({
 			success: false,
 			message: "Internal Server Error. Try Again!",
@@ -136,17 +129,14 @@ function foodSponsors(req, res) {
 }
 
 function updateUsers(req, res) {
-
 	db.child('users').once('value')
 	.then((snapshot) => {
-
 		let data = snapshot.val();
 		let users = Object.keys(data);
 
 		let final = [];
 
 		for(let i = 0 ; i < users.length ; i++) {
-
 			// if(data[users[i]]["onBoard"] === true)
 			// {
 			// 	let zz = '';
@@ -159,18 +149,15 @@ function updateUsers(req, res) {
 			// 	else if(data[users[i]]["year"] === 'Graduate')
 			// 		zz = 'Graduated';
 
-
 				final.push(db.child('users').child(users[i]).update({
 					onBoard: false
 				}));
 			// }
-
 		}
 
 		// eslint-disable-next-line promise/no-nesting
 		return Promise.all(final)
 		.then(() => {
-
 			return res.status(200).json({
 				success: true
 			});
@@ -182,17 +169,13 @@ function updateUsers(req, res) {
 		})
 	})
 	.catch((err) => {
-
 		return res.send(err);
 	})
 }
 
-
 function getAppDevelopers(req, res) {
-
 	db.child(appDevelopers).once('value')
 	.then((snapshot) => {
-
 		let information = snapshot.val();
 
 		return res.status(200).json({
@@ -204,7 +187,6 @@ function getAppDevelopers(req, res) {
 		});
 	})
 	.catch((err) => {
-
 		return res.status(500).json({
 			success: false,
 			message: "Internal Server Error. Could not fetch app developers.",
@@ -213,15 +195,12 @@ function getAppDevelopers(req, res) {
 	});
 }
 
-
 // return event description with eventName only
 // for assistant
 function getEventInformation(req, res) {
-
 	let eventName = req.query.eventName;
 
 	if(eventName === undefined) {
-
 		return res.status(400).json({
 			success:false,
 			message: "Usage: [GET] eventName=name"
@@ -233,23 +212,18 @@ function getEventInformation(req, res) {
 
 	db.child(eventDescription).once('value')
 	.then((snapshot) => {
-
 		let allData = snapshot.val();
 
 		for(let category in allData) {
-
 			for(let event in allData[category]) {
-
 				let name = event.toLowerCase();
 				if(eventName === name) {
-
 					// caching = 12hr (server), 6hr (browser)
 					res.set('Cache-Control', 'public, max-age=21600 , s-maxage=43200');
 					return res.status(200).json({
 						success: true,
 						data: allData[category][event]
 					})
-
 				}
 			}
 		}
@@ -260,25 +234,20 @@ function getEventInformation(req, res) {
 		})
 	})
 	.catch((err) => {
-
 		return res.status(500).json({
 			success: false,
 			message: "could not fetch event description",
 			err: err
 		})
 	})
-
 }
-
 
 // return users registered in one single event
 function getEventUsers(req, res) {
-
 	let eventName = req.query.eventName;
 	let eventCategory = req.query.eventCategory;
 
 	if(eventName === undefined || eventCategory === undefined) {
-
 		return res.status(400).json({
 			success: false,
 			message: `Usage: eventName=name&eventCategory=category`
@@ -287,7 +256,6 @@ function getEventUsers(req, res) {
 
 	db.child(events + "/" + eventCategory + "/" + eventName).once('value')
 	.then((snapshot) => {
-
 		if(snapshot.val() === null) {
 			return res.status(400).json({
 				success: false,
@@ -297,14 +265,12 @@ function getEventUsers(req, res) {
 
 		db.child(users).once('value')
 		.then((snapshot) => {
-
 			let allUsers = snapshot.val();
 
 			let data = {};
 			data["users"] = new Array();
 
 			for(user in allUsers) {
-
 				if(allUsers[user][registeredEvents] === undefined) {
 					continue;
 				}
@@ -312,10 +278,10 @@ function getEventUsers(req, res) {
 				if(allUsers[user][registeredEvents][eventCategory] === undefined) {
 					continue;
 				}
+
 				if(allUsers[user][registeredEvents][eventCategory].indexOf(eventName) !== -1) {
 					data["users"].push(allUsers[user]);
 				}
-
 			}
 
 			return res.status(200).json({
@@ -324,7 +290,6 @@ function getEventUsers(req, res) {
 			})
 		})
 		.catch(() => {
-
 			res.status(500).json({
 				success: false,
 				message: `error fetching users node`
@@ -339,19 +304,12 @@ function getEventUsers(req, res) {
 			message: "could not see events. internal error"
 		})
 	})
-
-
 }
 
-
 function matchEventDescription(database, data) {
-
-
 	return new Promise(function(resolve, reject) {
-
 		db.child(eventDescription).once('value')
 		.then((snap) => {
-
 			// console.log("idhr hau mai");
 			// console.log();
 			// console.log();
@@ -375,24 +333,18 @@ function matchEventDescription(database, data) {
 						eventDetails["eventCategory"] = category;
 						data[events].push(eventDetails);
 					} else {
-
 						// console.log(eventDetails);
 						// console.log(userEvent);		
 					}
 					
-
-					
-
 					// data[category].push(eventDetails);
 				}
 			}
 
 			// console.log(data);
 			return resolve(data);
-
 		})
 		.catch((err) => {
-
 			// console.log("error: ", err);		// have to add
 			// deploy shows error - error needs to be handled
 			data = {
@@ -403,16 +355,12 @@ function matchEventDescription(database, data) {
 
 			return reject(data);
 		})
-
 	})
 }
 
-
 function appGetRegisteredEvents(req, res, next) {
-
 	let id = req.query.email;
 	if(id === undefined || id === null) {
-
 		return res.status(400).json({
 			success: false,
 			message: 'send id'
@@ -424,18 +372,15 @@ function appGetRegisteredEvents(req, res, next) {
 	return next();
 }
 
-
 function getRegisteredEvents(req, res)
 {
 	let email = req.body.email;
 
 	db.child(users + "/" + email + "/" + registeredEvents).once('value')
 	.then((snapshot) => {
-
 		let database = snapshot.val();
 
 		if(!database) {
-
 			return res.status(400).json({
 				success: false,
 				message: "No events registered",
@@ -451,7 +396,6 @@ function getRegisteredEvents(req, res)
 		
 		return matchEventDescription(database, data)
 		.then((data) => {
-
 			return res.status(200).json({
 				success: true,
 				data: data
@@ -462,7 +406,6 @@ function getRegisteredEvents(req, res)
 		})
 	})
 	.catch(() => {
-
 		res.status(400).json({
 			success: false,
 			message: `Error while fetching user registered events`
@@ -470,10 +413,8 @@ function getRegisteredEvents(req, res)
 	})
 }
 
-
 //send time stamp of the server
 function getTimestamp(req, res) {
-
 	res.setHeader('Content-Type', 'application/json');
 	res.send(JSON.stringify({
 		timestamp: Date.now()
@@ -481,11 +422,9 @@ function getTimestamp(req, res) {
 }
 
 function appEventRegister(req, res, next) {
-
 	let em = req.body.email;
 	
 	if(em === undefined || em === null) {
-
 		res.status(400).json({
 			success: false,
 			message: "unauth, send id"
@@ -498,7 +437,6 @@ function appEventRegister(req, res, next) {
 	next();
 }
 
-
 // registeredEvents
 // {
 // 	managerial: ["a", "b"],
@@ -507,50 +445,39 @@ function appEventRegister(req, res, next) {
 // register user for a events
 function eventRegister(request, response)
 {
-
 	let eventName = request.body.eventName;
 	let eventCategory = request.body.eventCategory;
 	let email = request.body.email;
 
 	if(eventName === undefined || eventCategory === undefined) {
-
 		return response.status(400).json({
 			success: false,
 			message: `Invalid Parameters.\n Usage: eventName=event&eventCategory=category`
 		});
 	}
 
-		
 	// get previsouly registered events
 	db.child(users + "/" + email + "/" + registeredEvents).once('value')
 	.then((snapshot) => {
-
 		let registeredEvent = snapshot.val();
-		if(registeredEvent === undefined || registeredEvent === null)
-		{
+		if(registeredEvent === undefined || registeredEvent === null) {
 			registeredEvent = {};
 		}
 
 		// if not registred any events in that category
-		if(registeredEvent[eventCategory] === undefined)
-		{
+		if(registeredEvent[eventCategory] === undefined) {
 			// create array fro category
 			registeredEvent[eventCategory] = new Array();
 			// push event into that category
 			registeredEvent[eventCategory].push(eventName);
-		}
-		else
-		{
+		} else {
 			// if category already exists
 			// push event to that category
 
 			// if event already registered
-			if(registeredEvent[eventCategory].indexOf(eventName) === -1)
-			{
+			if(registeredEvent[eventCategory].indexOf(eventName) === -1) {
 				registeredEvent[eventCategory].push(eventName);
-			}
-			else
-			{
+			} else {
 				return response.send({
 					success: false,
 					message: `already registered for ${eventName}`
@@ -563,14 +490,12 @@ function eventRegister(request, response)
 			[registeredEvents]: registeredEvent
 		})
 		.then(() => {
-
 			return response.json({
 				success:true,
 				status: `Successfully registered for ${eventName}`
 			});
 		})
 		.catch(() => {
-
 			return response.json({
 				success:false,
 				message: "could not register!",
@@ -581,7 +506,6 @@ function eventRegister(request, response)
 		return;
 	})
 	.catch(() => {
-
 		return response.json({
 			success:false,
 			message: "could not fetch user registered events",
@@ -589,7 +513,6 @@ function eventRegister(request, response)
 		});
 	});
 }
-
 
 //return eventName
 // {
@@ -601,10 +524,8 @@ function getEventNames(req, res)
 {
 	//optional - eventCategory
 	if(req.query.eventCategory === undefined) {
-
 		return db.child(events).once('value')
 		.then((snapshot) => {
-
 			let database = snapshot.val();
 			let data = {};
 			data[events] = new Array();
@@ -613,7 +534,6 @@ function getEventNames(req, res)
 			{
 				for(let event in database[category])
 				{
-
 					let eventData = new Object;
 					let eventName = database[category][event]["eventName"];
 
@@ -622,26 +542,22 @@ function getEventNames(req, res)
 
 					data[events].push(eventData);
 				}
-
 			}
+
 			let success = true;
 			res.set('Cache-Control', 'public, max-age=3600 , s-maxage=7200');
 			return res.json({success:success,data:data});
 		})
-	}
-	else {
-
+	} else {
 		let category = req.query.eventCategory;
 
 		let node = events + "/" + category;
 
 		return db.child(node).once('value')
 		.then((snapshot) => {
-
 			//console.log(snapshot.val());
 			let database = snapshot.val();
-			if(database === null)
-			{
+			if(database === null) {
 				return res.json({
 					success: false,
 					message:`${category} category doesn't exist`
@@ -673,13 +589,13 @@ function getEventNames(req, res)
 function getCategories(req, res) {
 	return db.child(events).once('value')
 	.then((snapshot) => {
-
 		var data = {categories : []}
 		for(var i in snapshot.val())		// get each category
 		{
 			let category = i;
 			data.categories.push(category);
 		}
+
 		message = "Categories received";
 		success = true;
 		res.set('Cache-Control', 'public, max-age=3600 , s-maxage=7200');
@@ -695,7 +611,6 @@ function getCategories(req, res) {
 
 // to add a new events from the admin panel
 function addEvent(req, res) {
-
 	let eventData = req.body.eventData;	// accepts JSON event data
 	// {
 	// 	eventName: "string",
@@ -706,7 +621,6 @@ function addEvent(req, res) {
 	// }
 
 	if(eventData === undefined) {
-
 		return res.json({
 			success: false,
 			message: `Send event data as json data in $eventData`
@@ -714,7 +628,6 @@ function addEvent(req, res) {
 	}
 
 	if(eventData["eventName"] === undefined || eventData["startTime"] === undefined || eventData["endTime"] === undefined || eventData["category"] === undefined) {
-
 		return res.status(400).json({
 			success:false,
 			message: "eventName, startTime, endTime, category -- are compulsory parameters"
@@ -727,7 +640,6 @@ function addEvent(req, res) {
 	// adding event to timeline
 	// name, startTime and endTime
 	db.child(`${events}/${eventData.category}/${eventData.eventName}`).set({
-
 		eventName : eventData.eventName,
 		startTime : eventData.startTime,
 		endTime : eventData.endTime
@@ -744,14 +656,11 @@ function addEvent(req, res) {
 	// adding event with full description to the node
 	// with all the json data received
 
-
-
 	let eventCategory =  eventData.category;
 	delete eventData.category;
 
 	db.child(`${eventDescription}/${eventCategory}/${eventData.eventName}`).set(eventData)
 	.then((snapshot) => {
-
 		console.log(`Added ${eventData.eventName} successfully`);
 
 		return res.send({
@@ -764,33 +673,27 @@ function addEvent(req, res) {
 			message: `Error occured when adding events to the description node\nError : ${err}`
 		});
 	})
-
 }
 
 // returns events description for single event
 // or all the events of one category
 function getEventDescription(req, res) {
-
 	//	compulsory
 	let categoryName = req.query.eventCategory;
 	// optional parameter
 	let eventName = req.query.eventName;
 
-	if(categoryName === undefined)
-	{
+	if(categoryName === undefined) {
 		return res.send({
 			success: false,
 			message: `Invalid Paramenters. \n Usage: eventCategory=category&[eventName=name]`
 		});
 	}
 
-	if(eventName === undefined)
-	{
+	if(eventName === undefined) {
 		db.child(`${eventDescription}/${categoryName}`).once('value')
 		.then((snapshot) => {
-
 			if(snapshot.val() === null) {
-
 				return res.send({
 					success: false,
 					message: `${categoryName} doesn't exist.`
@@ -804,7 +707,6 @@ function getEventDescription(req, res) {
 			data[events] = new Array();
 
 			for(let event in database) {
-
 				let eventData = database[event];
 				eventData["eventCategory"] = categoryName;
 				console.log(eventData);
@@ -824,12 +726,9 @@ function getEventDescription(req, res) {
 				message: `could not fetch description for category ${categoryName}`
 			})
 		})
-	}
-	else
-	{
+	} else {
 		db.child(`${eventDescription}/${categoryName}/${eventName}`).once('value')
 		.then((snapshot) => {
-
 			let data = snapshot.val();
 			if(data === null) {
 				return res.send({
@@ -851,13 +750,11 @@ function getEventDescription(req, res) {
 				message: `Error in getting events details.\n Error: ${err}`
 			});
 		})
-
 	}
-
 }
+
 // returns events startTime, endTime and name
 function getEventTimeline(req, res) {
-
 	return db.child(events).once('value')
 	.then((snapshot) => {
 		let database = snapshot.val();
@@ -866,15 +763,14 @@ function getEventTimeline(req, res) {
 		data[events] = new Array();
 
 		for(let category in database) {
-
 			for(let event in database[category]) {
-
 				let eventData = database[category][event];
 				eventData["eventCategory"] = category;
 
 				data[events].push(eventData);
 			}
 		}
+
 		res.set('Cache-Control', 'public, max-age=3600 , s-maxage=7200');
 		return res.status(200).json({
 			success:true,
@@ -887,22 +783,7 @@ function getEventTimeline(req, res) {
 			message: `Error occured while getting events timeline\n Error : ${err}`
 		})
 	})
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
 *   /googleLogin
@@ -920,9 +801,7 @@ function getEventTimeline(req, res) {
 *               description: error
 */
 function googleLoginApp(req, res) {
-
 	request(googleUrl + req.body.idToken, {json: true}, (err, response, body) => {
-
 		if(err) {
 			return res.status(400).json({
 				success: false,
@@ -946,11 +825,8 @@ function googleLoginApp(req, res) {
 		let info;
 
 		ref.once('value', (snapshot) => {
-
 			if(snapshot.val()) {
-				
 				if(snapshot.val().onBoard === true) {
-
 					info = {
 						email:snapshot.val().email,
 						name:snapshot.val().name,
@@ -962,7 +838,6 @@ function googleLoginApp(req, res) {
 						admin:snapshot.val().admin
 					};
 				} else {
-					
 					info = {
 						email:snapshot.val().email,
 						name:snapshot.val().name,
@@ -977,9 +852,7 @@ function googleLoginApp(req, res) {
 					onBoard: snapshot.val().onBoard,
 					information: info
 				});
-				
 			} else {
-
 				database.ref(email_child).set({
 					onBoard: false,
 					email: body.email,
@@ -1005,13 +878,11 @@ function googleLoginApp(req, res) {
 		});
 	});
 }
+
 function googleLogin(req, response) {
-
 	request(googleUrl + req.body.idToken, {json: true}, (err, res, body) => {
-
 		let data;
 		if (err) {
-
 			return res.status(400).json({success: false,err:err});
 		}
 
@@ -1030,7 +901,6 @@ function googleLogin(req, response) {
 		let picture = body.picture;
 		ref.once('value', (snapshot) => {
 			if (snapshot.val()) {
-
 				/*	data = {
 				onBoard: snapshot.val().onBoard,
 				authenticatedRequest: true,
@@ -1038,8 +908,7 @@ function googleLogin(req, response) {
 				body: body
 			};*/
 
-				if(snapshot.val().onBoard === true)
-				{
+				if(snapshot.val().onBoard === true) {
 					jwttoken = {
 						email:snapshot.val().email,
 						name:snapshot.val().name,
@@ -1066,8 +935,7 @@ function googleLogin(req, response) {
 					onBoard:snapshot.val().onBoard,
 					success: true, data:data
 				});
-			}
-			else {
+			} else {
 				database.ref(email_child).set({
 					onBoard: false,
 					email: body.email,
@@ -1096,16 +964,6 @@ function googleLogin(req, response) {
 	});
 }
 
-
-
-
-
-
-
-
-
-
-
 /*
 *   /signUp
 *   put:
@@ -1126,7 +984,6 @@ function googleLogin(req, response) {
 *               description: user does not exist
 */
 function signUpApp(req, res) {
-
 	if (req.body.phone === undefined || req.body.college === undefined || req.body.year === undefined) {
 		return res.status(400).json({
 			success: false,err:'please pass valid/complete url parameters'
@@ -1145,16 +1002,12 @@ function signUpApp(req, res) {
 	let ref = database.ref('users/' + email);
 
 	ref.once('value', (snapshot) => {
-
 		if(snapshot.val() === null || snapshot.val() === undefined) {
-
 			return res.status(403).json({
 				success: false,
 				err:'user does not exist'
 			});
-
 		} else if (snapshot.val().onBoard === false) {
-			
 			ref.update({
 				onBoard: true,
 				phone: req.body.phone,
@@ -1173,47 +1026,36 @@ function signUpApp(req, res) {
 				admin:snapshot.val().admin,
 			}
 			
-			
 			return res.status(200).json({
 				success: true,
 				message: "user onboarded",
 				information: info
 			});
-
 		} else {
-			
 			return res.status(405).json({
 				success:false,
 				err:'not allowed, already onboarded'
 			});
-		
 		}
 	});
 }
 
 function signUp(req, response) {
-
 	if (req.body.phone === undefined || req.body.college === undefined || req.body.year === undefined) {
 		return response.status(400).json({
 			success: false,err:'please pass valid/complete url parameters'
 		});
-	}
-	else{
+	} else{
 		let email = req.body.email;
 		let ref = database.ref('users/'+email);
 
 		ref.once('value', (snapshot) => {
-
 			if(snapshot.val()===null || snapshot.val()===undefined){
-
 				return response.status(403).json({
 					success: false,
 					err:'user does not exist'
 				});
-
-			}
-			else if (snapshot.val().onBoard===false) {
-
+			} else if (snapshot.val().onBoard===false) {
 				ref.update({
 					onBoard: true,
 					phone: req.body.phone,
@@ -1231,6 +1073,7 @@ function signUp(req, response) {
 					year: req.body.year,
 					admin:snapshot.val().admin,
 				}
+
 				const token = jwt.sign(jwttoken, config.key);
 				let data={token:token};
 				return response.status(200).json({
@@ -1238,20 +1081,15 @@ function signUp(req, response) {
 					message:"user onboarded",
 					data:data
 				});
-			}
-			else {
-
+			} else {
 				return response.status(405).json({
 					success:false,
 					err:'not allowed, already onboarded'
 				})
-
 			}
 		});
 	}
-
 }
-
 
 // returns one new random fact everytime
 function randomFact(request,response) {
@@ -1272,7 +1110,6 @@ function randomFact(request,response) {
 		});
 	})
 	.catch(() => {
-
 		return response.status(500).json({
 			success: false,
 			message: "could not fetch facts"
@@ -1280,14 +1117,11 @@ function randomFact(request,response) {
 	})
 }
 
-
 //<------Returning the array of all the videos------>
 //Returns the array of videos containing title and url of a video.
 function video(request,response) {
-
 	return database.ref('/videos').once('value')
 	.then((snapshot) => {
-
 		// browser caching - 1hr, server caching - 2hr
 		response.set('Cache-Control', 'public, max-age=3600 , s-maxage=7200');
 		let data=snapshot.val();
@@ -1311,8 +1145,7 @@ function addQuery(request,response){
 	console.log(query);
 	let date=Date.now();
 	const email_child='queries/'+email;
-	if(query !== undefined)
-	{
+	if(query !== undefined) {
 		database.ref().child(email_child).child(date).set({
 			text:query,
 			id:date,
@@ -1322,9 +1155,7 @@ function addQuery(request,response){
 			success:true,
 			message : "query successfully added"
 		});
-	}
-	else
-	{
+	} else {
 		response.status(400).json({
 			success:false,
 			message: "empty query"
@@ -1334,17 +1165,14 @@ function addQuery(request,response){
 
 // returns query to admin
 function getQuery(req, res) {
-
 	db.child(queries).once('value')
 	.then(function (snapshot) {
-
 		let userQueries = snapshot.val();
 
 		let data = {};
 		data[queries] = new Array();
 
 		for(user in userQueries) {
-
 			let obj = {};
 
 			email = user.replace(/,/g, '.');
@@ -1353,9 +1181,9 @@ function getQuery(req, res) {
 			obj["query"] = new Array();
 
 			for(query in userQueries[user]) {
-
 				obj["query"].push(userQueries[user][query]);
 			}
+
 			data[queries].push(obj);
 		}
 
@@ -1365,15 +1193,12 @@ function getQuery(req, res) {
 		});
 	})
 	.catch(() => {
-
 		return res.status(500).json({
 			error: "error getting queries",
 			success: false
 		})
 	})
-
 }
-
 
 ///////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////
@@ -1390,6 +1215,7 @@ function addNotification(req,res){
 			error:'empty notification'
 		});
 	}
+
 	let notif=req.body.notif;
 	let date=`${Date.now()}`;
 	let node=9999999999999-date;
@@ -1412,7 +1238,6 @@ function getNotifications(req,res){
 		data[notifications] = new Array();
 
 		for(not in notifs) {
-
 			let obj = {};
 
 			obj["notif"] =notifs[not]['notif'];
@@ -1420,24 +1245,18 @@ function getNotifications(req,res){
 
 			data[notifications].push(obj);
 		}
+
 		return res.json({
 			success:true,
 			data:data
 		});
 	}).catch(() => {
-
 		return res.status(500).json({
 			error: "error getting notifications",
 			success: false
 		})
 	})
 }
-
-
-
-
-
-
 
 ///////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////
@@ -1447,26 +1266,20 @@ function getNotifications(req,res){
 ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////
 
-
-
 function getContacts(req, res) {
-
 	db.child('/contacts').once('value')
 	.then((snapshot) => {
-
 		let database = snapshot.val();
 
 		let data = {};
 		data["contacts"] = new Array();
 
 		for(let category in database) {
-
 			let type = {};
 			type["section"] = category;
 			type["people"] = new Array();
 
 			for(let person in database[category]) {
-
 				type["people"].push(database[category][person]);
 			}
 
@@ -1480,13 +1293,11 @@ function getContacts(req, res) {
 		});
 	})
 	.catch(() => {
-
 		return res.status(500).json({
 			success: false,
 			message: 'could not fetch contacts'
 		});
 	})
-
 }
 
 ///////////////////////////////////////////////////////////
@@ -1499,11 +1310,9 @@ function getContacts(req, res) {
 
 // gives next 1 hour events
 function getNextEvents(req, res) {
-
 	let timestamp = req.query.timestamp;
 
 	if(timestamp === undefined) {
-
 		return res.status(400).json({
 			success: false,
 			message: "send timestamp"
@@ -1514,16 +1323,13 @@ function getNextEvents(req, res) {
 
 	db.child(events).once('value')
 	.then((snapshot) => {
-
 		let database = snapshot.val();
 
 		let data = {};
 		data[events] = new Array();
 
 		for(let category  in database) {
-
 			for(let event in database[category]) {
-
 				let startTime = database[category][event].startTime;
 				let endTime = database[category][event].endTime;
 
@@ -1533,15 +1339,12 @@ function getNextEvents(req, res) {
 				database[category][event]["eventCategory"] = category;
 
 				if(timestamp >= startTime && timestamp <= endTime) {
-
 					let obj = {};
 					obj["status"] = "LIVE!";
 					obj["eventDetails"] = database[category][event];
 
 					data[events].push(obj);
-				}
-				else if(startTime <= timestamp + 432000000 && startTime >= timestamp) {
-
+				} else if(startTime <= timestamp + 432000000 && startTime >= timestamp) {
 					let obj = {};
 					obj["status"] = "Upcoming";
 
@@ -1550,7 +1353,6 @@ function getNextEvents(req, res) {
 				}
 			}
 		}
-
 
 		data["events"].sort(sortOrder("startTime"));
 
@@ -1567,21 +1369,17 @@ function getNextEvents(req, res) {
 			message: "could not fetch events"
 		})
 	})
-
 }
 
 function sortOrder(prop) {
-
 	return function(a, b) {
-
 		if(a["eventDetails"][prop] > b["eventDetails"][prop]) {
 			return 1;
-		}
-		else if(a["eventDetails"][prop] < b["eventDetails"][prop]) {
+		} else if(a["eventDetails"][prop] < b["eventDetails"][prop]) {
 			return -1;
 		}
-		return 0;
 
+		return 0;
 	}
 }
 
@@ -1590,28 +1388,25 @@ function sortOrder(prop) {
 	* Called by get on '/sponsor' route
 */
 function getSponsors(req, res) {
-
 	db.child(sponsorNode).once('value')
 	.then((snapshot) => {
-
 		let database = snapshot.val();
 
 		let data = {};
 		data["sponsors"] = new Array();
 
 		for(let sponsorSection in database) {
-
 			let type = {};
 			type["sponsorSection"] = sponsorSection;
 			type["sponsors"] = new Array();
 
 			for(key in database[sponsorSection]) {
-
 				type["sponsors"].push(database[sponsorSection][key]);
 			}
-			data["sponsors"].push(type);
 
+			data["sponsors"].push(type);
 		}
+
 		res.set('Cache-Control', 'public, max-age=3600 , s-maxage=7200');
 		return res.status(200).json({
 			data: data,
@@ -1619,7 +1414,6 @@ function getSponsors(req, res) {
 		});
 	})
 	.catch(() => {
-
 		return res.status(500).json({
 			success: false,
 			message: 'could not fetch sponsors'
@@ -1690,11 +1484,12 @@ function addSponsor(request, response) {
 	if(imageUrl === undefined) {
 		emptyFields.push('imageUrl');
 	}
+
 	if(sponsorSection === undefined) {
 		emptyFields.push('sponsorSection');
 	}
-	if(emptyFields.length === 0)
-	{
+
+	if(emptyFields.length === 0) {
 		let sponsor = request.body.sponsor;
 		delete sponsor.sponsorSection;
 
@@ -1703,9 +1498,7 @@ function addSponsor(request, response) {
 			success:true,
 			message : "Sponsor successfully added"
 		});
-	}
-	else
-	{
+	} else {
 		const errorMessage = 'Following attributes found empty : ' + emptyFields;
 		response.status(400).json({
 			success:false,
@@ -1714,10 +1507,8 @@ function addSponsor(request, response) {
 	}
 }
 
-
 // function to remove a addQuery
 function removeQuery(req, response) {
-
 	const id = req.body.id;
 	let email=req.body.queryEmail;
 
@@ -1727,6 +1518,7 @@ function removeQuery(req, response) {
 			message: "Usage: queryEmail=queryEmail&id=queryId"
 		});
 	}
+
 	email = email.replace(/\./g, ',');
 	let data={};
 	const email_child='queries/'+email;
@@ -1748,23 +1540,19 @@ function removeQuery(req, response) {
 	})
 }
 
-
 //////////////////////////////
 		// LECTURES
 /////////////////////////////
 
 function getLectures(req, res) {
-
 	db.child('/lectures').once('value')
 	.then((snapshot) => {
-
 		let allLectures = snapshot.val();
 
 		let data = {};
 		data["lectures"] =new Array();
 
 		for(lecture in allLectures) {
-
 			data["lectures"].push(allLectures[lecture]);
 		}
 
@@ -1780,18 +1568,13 @@ function getLectures(req, res) {
 			message: 'could not fetch lectures'
 		})
 	})
-
 }
-
-
 
 ///////////////////////
 ////Devlopers/////////
 
-
 // only for localhost - not deployed
 // function addDeveloper(req, res) {
-
 // 	let name = req.body.name;
 // 	let link = req.body.link;
 // 	let year = parseInt(req.body.year);
@@ -1816,22 +1599,17 @@ function getLectures(req, res) {
 // }
 
 function getDeveloper(req, res) {
-
 	db.child('about').once('value')
 	.then((snapshot) => {
-
 		let data = {devs: []};
 
 		let devs = snapshot.val();
 		for(let key in devs) {
-
 			data["devs"].push(devs[key]);
 		}
 
 		data["devs"].sort((a, b) => {
-
 			// if((parseInt(b["year"]) - parseInt(a["year"])) === 0) {
-
 			// 	if(a["name"] < b["name"]) {
 			// 		return -11;
 			// 	}
@@ -1848,13 +1626,11 @@ function getDeveloper(req, res) {
 		})
 	})
 	.catch(() => {
-
 		return res.status(500).json({
 			success: false,
 			message: "error fetching developers"
 		})
 	})
-
 }
 
 exports.api = functions.https.onRequest(app);
