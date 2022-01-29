@@ -7,7 +7,12 @@ const YAML = require("yamljs");
 var swagger_path = path.resolve(__dirname, "swagger.yaml");
 const swaggerDocument = YAML.load(swagger_path);
 const cors = require('cors');
-admin.initializeApp();
+var serviceAccount = require("./finaservicekey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://techspardha-87928.firebaseio.com",
+});
 
 // import the rotues
 const userRoutes = require('./routes/user');

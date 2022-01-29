@@ -3,3 +3,4 @@ node_modules/
 *.log
 functions/.runtimeconfig.json
 functions/.env
+functions/finaservicekey.json
