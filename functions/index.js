@@ -1,7 +1,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const jwt = require('jsonwebtoken');
-var nodemailer = require('nodemailer');
 const request = require('request');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -10,19 +9,6 @@ const isAuthenticatedAdmin = require('./middlewares/admin');
 const config = require('./config');
 
 const cors = require('cors');
-const { guaravarora7gmailcom } = require('./admins');
-
-var confi = require('../.runtimeconfig');
-if(Object.keys(functions.config()).length){
-	confi = functions.config();
- }
-
-const emailPassword = confi.technoemail.password;
-const emailClientId = confi.technoemail.clientid;
-const emailRefreshToken = confi.technoemail.refreshtoken;
-const emailClientSecret = confi.technoemail.clientsecret;
-
-
 
 admin.initializeApp();
 const database = admin.database();
@@ -366,6 +352,9 @@ function matchEventDescription(database, data) {
 		db.child(eventDescription).once('value')
 		.then((snap) => {
 
+			// console.log("idhr hau mai");
+			// console.log();
+			// console.log();
 
 			let eventsDes = snap.val();
 
@@ -522,12 +511,7 @@ function eventRegister(request, response)
 	let eventName = request.body.eventName;
 	let eventCategory = request.body.eventCategory;
 	let email = request.body.email;
-	var emailArray = request.body.email.split(",");
-    var finalEmail = emailArray[0];
-	for (let i = 1; i < emailArray.length; i++) {
-		finalEmail += "." + emailArray[i];
-	  }
-	  
+
 	if(eventName === undefined || eventCategory === undefined) {
 
 		return response.status(400).json({
@@ -579,30 +563,7 @@ function eventRegister(request, response)
 			[registeredEvents]: registeredEvent
 		})
 		.then(() => {
-			let transporter = nodemailer.createTransport({
-				service: 'gmail',
-				auth: {
-				  type: 'OAuth2',
-				  user: "noreplytechnobyte@gmail.com",
-				  pass: emailPassword,
-				  clientId: emailClientId,
-				  clientSecret: emailClientSecret,
-				  refreshToken: emailRefreshToken
-				}
-			  });
-			let mailOptions = {
-				from: "noreplytechnobyte@gmail.com",
-				to: finalEmail,
-				subject: 'Techno event',
-				text: "Successfully registered for " + eventName
-			  };
-			  transporter.sendMail(mailOptions, function(err, data) {
-				if (err) {
-				  console.log("Error " + err);
-				} else {
-				  console.log("Email sent successfully");
-				}
-			  });
+
 			return response.json({
 				success:true,
 				status: `Successfully registered for ${eventName}`

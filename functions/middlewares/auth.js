@@ -22,14 +22,13 @@ const isAuthenticated = (req, res, next) => {
         //     });
         // }
         //else {
-        console.log("data :- " + data);
         let email = data.email;
         email = email.replace(/\./g, ',');
         const name = data.name;
-        console.log(req.body);
+
         req.body.email = email;
         req.body.name = name;
-        
+
         return next();
         //}
       }
