@@ -15,11 +15,11 @@ exports.basicmail = (heading,detail,buttontext,buttonlink,thankyou) => {
                                     align="center" bgcolor="#71b6f9" valign="top">
                                      <div style="display: flex; align-items: center; justify-content: space-evenly;">
                                          <img src="https://res.cloudinary.com/dvhrzmkwd/image/upload/v1648538215/diq0cnmylb9ccm0kqqrj.jpg" height="100px" width="auto">
-                                       <div style="display: flex; flex-direction: column;">
-                                            <a href="https://techspardha.live" style="font-size:32px; 
+                                       <div style="display: grid;">
+                                            <a href="techspardha.live" style="font-size:32px; 
                                             font-family: 'Poppins', sans-serif; 
                                             color:#fff; text-decoration: none;">Techspardha'22</a> <br>
-                                        <span style="margin-top: 10px;display: block;"> ${heading} </span>
+                                        
                                        </div>
                                      </div>
                                 </td>
@@ -31,6 +31,11 @@ exports.basicmail = (heading,detail,buttontext,buttonlink,thankyou) => {
                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                 <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
                                                     <strong style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> ${detail}
+                                                </td>
+                                            </tr>
+                                            <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
+                                                    <strong style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> ${heading}
                                                 </td>
                                             </tr>
                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
