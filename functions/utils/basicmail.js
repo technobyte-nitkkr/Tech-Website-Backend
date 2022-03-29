@@ -1,6 +1,6 @@
 // return basic html
 exports.basicmail = (heading,detail,buttontext,buttonlink,thankyou) => {
-   return   `<table class="body-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6">
+   return `<table class="body-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6">
     <tbody>
         <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
             <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td>
@@ -11,10 +11,17 @@ exports.basicmail = (heading,detail,buttontext,buttonlink,thankyou) => {
                         bgcolor="#fff">
                         <tbody>
                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                <td class="" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: #38414a; margin: 0; padding: 20px;"
+                                <td class="" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: black; margin: 0; padding: 20px auto;"
                                     align="center" bgcolor="#71b6f9" valign="top">
-                                    <a href="https://website-frontend20-bn85ryuih.vercel.app/" style="font-size:32px;color:#fff;">Altius 2022</a> <br>
-                                    <span style="margin-top: 10px;display: block;"> ${heading} </span>
+                                     <div style="display: flex; align-items: center; justify-content: space-evenly;">
+                                         <img src="https://res.cloudinary.com/dvhrzmkwd/image/upload/v1648538215/diq0cnmylb9ccm0kqqrj.jpg" height="100px" width="auto">
+                                       <div style="display: flex; flex-direction: column;">
+                                            <a href="https://techspardha.live" style="font-size:32px; 
+                                            font-family: 'Poppins', sans-serif; 
+                                            color:#fff; text-decoration: none;">Techspardha'22</a> <br>
+                                        <span style="margin-top: 10px;display: block;"> ${heading} </span>
+                                       </div>
+                                     </div>
                                 </td>
                             </tr>
                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
@@ -28,7 +35,7 @@ exports.basicmail = (heading,detail,buttontext,buttonlink,thankyou) => {
                                             </tr>
                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                 <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                                                    <a href="${buttonlink}" class="btn-primary" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background-color: #f1556c; margin: 0; border-color: #f1556c; border-style: solid; border-width: 8px 16px;">${buttontext}</a>
+                                                    <a href="${buttonlink}" class="btn-primary" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background-color: #4890ff; margin: 0; border-color: #4890ff; border-style: solid; border-width: 8px 16px;">${buttontext}</a>
                                                 </td>
                                             </tr>
                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">

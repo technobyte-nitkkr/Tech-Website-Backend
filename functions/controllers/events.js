@@ -461,9 +461,8 @@ exports.eventRegister = (request, response) => {
                 "Thankyou for your registration",
                 `You have succesfully registered for the event: ${eventName}`,
                 "Open Website",
-                "https://website-frontend20-2mkfatxre.vercel.app/",
-                
-                "Thanks and regards,\n Team Altius"
+                "techspardha.live",
+                "Thanks and regards,\n Team Techspardha"
               );
               mailHelper({
                 email: finalEmail,

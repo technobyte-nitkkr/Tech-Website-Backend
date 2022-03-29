@@ -4,3 +4,4 @@ node_modules/
 functions/.runtimeconfig.json
 functions/.env
 functions/finaservicekey.json
+functions/firebase-debug.log
