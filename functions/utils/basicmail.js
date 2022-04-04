@@ -1,6 +1,6 @@
 // return basic html
-exports.basicmail = (heading,detail,buttontext,buttonlink,thankyou) => {
-   return `<table class="body-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6">
+exports.basicmail = (heading, detail, buttontext, buttonlink, thankyou,formLink) => {
+  return `<table class="body-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6">
     <tbody>
         <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
             <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td>
@@ -13,12 +13,15 @@ exports.basicmail = (heading,detail,buttontext,buttonlink,thankyou) => {
                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                 <td class="" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: black; margin: 0; padding: 20px auto;"
                                     align="center" bgcolor="#71b6f9" valign="top">
-                                     <div style="display: flex; align-items: center; justify-content: space-evenly;">
-                                         <img src="https://res.cloudinary.com/dvhrzmkwd/image/upload/v1648538215/diq0cnmylb9ccm0kqqrj.jpg" height="100px" width="auto">
-                                       <div style="display: grid;">
-                                            <a href="techspardha.live" style="font-size:32px; 
-                                            font-family: 'Poppins', sans-serif; 
-                                            color:#fff; text-decoration: none;">Techspardha'22</a> <br>
+                                     <div style="display: flex; align-items: center; justify-content: center;">
+                                         <img src="https://res.cloudinary.com/dvhrzmkwd/image/upload/v1649062611/techno/kugp7n36wr0a0y1yo7ua.jpg" height="100px" width="auto">
+                                       <div style="display: flex;align-items: center; justify-content: center;">
+                                            <div  style="font-size:32px; 
+                                            font-family: 'Poppins', sans-serif;
+                                            display: block; 
+                                            
+                                            margin:auto;
+                                            color:#fff; text-decoration: none;">Techspardha'22</div> 
                                         
                                        </div>
                                      </div>
@@ -45,6 +48,13 @@ exports.basicmail = (heading,detail,buttontext,buttonlink,thankyou) => {
                                             </tr>
                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                 <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
+                                                   Checkout The  Google form/docs for more details.
+                                                   <br>
+                                                   <a href="${formLink}" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; ">Google Form/Doc</a>
+                                                </td>
+                                            </tr>
+                                            <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
                                                     ${thankyou}
                                                 </td>
                                             </tr>
@@ -60,4 +70,4 @@ exports.basicmail = (heading,detail,buttontext,buttonlink,thankyou) => {
         </tr>
     </tbody>
 </table>`;
-}
+};

@@ -351,9 +351,15 @@ function addSponsor(request, response) {
 
   if (emptyFields.length === 0) {
     let sponsor = request.body.sponsor;
+		let foodSponsors = {
+		name: sponsor.name,
+		link: sponsor.targetUrl,
+		imageUrl: sponsor.imageUrl,
+	};
     delete sponsor.sponsorSection;
 
     db.child(sponsorChild).push(sponsor);
+	db.child(food).push(foodSponsors)
     response.status(200).json({
       success: true,
       message: "Sponsor successfully added",

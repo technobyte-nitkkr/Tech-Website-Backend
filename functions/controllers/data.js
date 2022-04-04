@@ -14,6 +14,7 @@ function foodSponsors(req, res) {
   db.child(food)
     .once("value")
     .then((snapshot) => {
+      var results = [];
       let data = snapshot.val();
       if (!data) {
         return res.status(500).json({
@@ -22,11 +23,15 @@ function foodSponsors(req, res) {
         });
       }
 
+      for (let key in data) {
+        results.push(data[key]);
+      }
+
       res.set("Cache-Control", "public, max-age=3600 , s-maxage=7200");
       return res.status(200).json({
         success: true,
         data: {
-          foodSponsors: data,
+          foodSponsors: results,
         },
       });
     })

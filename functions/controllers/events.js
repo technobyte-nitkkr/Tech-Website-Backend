@@ -413,10 +413,12 @@ exports.eventRegister = (request, response) => {
   }
 
   // check if the event exists
-  db.child(`${events}/${eventCategory}/events/${eventName}`)
+  db.child(`${eventDescription}/${eventCategory}/${eventName}`)
     .once("value")
     .then((snapshot) => {
       const data = snapshot.val();
+      console.log(data);
+      var documentLink = data.document;
       if (data === null) {
         throw new Error(`${eventName} in ${eventCategory} doesn't exist.`);
       }
@@ -462,7 +464,8 @@ exports.eventRegister = (request, response) => {
                 `You have succesfully registered for the event: ${eventName}`,
                 "Open Website",
                 "techspardha.live",
-                "Thanks and regards,\n Team Techspardha"
+                "Thanks and regards,<br> Team Techspardha",
+                documentLink
               );
               mailHelper({
                 email: finalEmail,

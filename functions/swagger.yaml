@@ -810,6 +810,8 @@ paths:
                 sponsor:
                   type: object
                   properties:
+                    name:
+                      type: string
                     imageUrl:
                       type: string
                     targetUrl:
