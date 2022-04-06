@@ -320,17 +320,6 @@ function getDeveloper(req, res) {
         data["devs"].push(devs[key]);
       }
 
-      data["devs"].sort((a, b) => {
-        // if((parseInt(b["year"]) - parseInt(a["year"])) === 0) {
-        // 	if(a["name"] < b["name"]) {
-        // 		return -11;
-        // 	}
-        // 	else {
-        // 		return 0
-        // 	}
-        // }
-        return parseInt(b["year"]) - parseInt(a["year"]);
-      });
       res.set("Cache-Control", "public, max-age=3600 , s-maxage=7200");
       return res.status(200).json({
         success: true,

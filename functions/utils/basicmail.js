@@ -37,7 +37,7 @@ exports.basicmail = (heading, detail, buttontext, buttonlink, thankyou,formLink)
                                                 </td>
                                             </tr>
                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                                <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
+                                                <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 20px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
                                                     <strong style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> ${heading}
                                                 </td>
                                             </tr>
@@ -48,9 +48,9 @@ exports.basicmail = (heading, detail, buttontext, buttonlink, thankyou,formLink)
                                             </tr>
                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                 <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                                                   Checkout The  Google form/docs for more details.
+                                                   Checkout our website for more such events.
                                                    <br>
-                                                   <a href="${formLink}" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; ">Google Form/Doc</a>
+                                                   <a href="https://techspardha.live" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; ">Techspardha</a>
                                                 </td>
                                             </tr>
                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">

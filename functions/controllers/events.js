@@ -460,17 +460,17 @@ exports.eventRegister = (request, response) => {
             })
             .then((data) => {
               var html = basicmail(
-                "Thankyou for your registration",
-                `You have succesfully registered for the event: ${eventName}`,
-                "Open Website",
-                "techspardha.live",
+                "Fill the given Google form as a next step of registration.",
+                `You have successfully completed the first step of registration for ${eventName}.`,
+                "Google Form",
+                documentLink,
                 "Thanks and regards,<br> Team Techspardha",
-                documentLink
+                "none"
               );
               mailHelper({
                 email: finalEmail,
-                subject: "Event Registration",
-                text: `You have been registered for ${eventName}`,
+                subject: `Registration form for ${eventName}`,
+                text: `Registration form for ${eventName}`,
                 html: html,
               })
                 .then((info) => {
