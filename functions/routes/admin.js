@@ -1,4 +1,4 @@
-const { updateUsers, addNotification, getQuery, removeQuery, getEventUsers, addSponsor, updateRole, emailtoarray, getEventUsersEmails, sendNotification } = require("../controllers/admin");
+const { updateUsers,  getQuery, removeQuery, getEventUsers, addSponsor, updateRole, emailtoarray, getEventUsersEmails, sendNotification } = require("../controllers/admin");
 const { addEvent, addCategory } = require("../controllers/events");
 
 const { isLoggedIn, isCustomRole } = require("../middlewares/user");
@@ -8,7 +8,7 @@ const router = require("express").Router();
 router.post("/events", isLoggedIn,isCustomRole("admin","manager"), addEvent);
 router.get("/admin/event", isLoggedIn, isCustomRole("admin","manager"), getEventUsers);
 router.get("/admin/query", isLoggedIn, isCustomRole("admin","manager"), getQuery);
-router.post("/admin/notification",isLoggedIn,isCustomRole("admin","manager"), addNotification);
+
 router.post("/sponsors", isLoggedIn, isCustomRole("admin","manager"), addSponsor);
 router.post("/admin/mail/list",isLoggedIn, isCustomRole("admin"),emailtoarray);
 router.post("/admin/mail/category",isLoggedIn, isCustomRole("admin","manager"),getEventUsersEmails,emailtoarray);

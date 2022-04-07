@@ -25,12 +25,12 @@ const { basicmail } = require('./utils/basicmail');
 // express
 const app = express();
 
+app.use(cors());
 // middlewares
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.json());
 
 // routes
-app.use(cors({origin: true}));
 
 // use custom routes
 app.use(userRoutes);
@@ -49,7 +49,16 @@ app.get('/api-docs',(req,res)=>{
 });
 
 // app.get('/email',(req,res)=>{
-// 	res.send(basicmail("helo","helo","helo","helo","helo"));
+// 	res.send(
+//     basicmail(
+//       "Fill the given Google form/Join Group as a next step of registration.",
+//       `You have successfully completed the first step of registration for Encoder`,
+//       "Google Form",
+//       "google.com",
+//       "Thanks and regards,<br> Team Techspardha",
+//       "none"
+//     )
+//   );
 // })
 
 // defalut route

@@ -41,11 +41,26 @@ exports.basicmail = (heading, detail, buttontext, buttonlink, thankyou,formLink)
                                                     <strong style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> ${heading}
                                                 </td>
                                             </tr>
-                                            <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                                <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                                                    <a href="${buttonlink}" class="btn-primary" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background-color: #4890ff; margin: 0; border-color: #4890ff; border-style: solid; border-width: 8px 16px;">${buttontext}</a>
-                                                </td>
-                                            </tr>
+                                          <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                  <td
+                                                    class="content-block"
+                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
+                                                    valign="top"
+                                                  >
+                                                    ${
+                                              buttonlink ? (
+                                                `
+                                                    <a
+                                                      href="${buttonlink}"
+                                                      class="btn-primary"
+                                                      style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background-color: #4890ff; margin: 0; border-color: #4890ff; border-style: solid; border-width: 8px 16px;"
+                                                    >
+                                                      ${buttontext}
+                                                      </a>
+                                                      `): 'Link Will be Available Soon' } 
+                                                  </td>
+                                                </tr>
+                                            
                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                 <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
                                                    Checkout our website for more such events.

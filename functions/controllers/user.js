@@ -372,8 +372,8 @@ exports.addQuery = (request, response) => {
     });
   }
 
-  console.log(email);
-  console.log(query);
+  // console.log(email);
+  // console.log(query);
   let date = Date.now();
   const email_child = "queries/" + email;
   if (query !== undefined) {

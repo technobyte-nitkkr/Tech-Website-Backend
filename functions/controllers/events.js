@@ -417,7 +417,7 @@ exports.eventRegister = (request, response) => {
     .once("value")
     .then((snapshot) => {
       const data = snapshot.val();
-      console.log(data);
+      // console.log(data);
       var documentLink = data.document;
       if (data === null) {
         throw new Error(`${eventName} in ${eventCategory} doesn't exist.`);
@@ -460,10 +460,10 @@ exports.eventRegister = (request, response) => {
             })
             .then((data) => {
               var html = basicmail(
-                "Fill the given Google form as a next step of registration.",
+                "Fill the given Google form/Join Group as a next step of registration.",
                 `You have successfully completed the first step of registration for ${eventName}.`,
                 "Google Form",
-                documentLink,
+                (documentLink && documentLink.length) ? documentLink : undefined,
                 "Thanks and regards,<br> Team Techspardha",
                 "none"
               );

@@ -1216,37 +1216,6 @@ paths:
                     type: string
         500:
           description: internal server error
-  /admin/notification:
-    post:
-      tags:
-        - manager
-      summary: add a notification
-      security:
-        - Authdetails: []
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              required:
-                - notif
-              properties:
-                notif:
-                  type: string
-      responses:
-        200:
-          description: All good success
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  message:
-                    type: string
-        500:
-          description: internal server error
   /admin/mail/list:
     post:
       tags:

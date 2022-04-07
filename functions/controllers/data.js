@@ -337,7 +337,7 @@ function getDeveloper(req, res) {
 function getFaq(req,res){
   db.child("faq")
     .once("value").then(snapshot => {
-      console.log(snapshot.val());
+      // console.log(snapshot.val());
       let data = snapshot.val();
       res.set("Cache-Control", "public, max-age=3600 , s-maxage=7200");
       return res.status(200).json({
@@ -364,7 +364,7 @@ function getNotifications(req,res){
 		for(not in notifs) {
 			let obj = {};
 
-			obj["notif"] =notifs[not]['notif'];
+			obj["notification"] =notifs[not]['notification'];
 			obj["time"] = notifs[not]['time'];
 
 			data[notifications].push(obj);
