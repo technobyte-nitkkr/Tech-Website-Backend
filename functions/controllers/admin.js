@@ -10,7 +10,7 @@ const events = "events";
 const eventDescription = "eventDescription";
 const userRegistrations = "userRegistrations";
 const users = "users";
-const registeredEvents = "registeredEvents19";
+const registeredEvents = "registeredEvents23";
 const queries = "queries";
 
 const notifications = "notifications";

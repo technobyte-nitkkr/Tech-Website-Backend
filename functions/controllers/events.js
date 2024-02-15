@@ -13,7 +13,7 @@ const db = database.ref();
 const events = "events";
 const eventDescription = "eventDescription";
 const users = "users";
-const registeredEvents = "registeredEvents19";
+const registeredEvents = "registeredEvents23";
 exports.getEventNames = (req, res) => {
   //optional - eventCategory
   if (req.query.eventCategory === undefined) {
@@ -357,7 +357,7 @@ exports.getRegisteredEvents = (req, res) => {
       let database = snapshot.val();
 
       if (!database) {
-        return res.status(400).json({
+        return res.status(200).json({
           success: false,
           message: "No events registered",
           data: {
