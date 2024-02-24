@@ -99,7 +99,7 @@ function getEventUsersEmails(req, res, next) {
     });
   }
 
-  db.child(events + "/" + eventCategory + "/" + eventName)
+  db.child(events + "/"  + eventCategory + "/events/" + eventName)
     .once("value")
     .then((snapshot) => {
       if (snapshot.val() === null) {

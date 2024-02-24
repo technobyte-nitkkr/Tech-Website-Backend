@@ -4,19 +4,12 @@ const functions = require("firebase-functions");
 const mailHelper = async (options) => {
   var config = await functions.config();
   const emailPassword = config.technoemail.password;
-  const emailClientId = config.technoemail.clientid;
-  const emailRefreshToken = config.technoemail.refreshtoken;
-  const emailClientSecret = config.technoemail.clientsecret;
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      type: "OAuth2",
       user: "noreplytechnobyte@gmail.com",
       pass: emailPassword,
-      clientId: emailClientId,
-      clientSecret: emailClientSecret,
-      refreshToken: emailRefreshToken,
     },
   });
   

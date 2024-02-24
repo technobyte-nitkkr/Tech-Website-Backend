@@ -14,14 +14,14 @@ exports.basicmail = (heading, detail, buttontext, buttonlink, thankyou,formLink)
                                 <td class="" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: black; margin: 0; padding: 20px auto;"
                                     align="center" bgcolor="#71b6f9" valign="top">
                                      <div style="display: flex; align-items: center; justify-content: center;">
-                                         <img src="https://res.cloudinary.com/dvhrzmkwd/image/upload/v1649062611/techno/kugp7n36wr0a0y1yo7ua.jpg" height="100px" width="auto">
+                                         <img src="https://i.ibb.co/b1Dx9wr/icon.png" height="100px" width="auto">
                                        <div style="display: flex;align-items: center; justify-content: center;">
                                             <div  style="font-size:32px; 
                                             font-family: 'Poppins', sans-serif;
                                             display: block; 
                                             
                                             margin:auto;
-                                            color:#fff; text-decoration: none;">Techspardha'22</div> 
+                                            color:#fff; text-decoration: none;">Techspardha'24</div> 
                                         
                                        </div>
                                      </div>
@@ -48,8 +48,8 @@ exports.basicmail = (heading, detail, buttontext, buttonlink, thankyou,formLink)
                                                     valign="top"
                                                   >
                                                     ${
-                                              buttonlink ? (
-                                                `
+                                                      buttonlink
+                                                        ? `
                                                     <a
                                                       href="${buttonlink}"
                                                       class="btn-primary"
@@ -57,7 +57,9 @@ exports.basicmail = (heading, detail, buttontext, buttonlink, thankyou,formLink)
                                                     >
                                                       ${buttontext}
                                                       </a>
-                                                      `): 'Link Will be Available Soon' } 
+                                                      `
+                                                        : "Link Will be Available Soon"
+                                                    } 
                                                   </td>
                                                 </tr>
                                             
@@ -65,7 +67,7 @@ exports.basicmail = (heading, detail, buttontext, buttonlink, thankyou,formLink)
                                                 <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
                                                    Checkout our website for more such events.
                                                    <br>
-                                                   <a href="https://techspardha.live" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; ">Techspardha</a>
+                                                   <a href="https://techspardha.in" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; ">Techspardha</a>
                                                 </td>
                                             </tr>
                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
